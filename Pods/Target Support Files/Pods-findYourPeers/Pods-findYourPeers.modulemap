@@ -1,0 +1,6 @@
+framework module Pods_findYourPeers {
+  umbrella header "Pods-findYourPeers-umbrella.h"
+
+  export *
+  module * { export * }
+}
