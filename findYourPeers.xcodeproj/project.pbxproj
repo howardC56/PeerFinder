@@ -3,20 +3,20 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		7FBBA4614D8150661BAD314A /* Pods_findYourPeers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9CA310C14C1632521314CB1 /* Pods_findYourPeers.framework */; };
 		888950A5244DFF8E003DDE1E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888950A4244DFF8E003DDE1E /* AppDelegate.swift */; };
 		888950A7244DFF8E003DDE1E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888950A6244DFF8E003DDE1E /* SceneDelegate.swift */; };
-		888950A9244DFF8E003DDE1E /* FollowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888950A8244DFF8E003DDE1E /* FollowViewController.swift */; };
+		888950A9244DFF8E003DDE1E /* FollowedGroupsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888950A8244DFF8E003DDE1E /* FollowedGroupsController.swift */; };
 		888950AE244DFF93003DDE1E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 888950AD244DFF93003DDE1E /* Assets.xcassets */; };
 		888950B1244DFF94003DDE1E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 888950AF244DFF94003DDE1E /* LaunchScreen.storyboard */; };
 		888950B9244E00BC003DDE1E /* GroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888950B8244E00BC003DDE1E /* GroupsViewController.swift */; };
 		888950BB244E00D9003DDE1E /* GroupDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888950BA244E00D9003DDE1E /* GroupDetailViewController.swift */; };
 		888950BD244E0110003DDE1E /* CreateGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888950BC244E0110003DDE1E /* CreateGroupViewController.swift */; };
-		888950BF244E012A003DDE1E /* FollowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888950BE244E012A003DDE1E /* FollowView.swift */; };
+		888950BF244E012A003DDE1E /* FollowedGroupsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888950BE244E012A003DDE1E /* FollowedGroupsView.swift */; };
 		888950C1244E0137003DDE1E /* GroupsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888950C0244E0137003DDE1E /* GroupsView.swift */; };
 		888950C3244E0141003DDE1E /* GroupDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888950C2244E0141003DDE1E /* GroupDetailView.swift */; };
 		888950C5244E017A003DDE1E /* CreateViewGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888950C4244E017A003DDE1E /* CreateViewGroup.swift */; };
@@ -24,6 +24,8 @@
 		888950CD244E03FE003DDE1E /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888950CC244E03FE003DDE1E /* Group.swift */; };
 		888950CF244E0408003DDE1E /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888950CE244E0408003DDE1E /* Post.swift */; };
 		888950D1244E04F8003DDE1E /* FireBaseDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888950D0244E04F8003DDE1E /* FireBaseDataService.swift */; };
+		888950D7244E23E5003DDE1E /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888950D6244E23E5003DDE1E /* MainTabBarController.swift */; };
+		888950D9244E26F8003DDE1E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 888950D8244E26F8003DDE1E /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,14 +33,14 @@
 		888950A1244DFF8E003DDE1E /* findYourPeers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = findYourPeers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		888950A4244DFF8E003DDE1E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		888950A6244DFF8E003DDE1E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		888950A8244DFF8E003DDE1E /* FollowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowViewController.swift; sourceTree = "<group>"; };
+		888950A8244DFF8E003DDE1E /* FollowedGroupsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowedGroupsController.swift; sourceTree = "<group>"; };
 		888950AD244DFF93003DDE1E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		888950B0244DFF94003DDE1E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		888950B2244DFF94003DDE1E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		888950B8244E00BC003DDE1E /* GroupsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsViewController.swift; sourceTree = "<group>"; };
 		888950BA244E00D9003DDE1E /* GroupDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupDetailViewController.swift; sourceTree = "<group>"; };
 		888950BC244E0110003DDE1E /* CreateGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupViewController.swift; sourceTree = "<group>"; };
-		888950BE244E012A003DDE1E /* FollowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowView.swift; sourceTree = "<group>"; };
+		888950BE244E012A003DDE1E /* FollowedGroupsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowedGroupsView.swift; sourceTree = "<group>"; };
 		888950C0244E0137003DDE1E /* GroupsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsView.swift; sourceTree = "<group>"; };
 		888950C2244E0141003DDE1E /* GroupDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupDetailView.swift; sourceTree = "<group>"; };
 		888950C4244E017A003DDE1E /* CreateViewGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateViewGroup.swift; sourceTree = "<group>"; };
@@ -46,6 +48,8 @@
 		888950CC244E03FE003DDE1E /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		888950CE244E0408003DDE1E /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		888950D0244E04F8003DDE1E /* FireBaseDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseDataService.swift; sourceTree = "<group>"; };
+		888950D6244E23E5003DDE1E /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		888950D8244E26F8003DDE1E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B9CA310C14C1632521314CB1 /* Pods_findYourPeers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_findYourPeers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF90206A455DF28F11F59A71 /* Pods-findYourPeers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-findYourPeers.release.xcconfig"; path = "Target Support Files/Pods-findYourPeers/Pods-findYourPeers.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -68,7 +72,6 @@
 				36666A3680C28FE4BE868EC4 /* Pods-findYourPeers.debug.xcconfig */,
 				BF90206A455DF28F11F59A71 /* Pods-findYourPeers.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -108,6 +111,7 @@
 				888950C6244E0229003DDE1E /* Views */,
 				888950AD244DFF93003DDE1E /* Assets.xcassets */,
 				888950AF244DFF94003DDE1E /* LaunchScreen.storyboard */,
+				888950D8244E26F8003DDE1E /* GoogleService-Info.plist */,
 				888950B2244DFF94003DDE1E /* Info.plist */,
 			);
 			path = findYourPeers;
@@ -116,7 +120,7 @@
 		888950C6244E0229003DDE1E /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				888950BE244E012A003DDE1E /* FollowView.swift */,
+				888950BE244E012A003DDE1E /* FollowedGroupsView.swift */,
 				888950C0244E0137003DDE1E /* GroupsView.swift */,
 				888950C2244E0141003DDE1E /* GroupDetailView.swift */,
 				888950C4244E017A003DDE1E /* CreateViewGroup.swift */,
@@ -127,7 +131,8 @@
 		888950C7244E027A003DDE1E /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				888950A8244DFF8E003DDE1E /* FollowViewController.swift */,
+				888950A8244DFF8E003DDE1E /* FollowedGroupsController.swift */,
+				888950D6244E23E5003DDE1E /* MainTabBarController.swift */,
 				888950B8244E00BC003DDE1E /* GroupsViewController.swift */,
 				888950BA244E00D9003DDE1E /* GroupDetailViewController.swift */,
 				888950BC244E0110003DDE1E /* CreateGroupViewController.swift */,
@@ -224,6 +229,7 @@
 			files = (
 				888950B1244DFF94003DDE1E /* LaunchScreen.storyboard in Resources */,
 				888950AE244DFF93003DDE1E /* Assets.xcassets in Resources */,
+				888950D9244E26F8003DDE1E /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,13 +283,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				888950B9244E00BC003DDE1E /* GroupsViewController.swift in Sources */,
-				888950A9244DFF8E003DDE1E /* FollowViewController.swift in Sources */,
+				888950A9244DFF8E003DDE1E /* FollowedGroupsController.swift in Sources */,
+				888950D7244E23E5003DDE1E /* MainTabBarController.swift in Sources */,
 				888950C5244E017A003DDE1E /* CreateViewGroup.swift in Sources */,
 				888950CD244E03FE003DDE1E /* Group.swift in Sources */,
 				888950D1244E04F8003DDE1E /* FireBaseDataService.swift in Sources */,
 				888950CF244E0408003DDE1E /* Post.swift in Sources */,
 				888950BD244E0110003DDE1E /* CreateGroupViewController.swift in Sources */,
-				888950BF244E012A003DDE1E /* FollowView.swift in Sources */,
+				888950BF244E012A003DDE1E /* FollowedGroupsView.swift in Sources */,
 				888950A5244DFF8E003DDE1E /* AppDelegate.swift in Sources */,
 				888950C3244E0141003DDE1E /* GroupDetailView.swift in Sources */,
 				888950A7244DFF8E003DDE1E /* SceneDelegate.swift in Sources */,

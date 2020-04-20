@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FollowViewController: UIViewController {
+class FollowedGroupsController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
