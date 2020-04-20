@@ -28,6 +28,7 @@ class GroupsView: UIView {
         return button
     }()
     
+    
     public lazy var vStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [studyButton, clubsButton, eventsButton])
         stack.axis = .horizontal
@@ -49,9 +50,18 @@ class GroupsView: UIView {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         let cv = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-        cv.backgroundColor = .systemTeal
+        cv.backgroundColor = UIColor(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
         cv.layer.cornerRadius = 4
         return cv
+    }()
+    
+    public lazy var addGroup: UIButton = {
+       let button = UIButton()
+        button.setImage(UIImage(systemName: "plus"), for: .normal)
+//        button.clipsToBounds = true
+//        button.layer.cornerRadius = button.frame.width / 2
+        button.backgroundColor = .red
+        return button
     }()
     
     override init(frame: CGRect) {
@@ -68,6 +78,7 @@ class GroupsView: UIView {
         setUpVstack()
         setUpGroupSearchConstraints()
         setUpCVConstraints()
+        setUpAddButtonConstraints()
     }
     
     
@@ -106,6 +117,19 @@ class GroupsView: UIView {
             groupsCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             groupsCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             groupsCollectionView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.5)
+        ])
+    }
+    
+    private func setUpAddButtonConstraints() {
+        addSubview(addGroup)
+        
+        addGroup.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            addGroup.topAnchor.constraint(equalTo: groupsCollectionView.bottomAnchor, constant: 8),
+            addGroup.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            addGroup.widthAnchor.constraint(equalToConstant: 44),
+            addGroup.heightAnchor.constraint(equalToConstant: 44)
         ])
     }
     

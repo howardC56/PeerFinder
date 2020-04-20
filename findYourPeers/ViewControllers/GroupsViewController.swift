@@ -19,7 +19,11 @@ class GroupsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .darkGray
+        view.backgroundColor = UIColor(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
+        configureButtons()
+    }
+    
+    private func configureButtons() {
         groupsView.studyButton.addTarget(self, action: #selector(setUpStudyButton), for: .touchUpInside)
         groupsView.clubsButton.addTarget(self, action: #selector(setUpClubsButton), for: .touchUpInside)
         groupsView.eventsButton.addTarget(self, action: #selector(setUpEventsButton), for: .touchUpInside)
