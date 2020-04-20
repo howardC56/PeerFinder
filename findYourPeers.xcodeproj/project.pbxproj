@@ -26,6 +26,7 @@
 		888950D1244E04F8003DDE1E /* FireBaseDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888950D0244E04F8003DDE1E /* FireBaseDataService.swift */; };
 		888950D7244E23E5003DDE1E /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888950D6244E23E5003DDE1E /* MainTabBarController.swift */; };
 		C6579460244E3CB4000F3593 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C657945F244E3CB4000F3593 /* GoogleService-Info.plist */; };
+		C69DE08E244E48E200D86E30 /* GroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69DE08D244E48E200D86E30 /* GroupCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		B9CA310C14C1632521314CB1 /* Pods_findYourPeers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_findYourPeers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF90206A455DF28F11F59A71 /* Pods-findYourPeers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-findYourPeers.release.xcconfig"; path = "Target Support Files/Pods-findYourPeers/Pods-findYourPeers.release.xcconfig"; sourceTree = "<group>"; };
 		C657945F244E3CB4000F3593 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		C69DE08D244E48E200D86E30 /* GroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 				888950D2244E0500003DDE1E /* FireBase */,
 				888950C7244E027A003DDE1E /* ViewControllers */,
 				888950C6244E0229003DDE1E /* Views */,
+				C69DE08C244E48C900D86E30 /* Cells */,
 				888950AD244DFF93003DDE1E /* Assets.xcassets */,
 				888950AF244DFF94003DDE1E /* LaunchScreen.storyboard */,
 				C657945F244E3CB4000F3593 /* GoogleService-Info.plist */,
@@ -165,6 +168,14 @@
 				888950A6244DFF8E003DDE1E /* SceneDelegate.swift */,
 			);
 			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		C69DE08C244E48C900D86E30 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				C69DE08D244E48E200D86E30 /* GroupCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -289,6 +300,7 @@
 				888950CD244E03FE003DDE1E /* Group.swift in Sources */,
 				888950D1244E04F8003DDE1E /* FireBaseDataService.swift in Sources */,
 				888950CF244E0408003DDE1E /* Post.swift in Sources */,
+				C69DE08E244E48E200D86E30 /* GroupCell.swift in Sources */,
 				888950BD244E0110003DDE1E /* CreateGroupViewController.swift in Sources */,
 				888950BF244E012A003DDE1E /* FollowedGroupsView.swift in Sources */,
 				888950A5244DFF8E003DDE1E /* AppDelegate.swift in Sources */,
