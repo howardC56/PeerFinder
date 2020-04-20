@@ -9,6 +9,12 @@
 import UIKit
 
 class GroupCell: UICollectionViewCell {
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.clipsToBounds = true
+        self.layer.cornerRadius = 13
+    }
+    
     public lazy var groupImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -28,21 +34,21 @@ class GroupCell: UICollectionViewCell {
         let label = UILabel()
         label.text = "Group Name"
         label.textColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
-        label.font = UIFont(name: "Cochin", size: 20)
+        label.font = UIFont(name: "Kohinoor Telugu", size: 20)
         return label
     }()
     public lazy var groupTopicLabel: UILabel = {
         let label = UILabel()
         label.text = "Group Topic (math, science, etc)"
         label.textColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
-        label.font = UIFont(name: "Optima", size: 17)
+        label.font = UIFont(name: "Kohinoor Telugu", size: 17)
         return label
     }()
     public lazy var dateCreatedLabel: UILabel = {
         let label = UILabel()
         label.text = "created date"
         label.textColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
-        label.font = UIFont(name: "Optima", size: 17)
+        label.font = UIFont(name: "Kohinoor Telugu", size: 17)
         return label
     }()
     
@@ -79,4 +85,9 @@ class GroupCell: UICollectionViewCell {
         ])
     }
     
+}
+extension GroupCell {
+    private func configureCell() {
+        //TODO: - add configure cell for group model
+    }
 }
