@@ -9,22 +9,32 @@
 import UIKit
 
 class GroupsViewController: UIViewController {
+    
+    let groupsView = GroupsView()
+    
+    override func loadView() {
+        view = groupsView
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        view.backgroundColor = .darkGray
+        groupsView.studyButton.addTarget(self, action: #selector(setUpStudyButton), for: .touchUpInside)
+        groupsView.clubsButton.addTarget(self, action: #selector(setUpClubsButton), for: .touchUpInside)
+        groupsView.eventsButton.addTarget(self, action: #selector(setUpEventsButton), for: .touchUpInside)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @objc func setUpStudyButton() {
+        print("study")
     }
-    */
+    
+    @objc func setUpClubsButton() {
+        print("clubs")
+    }
+    
+    @objc func setUpEventsButton() {
+        print("events")
+    }
 
 }
