@@ -10,21 +10,22 @@ import UIKit
 
 class MainTabBarController: UITabBarController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
+    lazy var searchViewController: GroupsViewController = {
+           let vc = GroupsViewController()
+           vc.tabBarItem = UITabBarItem(title: "Search", image: UIImage(systemName: "magnifyingglass.circle"), selectedImage: UIImage(systemName: "magnifyingglass.circle.fill"))
+           return vc
+       }()
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+       lazy var collectionsViewController: FollowedGroupsController = {
+           let vc = FollowedGroupsController()
+           vc.tabBarItem = UITabBarItem(title: "Collections", image: UIImage(systemName: "star"), selectedImage: UIImage(systemName: "star.fill"))
+           return vc
+       }()
+       
+       override func viewDidLoad() {
+           super.viewDidLoad()
+        viewControllers = [UINavigationController(rootViewController: searchViewController), UINavigationController(rootViewController: collectionsViewController)]
+           
+       }
 
 }
