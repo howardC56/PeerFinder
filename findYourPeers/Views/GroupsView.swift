@@ -13,18 +13,33 @@ class GroupsView: UIView {
     public lazy var studyButton: UIButton = {
         let button = UIButton()
         button.setTitle("Study", for: .normal)
+        button.backgroundColor = UIColor(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
+        button.layer.cornerRadius = 10
+        button.layer.shadowOpacity = 0.3
+        button.layer.shadowRadius = 10
+        button.layer.shadowOffset = CGSize(width: 0, height: 4)
         return button
     }()
     
     public lazy var clubsButton: UIButton = {
         let button = UIButton()
         button.setTitle("Clubs", for: .normal)
+        button.backgroundColor = UIColor(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
+        button.layer.cornerRadius = 10
+        button.layer.shadowOpacity = 0.3
+        button.layer.shadowRadius = 10
+        button.layer.shadowOffset = CGSize(width: 0, height: 4)
         return button
     }()
     
     public lazy var eventsButton: UIButton = {
         let button = UIButton()
         button.setTitle("Events", for: .normal)
+        button.backgroundColor = UIColor(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
+        button.layer.cornerRadius = 10
+        button.layer.shadowOpacity = 0.3
+        button.layer.shadowRadius = 10
+        button.layer.shadowOffset = CGSize(width: 0, height: 4)
         return button
     }()
     
@@ -58,9 +73,12 @@ class GroupsView: UIView {
     public lazy var addGroup: UIButton = {
        let button = UIButton()
         button.setImage(UIImage(systemName: "plus"), for: .normal)
-//        button.clipsToBounds = true
-//        button.layer.cornerRadius = button.frame.width / 2
-        button.backgroundColor = .red
+        button.layer.cornerRadius = 22
+        button.layer.shadowOpacity = 0.25
+        button.layer.shadowRadius = 5
+        button.layer.shadowOffset = CGSize(width: 0, height: 4)
+        button.backgroundColor = #colorLiteral(red: 0, green: 0.6697600484, blue: 0.7905663848, alpha: 1)
+        button.tintColor = .white
         return button
     }()
     
@@ -88,10 +106,10 @@ class GroupsView: UIView {
         vStack.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            vStack.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            vStack.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 8),
             vStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             vStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            vStack.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.1)
+            vStack.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.05)
         ])
     }
     
@@ -101,7 +119,7 @@ class GroupsView: UIView {
         groupSearchBar.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            groupSearchBar.topAnchor.constraint(equalTo: vStack.bottomAnchor, constant: 8),
+            groupSearchBar.topAnchor.constraint(equalTo: vStack.bottomAnchor, constant: 20),
             groupSearchBar.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             groupSearchBar.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
         ])
