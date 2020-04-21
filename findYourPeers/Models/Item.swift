@@ -8,7 +8,9 @@
 
 import Foundation
 
+
 struct Item: Codable & Identifiable {
+    let datePosted: Date
     let id: String
     let itemCondition: String
     let itemDescription: String

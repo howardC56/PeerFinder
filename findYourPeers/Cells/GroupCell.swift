@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class GroupCell: UICollectionViewCell {
     override func layoutSubviews() {
@@ -20,8 +21,8 @@ class GroupCell: UICollectionViewCell {
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
+    
     public lazy var labelStack: UIStackView = {
-        
         let stack = UIStackView(arrangedSubviews: [groupNameLabel, groupTopicLabel, dateCreatedLabel])
         stack.axis = .vertical
         stack.alignment = .center
@@ -68,10 +69,10 @@ class GroupCell: UICollectionViewCell {
         addSubview(groupImageView)
         groupImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            groupImageView.topAnchor.constraint(equalTo: topAnchor),
-            groupImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            groupImageView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            groupImageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.3)
+            groupImageView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
+            groupImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
+            groupImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
+            groupImageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.2)
         ])
     }
     private func labelStackConstraints() {
@@ -79,7 +80,7 @@ class GroupCell: UICollectionViewCell {
         labelStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             labelStack.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-            labelStack.leadingAnchor.constraint(equalTo: groupImageView.trailingAnchor, constant: 10),
+            labelStack.leadingAnchor.constraint(equalTo: groupImageView.trailingAnchor, constant: 20),
             labelStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             labelStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10)
         ])
@@ -87,7 +88,10 @@ class GroupCell: UICollectionViewCell {
     
 }
 extension GroupCell {
-    private func configureCell() {
-        //TODO: - add configure cell for group model
+    public func configureCell(for group: Group) {
+        groupImageView.kf.setImage(with: URL(string: group.groupPhotoURL))
+        groupNameLabel.text = "\(group.groupName)"
+        groupTopicLabel.text = "\(group.topic)"
+        dateCreatedLabel.text = "\(group.dateCreated)"
     }
 }
