@@ -101,7 +101,7 @@ extension MarketPlaceViewController: UICollectionViewDataSource {
         }
         let item = items[indexPath.row]
         cell.configureCell(item: item)
-        cell.backgroundColor = #colorLiteral(red: 0.9971715808, green: 0.8923018575, blue: 0.4402516186, alpha: 1)
+        //cell.backgroundColor = #colorLiteral(red: 0.9971715808, green: 0.8923018575, blue: 0.4402516186, alpha: 1)
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
