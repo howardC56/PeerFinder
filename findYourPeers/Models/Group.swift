@@ -7,3 +7,16 @@
 //
 
 import Foundation
+
+struct Group: Codable {
+    let category: String
+    let collegeName: String
+    let createdBy: String
+    let creatorId: String
+    let dateCreated: Date
+    let description: String
+    let groupId: String
+    let groupName: String
+    let groupPhotoURL: String
+    let topic: String
+}
