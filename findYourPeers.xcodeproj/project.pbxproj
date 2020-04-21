@@ -25,7 +25,21 @@
 		888950CF244E0408003DDE1E /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888950CE244E0408003DDE1E /* Post.swift */; };
 		888950D1244E04F8003DDE1E /* FireBaseDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888950D0244E04F8003DDE1E /* FireBaseDataService.swift */; };
 		888950D7244E23E5003DDE1E /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888950D6244E23E5003DDE1E /* MainTabBarController.swift */; };
-		888950D9244E26F8003DDE1E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 888950D8244E26F8003DDE1E /* GoogleService-Info.plist */; };
+		888950DB244E7207003DDE1E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888950DA244E7207003DDE1E /* Extensions.swift */; };
+		888950DD244F43FC003DDE1E /* GroupDetailViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888950DC244F43FC003DDE1E /* GroupDetailViewCell.swift */; };
+		888950DF244F44BB003DDE1E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 888950DE244F44BB003DDE1E /* GoogleService-Info.plist */; };
+		888950E1244F7EFB003DDE1E /* FireBaseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888950E0244F7EFA003DDE1E /* FireBaseStorage.swift */; };
+		C69DE08E244E48E200D86E30 /* GroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69DE08D244E48E200D86E30 /* GroupCell.swift */; };
+		C69DE090244F46F300D86E30 /* MarketPlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69DE08F244F46F300D86E30 /* MarketPlaceViewController.swift */; };
+		C69DE092244F470600D86E30 /* ItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69DE091244F470600D86E30 /* ItemDetailViewController.swift */; };
+		C69DE094244F471000D86E30 /* ContactSellerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69DE093244F471000D86E30 /* ContactSellerViewController.swift */; };
+		C69DE096244F471C00D86E30 /* ItemWishlistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69DE095244F471C00D86E30 /* ItemWishlistViewController.swift */; };
+		C69DE098244F48E000D86E30 /* MarketPlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69DE097244F48E000D86E30 /* MarketPlaceView.swift */; };
+		C69DE09A244F48FA00D86E30 /* ItemDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69DE099244F48FA00D86E30 /* ItemDetailView.swift */; };
+		C69DE09C244F490700D86E30 /* ContactSellerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69DE09B244F490700D86E30 /* ContactSellerView.swift */; };
+		C69DE09E244F491600D86E30 /* ItemWishlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69DE09D244F491600D86E30 /* ItemWishlistView.swift */; };
+		C69DE0A0244F60EB00D86E30 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69DE09F244F60EB00D86E30 /* ItemCell.swift */; };
+		C69DE0A4244F7C7200D86E30 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69DE0A3244F7C7200D86E30 /* Item.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,9 +63,23 @@
 		888950CE244E0408003DDE1E /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		888950D0244E04F8003DDE1E /* FireBaseDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseDataService.swift; sourceTree = "<group>"; };
 		888950D6244E23E5003DDE1E /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
-		888950D8244E26F8003DDE1E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		888950DA244E7207003DDE1E /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		888950DC244F43FC003DDE1E /* GroupDetailViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupDetailViewCell.swift; sourceTree = "<group>"; };
+		888950DE244F44BB003DDE1E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		888950E0244F7EFA003DDE1E /* FireBaseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseStorage.swift; sourceTree = "<group>"; };
 		B9CA310C14C1632521314CB1 /* Pods_findYourPeers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_findYourPeers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF90206A455DF28F11F59A71 /* Pods-findYourPeers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-findYourPeers.release.xcconfig"; path = "Target Support Files/Pods-findYourPeers/Pods-findYourPeers.release.xcconfig"; sourceTree = "<group>"; };
+		C69DE08D244E48E200D86E30 /* GroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCell.swift; sourceTree = "<group>"; };
+		C69DE08F244F46F300D86E30 /* MarketPlaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketPlaceViewController.swift; sourceTree = "<group>"; };
+		C69DE091244F470600D86E30 /* ItemDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailViewController.swift; sourceTree = "<group>"; };
+		C69DE093244F471000D86E30 /* ContactSellerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactSellerViewController.swift; sourceTree = "<group>"; };
+		C69DE095244F471C00D86E30 /* ItemWishlistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemWishlistViewController.swift; sourceTree = "<group>"; };
+		C69DE097244F48E000D86E30 /* MarketPlaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketPlaceView.swift; sourceTree = "<group>"; };
+		C69DE099244F48FA00D86E30 /* ItemDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailView.swift; sourceTree = "<group>"; };
+		C69DE09B244F490700D86E30 /* ContactSellerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactSellerView.swift; sourceTree = "<group>"; };
+		C69DE09D244F491600D86E30 /* ItemWishlistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemWishlistView.swift; sourceTree = "<group>"; };
+		C69DE09F244F60EB00D86E30 /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
+		C69DE0A3244F7C7200D86E30 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,9 +137,10 @@
 				888950D2244E0500003DDE1E /* FireBase */,
 				888950C7244E027A003DDE1E /* ViewControllers */,
 				888950C6244E0229003DDE1E /* Views */,
+				C69DE08C244E48C900D86E30 /* Cells */,
 				888950AD244DFF93003DDE1E /* Assets.xcassets */,
 				888950AF244DFF94003DDE1E /* LaunchScreen.storyboard */,
-				888950D8244E26F8003DDE1E /* GoogleService-Info.plist */,
+				888950DE244F44BB003DDE1E /* GoogleService-Info.plist */,
 				888950B2244DFF94003DDE1E /* Info.plist */,
 			);
 			path = findYourPeers;
@@ -124,6 +153,10 @@
 				888950C0244E0137003DDE1E /* GroupsView.swift */,
 				888950C2244E0141003DDE1E /* GroupDetailView.swift */,
 				888950C4244E017A003DDE1E /* CreateViewGroup.swift */,
+				C69DE097244F48E000D86E30 /* MarketPlaceView.swift */,
+				C69DE099244F48FA00D86E30 /* ItemDetailView.swift */,
+				C69DE09B244F490700D86E30 /* ContactSellerView.swift */,
+				C69DE09D244F491600D86E30 /* ItemWishlistView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -136,6 +169,10 @@
 				888950B8244E00BC003DDE1E /* GroupsViewController.swift */,
 				888950BA244E00D9003DDE1E /* GroupDetailViewController.swift */,
 				888950BC244E0110003DDE1E /* CreateGroupViewController.swift */,
+				C69DE08F244F46F300D86E30 /* MarketPlaceViewController.swift */,
+				C69DE091244F470600D86E30 /* ItemDetailViewController.swift */,
+				C69DE093244F471000D86E30 /* ContactSellerViewController.swift */,
+				C69DE095244F471C00D86E30 /* ItemWishlistViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -146,6 +183,7 @@
 				888950C8244E03DF003DDE1E /* User.swift */,
 				888950CC244E03FE003DDE1E /* Group.swift */,
 				888950CE244E0408003DDE1E /* Post.swift */,
+				C69DE0A3244F7C7200D86E30 /* Item.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -154,6 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				888950D0244E04F8003DDE1E /* FireBaseDataService.swift */,
+				888950E0244F7EFA003DDE1E /* FireBaseStorage.swift */,
 			);
 			path = FireBase;
 			sourceTree = "<group>";
@@ -163,8 +202,19 @@
 			children = (
 				888950A4244DFF8E003DDE1E /* AppDelegate.swift */,
 				888950A6244DFF8E003DDE1E /* SceneDelegate.swift */,
+				888950DA244E7207003DDE1E /* Extensions.swift */,
 			);
 			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		C69DE08C244E48C900D86E30 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				C69DE08D244E48E200D86E30 /* GroupCell.swift */,
+				888950DC244F43FC003DDE1E /* GroupDetailViewCell.swift */,
+				C69DE09F244F60EB00D86E30 /* ItemCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -229,7 +279,7 @@
 			files = (
 				888950B1244DFF94003DDE1E /* LaunchScreen.storyboard in Resources */,
 				888950AE244DFF93003DDE1E /* Assets.xcassets in Resources */,
-				888950D9244E26F8003DDE1E /* GoogleService-Info.plist in Resources */,
+				888950DF244F44BB003DDE1E /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,18 +334,32 @@
 			files = (
 				888950B9244E00BC003DDE1E /* GroupsViewController.swift in Sources */,
 				888950A9244DFF8E003DDE1E /* FollowedGroupsController.swift in Sources */,
+				C69DE0A0244F60EB00D86E30 /* ItemCell.swift in Sources */,
 				888950D7244E23E5003DDE1E /* MainTabBarController.swift in Sources */,
+				C69DE0A4244F7C7200D86E30 /* Item.swift in Sources */,
+				888950E1244F7EFB003DDE1E /* FireBaseStorage.swift in Sources */,
 				888950C5244E017A003DDE1E /* CreateViewGroup.swift in Sources */,
 				888950CD244E03FE003DDE1E /* Group.swift in Sources */,
 				888950D1244E04F8003DDE1E /* FireBaseDataService.swift in Sources */,
 				888950CF244E0408003DDE1E /* Post.swift in Sources */,
+				C69DE094244F471000D86E30 /* ContactSellerViewController.swift in Sources */,
+				C69DE090244F46F300D86E30 /* MarketPlaceViewController.swift in Sources */,
+				C69DE08E244E48E200D86E30 /* GroupCell.swift in Sources */,
 				888950BD244E0110003DDE1E /* CreateGroupViewController.swift in Sources */,
+				C69DE092244F470600D86E30 /* ItemDetailViewController.swift in Sources */,
+				C69DE09C244F490700D86E30 /* ContactSellerView.swift in Sources */,
+				C69DE09A244F48FA00D86E30 /* ItemDetailView.swift in Sources */,
 				888950BF244E012A003DDE1E /* FollowedGroupsView.swift in Sources */,
 				888950A5244DFF8E003DDE1E /* AppDelegate.swift in Sources */,
+				C69DE09E244F491600D86E30 /* ItemWishlistView.swift in Sources */,
 				888950C3244E0141003DDE1E /* GroupDetailView.swift in Sources */,
+				888950DB244E7207003DDE1E /* Extensions.swift in Sources */,
+				C69DE096244F471C00D86E30 /* ItemWishlistViewController.swift in Sources */,
 				888950A7244DFF8E003DDE1E /* SceneDelegate.swift in Sources */,
 				888950C1244E0137003DDE1E /* GroupsView.swift in Sources */,
+				888950DD244F43FC003DDE1E /* GroupDetailViewCell.swift in Sources */,
 				888950BB244E00D9003DDE1E /* GroupDetailViewController.swift in Sources */,
+				C69DE098244F48E000D86E30 /* MarketPlaceView.swift in Sources */,
 				888950C9244E03DF003DDE1E /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

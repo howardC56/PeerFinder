@@ -10,21 +10,99 @@ import UIKit
 
 class GroupDetailViewController: UIViewController {
 
+    private var groupDetailView = GroupDetailView()
+    private var group: Group!
+    
+    private var posts = [Post]() {
+        didSet {
+            groupDetailView.tableView.reloadData()
+        }
+    }
+    
+    private var isFavorite = false {
+        didSet {
+            DispatchQueue.main.async {
+                if self.isFavorite == true {
+                    self.navigationItem.rightBarButtonItem?.image = UIImage(systemName: "star.fill")
+            } else {
+                    self.navigationItem.rightBarButtonItem?.image = UIImage(systemName: "star")
+            }
+            }
+        }
+    }
+    
+    lazy private var favorite: UIBarButtonItem = {
+                    [unowned self] in
+           return UIBarButtonItem(image: UIImage(systemName: "star"), style: .plain, target: self, action: #selector(configureFavorites(_:)))
+                    }()
+    
+    @objc private func configureFavorites(_ sender: UIBarButtonItem) {
+        if isFavorite {
+            DatabaseService.manager.deleteGroupFromFavorites(group.self) { [weak self] (result) in
+                       switch result {
+                       case .failure(let error):
+                           self?.showAlert(title: "error", message: error.localizedDescription)
+                       case .success:
+                           self?.isFavorite = false
+                               }
+                           }
+               } else {
+                   DatabaseService.manager.addGroupToFavorties(group) { [weak self] (result) in
+                       switch result {
+                       case .failure(let error):
+                           self?.showAlert(title: "error", message: error.localizedDescription)
+                       case .success:
+                           self?.isFavorite = true
+                       }
+                   }
+               }
+    }
+    
+    private func isGroupFavorited(_ group: Group) {
+        DatabaseService.manager.groupIsFavorited(group) { [weak self] (result) in
+            switch result {
+            case .failure(let error):
+                self?.showAlert(title: "error", message: error.localizedDescription)
+            case .success(let success):
+                if success {
+                    self?.isFavorite = true
+                } else {
+                    self?.isFavorite = false
+                }
+            }
+        }
+    }
+    
+    override func loadView() {
+        view = groupDetailView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        navigationItem.title = group.groupName.capitalized
+        navigationItem.rightBarButtonItem = favorite
+        groupDetailView.tableView.delegate = self
+        groupDetailView.tableView.dataSource = self
     }
     
 
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+}
+
+extension GroupDetailViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        posts.count
+        
     }
-    */
-
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "GroupDetailViewCell", for: indexPath) as? GroupDetailViewCell else {
+            fatalError("could not downcast to SearchViewTableViewCell")
+        }
+        let post = posts[indexPath.row]
+        //cell.configureCell(for: post)
+        return cell
+    }
+    
+    
 }
