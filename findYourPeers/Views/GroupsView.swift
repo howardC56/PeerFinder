@@ -13,7 +13,7 @@ class GroupsView: UIView {
     public lazy var studyButton: UIButton = {
         let button = UIButton()
         button.setTitle("Study", for: .normal)
-        button.backgroundColor = UIColor(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 0.01115901116, green: 0.2440761924, blue: 0.6173175573, alpha: 1)
         button.layer.cornerRadius = 10
         button.layer.shadowOpacity = 0.3
         button.layer.shadowRadius = 10
@@ -24,7 +24,7 @@ class GroupsView: UIView {
     public lazy var clubsButton: UIButton = {
         let button = UIButton()
         button.setTitle("Clubs", for: .normal)
-        button.backgroundColor = UIColor(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 0.01115901116, green: 0.2440761924, blue: 0.6173175573, alpha: 1)
         button.layer.cornerRadius = 10
         button.layer.shadowOpacity = 0.3
         button.layer.shadowRadius = 10
@@ -35,7 +35,7 @@ class GroupsView: UIView {
     public lazy var eventsButton: UIButton = {
         let button = UIButton()
         button.setTitle("Events", for: .normal)
-        button.backgroundColor = UIColor(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 0.01115901116, green: 0.2440761924, blue: 0.6173175573, alpha: 1)
         button.layer.cornerRadius = 10
         button.layer.shadowOpacity = 0.3
         button.layer.shadowRadius = 10
@@ -56,8 +56,10 @@ class GroupsView: UIView {
     public lazy var groupSearchBar: UISearchBar = {
         let search = UISearchBar()
         search.placeholder = "Enter a group name"
-        search.layer.cornerRadius = 10
+        search.layer.cornerRadius = 20
         search.layer.masksToBounds = true
+        search.barTintColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+        search.searchTextField.backgroundColor = .white
         return search
     }()
     
@@ -65,8 +67,8 @@ class GroupsView: UIView {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         let cv = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-        cv.backgroundColor = UIColor(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
-        cv.layer.cornerRadius = 4
+        cv.backgroundColor = #colorLiteral(red: 0.9971715808, green: 0.8923018575, blue: 0.4402516186, alpha: 1)
+        cv.layer.cornerRadius = 10
         return cv
     }()
     
@@ -106,7 +108,7 @@ class GroupsView: UIView {
         vStack.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            vStack.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 8),
+            vStack.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
             vStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             vStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             vStack.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.05)
@@ -134,7 +136,7 @@ class GroupsView: UIView {
             groupsCollectionView.topAnchor.constraint(equalTo: groupSearchBar.bottomAnchor, constant: 20),
             groupsCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             groupsCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            groupsCollectionView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.5)
+            groupsCollectionView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.52)
         ])
     }
     
@@ -144,7 +146,7 @@ class GroupsView: UIView {
         addGroup.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            addGroup.topAnchor.constraint(equalTo: groupsCollectionView.bottomAnchor, constant: 8),
+            addGroup.topAnchor.constraint(equalTo: groupsCollectionView.bottomAnchor, constant: 20),
             addGroup.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             addGroup.widthAnchor.constraint(equalToConstant: 44),
             addGroup.heightAnchor.constraint(equalToConstant: 44)
