@@ -7,24 +7,70 @@
 //
 
 import UIKit
+import FirebaseFirestore
 
 class CreateGroupViewController: UIViewController {
+    
+    private let groupView = CreateViewGroup()
+    
+    
+    
+    override func loadView() {
+           view = groupView
+       }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        view.backgroundColor = .white
+        
+        groupView.groupTopicTextField.delegate = self
+        groupView.groupTopicTextField.delegate = self
+        groupView.descriptionTextView.delegate = self
+        
+        configureNavBar()
+    }
+    
+    private func configureNavBar() {
+        navigationItem.title = "Create Group"
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(createGroupButtonPressed))
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelButtonPressed))
+    }
+    
+    @objc private func createGroupButtonPressed() {
+        
+    }
+    
+    @objc private func cancelButtonPressed() {
+        groupView.groupNameTextField.text = nil
+        groupView.groupNameTextField.placeholder = "Enter Name For Group"
+        groupView.groupTopicTextField.text = nil
+        groupView.groupTopicTextField.placeholder = "Enter Topic For Group"
+        groupView.descriptionTextView.text = "Enter Description For Group"
+        groupView.descriptionTextView.textColor = UIColor.lightGray
+        groupView.categorySegmentedControl.selectedSegmentIndex = 0
     }
     
 
-    /*
-    // MARK: - Navigation
+}
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+extension CreateGroupViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return true
     }
-    */
+}
 
+extension CreateGroupViewController: UITextViewDelegate {
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if(text == "\n")
+        {
+            view.endEditing(true)
+            return false
+        }
+        else
+        {
+            return true
+        }
+    }
 }
