@@ -57,7 +57,7 @@ class ItemDetailView: UIView {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let cv = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-        cv.backgroundColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+        cv.backgroundColor = #colorLiteral(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
         cv.layer.cornerRadius = 10
         return cv
     }()
@@ -77,6 +77,7 @@ class ItemDetailView: UIView {
         setUpSellerNameConstraints()
         setUpContantConstraints()
         setUpItemImageConstraints()
+        setUpImagesCollectionConstraints()
     }
     
     private func setUpItemNameConstraints() {
@@ -133,7 +134,12 @@ class ItemDetailView: UIView {
         itemsCollectionView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-        
+            itemsCollectionView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20),
+            itemsCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            itemsCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            itemsCollectionView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.1)
         ])
     }
+    
+    
 }
