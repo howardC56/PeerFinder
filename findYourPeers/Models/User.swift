@@ -11,6 +11,6 @@ import Foundation
 struct User: Codable {
     let collegeName: String
     let userEmail: String
-    let userId: String
+    let id: String
     let userName: String
 }

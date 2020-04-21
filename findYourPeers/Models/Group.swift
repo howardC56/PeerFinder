@@ -15,7 +15,7 @@ struct Group: Codable {
     let creatorId: String
     let dateCreated: Date
     let description: String
-    let groupId: String
+    let id: String
     let groupName: String
     let groupPhotoURL: String
     let topic: String
