@@ -99,3 +99,10 @@ class ItemCell: UICollectionViewCell {
         ])
     }
 }
+extension ItemCell {
+    public func configureCell(item: Item) {
+        itemNameLabel.text = item.itemName
+        datePostedLabel.text = item.datePosted.description
+        itemPriceLabel.text = "$\(item.itemPrice)"
+    }
+}

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseFirestore
 
 class MarketPlaceViewController: UIViewController {
 
@@ -16,7 +17,14 @@ class MarketPlaceViewController: UIViewController {
         view = marketPlaceView
         view.backgroundColor = .white
     }
-    
+    private var listener: ListenerRegistration?
+    private var items = [Item]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.marketPlaceView.collectionView.reloadData()
+            }
+        }
+    }
     private var searchQuery = "" {
         didSet {
             DispatchQueue.main.async {
@@ -31,6 +39,14 @@ class MarketPlaceViewController: UIViewController {
         configureSearchBar()
         configureNavBar()
 
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        //add listener function
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        listener?.remove()
     }
     private func configureCollectionView(){
         marketPlaceView.collectionView.delegate = self
@@ -61,18 +77,21 @@ extension MarketPlaceViewController: UICollectionViewDelegateFlowLayout {
 }
 extension MarketPlaceViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return items.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = marketPlaceView.collectionView.dequeueReusableCell(withReuseIdentifier: "itemCell", for: indexPath) as? ItemCell else {
             fatalError("failed to cast to ItemCell")
         }
+        let item = items[indexPath.row]
+        cell.configureCell(item: item)
         cell.backgroundColor = #colorLiteral(red: 0.9971715808, green: 0.8923018575, blue: 0.4402516186, alpha: 1)
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //segue to item detail
+        let item = items[indexPath.row]
+        //segue
     }
     
     
