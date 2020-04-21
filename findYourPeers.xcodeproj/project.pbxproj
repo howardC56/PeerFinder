@@ -37,6 +37,8 @@
 		C69DE09A244F48FA00D86E30 /* ItemDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69DE099244F48FA00D86E30 /* ItemDetailView.swift */; };
 		C69DE09C244F490700D86E30 /* ContactSellerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69DE09B244F490700D86E30 /* ContactSellerView.swift */; };
 		C69DE09E244F491600D86E30 /* ItemWishlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69DE09D244F491600D86E30 /* ItemWishlistView.swift */; };
+		C69DE0A0244F60EB00D86E30 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69DE09F244F60EB00D86E30 /* ItemCell.swift */; };
+		C69DE0A4244F7C7200D86E30 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69DE0A3244F7C7200D86E30 /* Item.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +76,8 @@
 		C69DE099244F48FA00D86E30 /* ItemDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailView.swift; sourceTree = "<group>"; };
 		C69DE09B244F490700D86E30 /* ContactSellerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactSellerView.swift; sourceTree = "<group>"; };
 		C69DE09D244F491600D86E30 /* ItemWishlistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemWishlistView.swift; sourceTree = "<group>"; };
+		C69DE09F244F60EB00D86E30 /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
+		C69DE0A3244F7C7200D86E30 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +181,7 @@
 				888950C8244E03DF003DDE1E /* User.swift */,
 				888950CC244E03FE003DDE1E /* Group.swift */,
 				888950CE244E0408003DDE1E /* Post.swift */,
+				C69DE0A3244F7C7200D86E30 /* Item.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -204,6 +209,7 @@
 			children = (
 				C69DE08D244E48E200D86E30 /* GroupCell.swift */,
 				888950DC244F43FC003DDE1E /* GroupDetailViewCell.swift */,
+				C69DE09F244F60EB00D86E30 /* ItemCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -325,7 +331,9 @@
 			files = (
 				888950B9244E00BC003DDE1E /* GroupsViewController.swift in Sources */,
 				888950A9244DFF8E003DDE1E /* FollowedGroupsController.swift in Sources */,
+				C69DE0A0244F60EB00D86E30 /* ItemCell.swift in Sources */,
 				888950D7244E23E5003DDE1E /* MainTabBarController.swift in Sources */,
+				C69DE0A4244F7C7200D86E30 /* Item.swift in Sources */,
 				888950C5244E017A003DDE1E /* CreateViewGroup.swift in Sources */,
 				888950CD244E03FE003DDE1E /* Group.swift in Sources */,
 				888950D1244E04F8003DDE1E /* FireBaseDataService.swift in Sources */,

@@ -8,40 +8,58 @@
 
 import UIKit
 
+enum Category {
+    case study
+    case club
+    case event
+}
+
 class FollowedGroupsController: UIViewController {
 
     private let followedGroupsView = FollowedGroupsView()
     
     override func loadView() {
         view = followedGroupsView
-        followedGroupsView.backgroundColor = .systemBackground
+        followedGroupsView.backgroundColor = .white
     }
-    
+    private var selectedCategory: Category = .study {
+        didSet {
+            DispatchQueue.main.async {
+                self.followedGroupsView.collectionView.reloadData()
+            }
+        }
+    }
+     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
-        configureButtonActions()
+        configureSegmentControllerAndNavBar()
+        
     }
     private func configureCollectionView() {
         followedGroupsView.collectionView.delegate = self
         followedGroupsView.collectionView.dataSource = self
         followedGroupsView.collectionView.register(GroupCell.self, forCellWithReuseIdentifier: "groupCell")
     }
-    private func configureButtonActions() {
-        followedGroupsView.studyButton.addTarget(self, action: #selector(studyButtonPressed(_:)), for: .touchUpInside)
-        followedGroupsView.clubButton.addTarget(self, action: #selector(clubButtonPressed(_:)), for: .touchUpInside)
-        followedGroupsView.eventButton.addTarget(self, action: #selector(eventButtonPressed(_:)), for: .touchUpInside)
+    private func configureSegmentControllerAndNavBar() {
+        followedGroupsView.categorySegmentedControl.addTarget(self, action: #selector(categorySelected(_:)), for: .valueChanged)
+        navigationItem.title = "Your Groups"
     }
-    @objc private func studyButtonPressed(_ sender: UIButton) {
-        //filter by study groups
+    @objc private func categorySelected(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            selectedCategory = .study
+            //filter groups
+        case 1:
+            selectedCategory = .club
+            //filter groups
+        case 2:
+            selectedCategory = .event
+            //filter groups
+        default:
+            print("default case hit")
+        }
     }
-    @objc private func clubButtonPressed(_ sender: UIButton) {
-        //filter by clubs
-    }
-    @objc private func eventButtonPressed(_ sender: UIButton) {
-        //filter by events
-    }
-
 }
 extension FollowedGroupsController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -66,6 +84,8 @@ extension FollowedGroupsController: UICollectionViewDataSource {
         cell.backgroundColor = #colorLiteral(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
         return cell
     }
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        //code to segue to group detail
+    }
     
 }
