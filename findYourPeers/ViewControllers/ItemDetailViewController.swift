@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class ItemDetailViewController: UIViewController {
     
@@ -16,17 +17,41 @@ class ItemDetailViewController: UIViewController {
         view = itemDetailView
     }
     
+    private var item: Item?
+    
     //add image picker controller here
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         view.backgroundColor = .white
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName:  "camera.fill"), style: .plain, target: self, action: #selector(loadCamera))
+        itemDetailView.itemsCollectionView.delegate = self
+        itemDetailView.itemsCollectionView.dataSource = self
     }
     
-    @objc private func loadCamera() {
-        print("camera opened")
-    }
+}
 
+extension ItemDetailViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let itemSpacing: CGFloat = 1
+        let maxWidth = CGFloat(80)
+        let numberOfItems: CGFloat = 1
+        let totalSpace: CGFloat = numberOfItems * itemSpacing
+        let itemWidth: CGFloat = (maxWidth - totalSpace) / numberOfItems
+        
+        return CGSize(width: itemWidth, height: 80)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "bruh", for: indexPath)
+        
+        return cell
+    }
+    
+    
 }
