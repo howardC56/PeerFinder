@@ -20,11 +20,10 @@ final class GroupDetailView: UIView {
     public lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        label.textColor = .black
+        label.textColor = UIColor(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
         label.adjustsFontSizeToFitWidth = true
         label.text = "Title Here"
         label.textAlignment = .center
-        label.backgroundColor = .white
         label.numberOfLines = 0
         return label
     }()
@@ -32,11 +31,10 @@ final class GroupDetailView: UIView {
     public lazy var categoryLabel: UILabel = {
            let label = UILabel()
            label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-           label.textColor = .black
+           label.textColor = UIColor(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
            label.adjustsFontSizeToFitWidth = true
            label.text = "category Here"
            label.textAlignment = .center
-           label.backgroundColor = .white
            label.numberOfLines = 0
            return label
        }()
@@ -44,12 +42,11 @@ final class GroupDetailView: UIView {
      public lazy var descriptionLabel: UITextView = {
            let label = UITextView()
            label.font = UIFont.systemFont(ofSize: 17, weight: .medium)
-           label.textColor = .black
+           label.textColor = UIColor(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
            label.textAlignment = .left
            label.layer.borderWidth = 1
-           label.layer.borderColor = UIColor.black.cgColor
+           label.layer.borderColor = UIColor(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1).cgColor
            label.text = "Date Posted: , UserName: , Description:"
-           label.backgroundColor = .white
            label.sizeToFit()
            label.isEditable = false
            return label
@@ -104,6 +101,7 @@ final class GroupDetailView: UIView {
         tableViewSetup()
         commentBoxSetup()
         buttonSetup()
+        backgroundColor = UIColor(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
     }
     
     private func photoimageSetup() {
