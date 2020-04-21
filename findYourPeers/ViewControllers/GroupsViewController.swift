@@ -23,6 +23,7 @@ class GroupsViewController: UIViewController {
         navigationItem.title = "Groups"
         navigationController?.navigationBar.prefersLargeTitles = true
         configureButtons()
+        setUpCollectionView()
     }
     
     private func configureButtons() {
@@ -35,6 +36,7 @@ class GroupsViewController: UIViewController {
     private func setUpCollectionView() {
         groupsView.groupsCollectionView.delegate = self
         groupsView.groupsCollectionView.dataSource = self
+        groupsView.groupsCollectionView.register(GroupCell.self, forCellWithReuseIdentifier: "groupCell")
     }
     
     @objc func setUpStudyButton() {
@@ -63,14 +65,22 @@ class GroupsViewController: UIViewController {
 
 extension GroupsViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
-    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let maxsize: CGSize = UIScreen.main.bounds.size
+        let itemWidth: CGFloat = maxsize.width * 0.9
+        let itemHeight: CGFloat = maxsize.height * 0.15
+        return CGSize(width: itemWidth, height: itemHeight)
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 10
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "boop", for: indexPath)
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "groupCell", for: indexPath) as? GroupCell else {
+            fatalError("could not downcast to groupCell")
+        }
+        cell.backgroundColor = #colorLiteral(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
         
         return cell
     }
