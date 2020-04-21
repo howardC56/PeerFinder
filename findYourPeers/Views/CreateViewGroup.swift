@@ -78,6 +78,7 @@ class CreateViewGroup: UIView {
         sc.layer.borderColor = customBlueColor.cgColor
         let attributes = [NSAttributedString.Key.font: UIFont(name: "Kohinoor Telugu", size: 20.0), NSAttributedString.Key.foregroundColor: customBlueColor]
         sc.setTitleTextAttributes(attributes as [NSAttributedString.Key : Any], for: .normal)
+        sc.selectedSegmentTintColor = customGoldColor
         sc.layer.borderWidth = 3.0
         sc.layer.cornerRadius = 20
         return sc
