@@ -100,7 +100,7 @@ extension GroupDetailViewController: UITableViewDelegate, UITableViewDataSource 
             fatalError("could not downcast to SearchViewTableViewCell")
         }
         let post = posts[indexPath.row]
-        //cell.configureCell(for: post)
+        cell.configureCell(post: post)
         return cell
     }
     
