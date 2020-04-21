@@ -7,3 +7,12 @@
 //
 
 import Foundation
+
+struct Post: Codable {
+    let userName: String
+    let userId: String
+    let timePosted: Date
+    let postText: String
+    let postId: String
+    
+}
