@@ -19,7 +19,7 @@ final class GroupDetailView: UIView {
     
     public lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        label.font = UIFont(name: "Kohinoor Telugu", size: 20)
         label.textColor = UIColor(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
         label.adjustsFontSizeToFitWidth = true
         label.text = "Title Here"
@@ -30,7 +30,7 @@ final class GroupDetailView: UIView {
     
     public lazy var categoryLabel: UILabel = {
            let label = UILabel()
-           label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+           label.font = UIFont(name: "Kohinoor Telugu", size: 18)
            label.textColor = UIColor(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
            label.adjustsFontSizeToFitWidth = true
            label.text = "category Here"
@@ -41,7 +41,7 @@ final class GroupDetailView: UIView {
     
      public lazy var descriptionLabel: UITextView = {
            let label = UITextView()
-           label.font = UIFont.systemFont(ofSize: 17, weight: .medium)
+           label.font = UIFont(name: "Kohinoor Telugu", size: 16)
            label.textColor = UIColor(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
            label.textAlignment = .left
            label.layer.borderWidth = 1
@@ -68,15 +68,15 @@ final class GroupDetailView: UIView {
     public lazy var commentButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "plus"), for: .normal)
-        button.tintColor = .blue
-        button.backgroundColor = .white
+        button.tintColor = UIColor(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+        button.backgroundColor = UIColor(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
         button.layer.shadowColor = UIColor.lightGray.cgColor
         button.layer.shadowPath = UIBezierPath(roundedRect: button.bounds, cornerRadius: 25).cgPath
         button.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
         button.layer.shadowOpacity = 0.7
         button.layer.shadowRadius = 5
         button.layer.cornerRadius = 25
-        button.layer.borderColor = UIColor.clear.cgColor
+        button.layer.borderColor = UIColor(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1).cgColor
         button.layer.borderWidth = 1.5
         button.layer.masksToBounds = true
         button.clipsToBounds = false
