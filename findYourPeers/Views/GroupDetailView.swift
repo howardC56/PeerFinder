@@ -83,6 +83,7 @@ final class GroupDetailView: UIView {
         button.layer.borderWidth = 1.5
         button.layer.masksToBounds = true
         button.clipsToBounds = false
+        button.animateButtonView(self)
         return button
     }()
     
