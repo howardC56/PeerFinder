@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Group: Codable {
+struct Group: Codable & Identifiable {
     let category: String
     let collegeName: String
     let createdBy: String

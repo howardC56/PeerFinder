@@ -37,7 +37,40 @@ class GroupDetailViewController: UIViewController {
                     }()
     
     @objc private func configureFavorites(_ sender: UIBarButtonItem) {
-        
+        if isFavorite {
+            DatabaseService.manager.deleteGroupFromFavorites(group.self) { [weak self] (result) in
+                       switch result {
+                       case .failure(let error):
+                           self?.showAlert(title: "error", message: error.localizedDescription)
+                       case .success:
+                           self?.isFavorite = false
+                               }
+                           }
+               } else {
+                   DatabaseService.manager.addGroupToFavorties(group) { [weak self] (result) in
+                       switch result {
+                       case .failure(let error):
+                           self?.showAlert(title: "error", message: error.localizedDescription)
+                       case .success:
+                           self?.isFavorite = true
+                       }
+                   }
+               }
+    }
+    
+    private func isGroupFavorited(_ group: Group) {
+        DatabaseService.manager.groupIsFavorited(group) { [weak self] (result) in
+            switch result {
+            case .failure(let error):
+                self?.showAlert(title: "error", message: error.localizedDescription)
+            case .success(let success):
+                if success {
+                    self?.isFavorite = true
+                } else {
+                    self?.isFavorite = false
+                }
+            }
+        }
     }
     
     override func loadView() {
