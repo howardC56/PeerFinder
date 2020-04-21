@@ -13,6 +13,6 @@ struct Post: Codable {
     let userId: String
     let timePosted: Date
     let postText: String
-    let postId: String
+    let id: String
     
 }
