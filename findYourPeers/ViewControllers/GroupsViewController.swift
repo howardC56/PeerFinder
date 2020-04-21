@@ -19,7 +19,7 @@ class GroupsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .systemGroupedBackground
+        view.backgroundColor = .white
         navigationItem.title = "Groups"
         navigationController?.navigationBar.prefersLargeTitles = true
         configureButtons()
