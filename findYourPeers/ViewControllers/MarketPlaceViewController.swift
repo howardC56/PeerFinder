@@ -16,15 +16,34 @@ class MarketPlaceViewController: UIViewController {
         view = marketPlaceView
         view.backgroundColor = .white
     }
+    
+    private var searchQuery = "" {
+        didSet {
+            DispatchQueue.main.async {
+                self.marketPlaceView.collectionView.reloadData()
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
+        configureSearchBar()
+        configureNavBar()
 
     }
     private func configureCollectionView(){
         marketPlaceView.collectionView.delegate = self
         marketPlaceView.collectionView.dataSource = self
         marketPlaceView.collectionView.register(ItemCell.self, forCellWithReuseIdentifier: "itemCell")
+    }
+    private func configureSearchBar() {
+        marketPlaceView.searchBar.delegate = self
+    }
+    private func configureNavBar() {
+        navigationItem.title = "Student Market Place"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: nil)
+        navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
     }
     
 
@@ -52,6 +71,16 @@ extension MarketPlaceViewController: UICollectionViewDataSource {
         cell.backgroundColor = #colorLiteral(red: 0.9971715808, green: 0.8923018575, blue: 0.4402516186, alpha: 1)
         return cell
     }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        //segue to item detail
+    }
     
     
+}
+extension MarketPlaceViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if let searchText = searchBar.text {
+            searchQuery = searchText
+        }
+    }
 }
