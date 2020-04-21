@@ -44,20 +44,18 @@ class FollowedGroupsController: UIViewController {
     @objc private func categorySelected(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
-            print("selected study")
+            selectedCategory = .study
+            //filter groups
         case 1:
-            print("selected club")
+            selectedCategory = .club
+            //filter groups
         case 2:
-            print("selected event")
+            selectedCategory = .event
+            //filter groups
         default:
             print("default case hit")
-            
         }
     }
-    
-    
-
-
 }
 extension FollowedGroupsController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -82,6 +80,8 @@ extension FollowedGroupsController: UICollectionViewDataSource {
         cell.backgroundColor = #colorLiteral(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
         return cell
     }
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        //code to segue to group detail
+    }
     
 }
