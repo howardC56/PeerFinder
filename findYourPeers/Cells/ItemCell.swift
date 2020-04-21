@@ -99,3 +99,6 @@ class ItemCell: UICollectionViewCell {
         ])
     }
 }
+extension ItemCell {
+    
+}

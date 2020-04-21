@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseFirestore
 
 class MarketPlaceViewController: UIViewController {
 
@@ -16,7 +17,7 @@ class MarketPlaceViewController: UIViewController {
         view = marketPlaceView
         view.backgroundColor = .white
     }
-    
+    private var listener: ListenerRegistration?
     private var searchQuery = "" {
         didSet {
             DispatchQueue.main.async {
@@ -31,6 +32,14 @@ class MarketPlaceViewController: UIViewController {
         configureSearchBar()
         configureNavBar()
 
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        //add listener function
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        listener?.remove()
     }
     private func configureCollectionView(){
         marketPlaceView.collectionView.delegate = self
