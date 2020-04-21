@@ -15,6 +15,12 @@ class GroupsViewController: UIViewController {
     override func loadView() {
         view = groupsView
     }
+    
+    private var groups = [Group]() {
+        didSet{
+            groupsView.groupsCollectionView.reloadData()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,8 +62,11 @@ class GroupsViewController: UIViewController {
     
     @objc func addGroupVC() {
         print("group insert")
-        let createGroupVC = CreateGroupViewController()
-        navigationController?.pushViewController(createGroupVC, animated: true)
+//        let createGroupVC = CreateGroupViewController()
+//        navigationController?.pushViewController(createGroupVC, animated: true)
+        
+        let itemVC = ItemDetailViewController()
+        navigationController?.pushViewController(itemVC, animated: true)
     }
     
 
