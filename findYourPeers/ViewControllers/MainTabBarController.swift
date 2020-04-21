@@ -22,10 +22,21 @@ class MainTabBarController: UITabBarController {
         return vc
     }()
     
+    public lazy var marketPlaceViewController: MarketPlaceViewController = {
+        let vc = MarketPlaceViewController()
+        vc.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "cart"), selectedImage: UIImage(systemName: "cart.fill"))
+        return vc
+    }()
+    public lazy var itemWishlistViewController: ItemWishlistViewController = {
+        let vc = ItemWishlistViewController()
+        vc.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "bag"), selectedImage: UIImage(systemName: "bag.fill"))
+        return vc
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tabBar.tintColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
-        viewControllers = [UINavigationController(rootViewController: searchViewController), UINavigationController(rootViewController: collectionsViewController)]
+        viewControllers = [UINavigationController(rootViewController: searchViewController), UINavigationController(rootViewController: collectionsViewController), UINavigationController(rootViewController: marketPlaceViewController),UINavigationController(rootViewController: itemWishlistViewController)]
         
     }
     
