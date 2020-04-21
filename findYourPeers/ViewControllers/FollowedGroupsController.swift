@@ -20,7 +20,7 @@ class FollowedGroupsController: UIViewController {
     
     override func loadView() {
         view = followedGroupsView
-        followedGroupsView.backgroundColor = .systemBackground
+        followedGroupsView.backgroundColor = .white
     }
     private var selectedCategory: Category = .study {
         didSet {
@@ -33,13 +33,17 @@ class FollowedGroupsController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
-        followedGroupsView.categorySegmentedControl.addTarget(self, action: #selector(categorySelected(_:)), for: .valueChanged)
+        configureSegmentControllerAndNavBar()
         
     }
     private func configureCollectionView() {
         followedGroupsView.collectionView.delegate = self
         followedGroupsView.collectionView.dataSource = self
         followedGroupsView.collectionView.register(GroupCell.self, forCellWithReuseIdentifier: "groupCell")
+    }
+    private func configureSegmentControllerAndNavBar() {
+        followedGroupsView.categorySegmentedControl.addTarget(self, action: #selector(categorySelected(_:)), for: .valueChanged)
+        navigationItem.title = "Your Groups"
     }
     @objc private func categorySelected(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
