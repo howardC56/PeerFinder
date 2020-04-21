@@ -15,12 +15,18 @@ class ItemDetailViewController: UIViewController {
     override func loadView() {
         view = itemDetailView
     }
+    
+    //add image picker controller here
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = .white
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName:  "camera.fill"), style: .plain, target: self, action: #selector(loadCamera))
     }
     
+    @objc private func loadCamera() {
+        print("camera opened")
+    }
 
 }
