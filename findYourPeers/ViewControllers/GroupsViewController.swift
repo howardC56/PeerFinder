@@ -57,7 +57,7 @@ class GroupsViewController: UIViewController {
             case .failure(let error):
                 print("could not fetch groups: \(error)")
             case .success(let groups):
-                self?.groups = groups
+                self?.groups = groups.filter { $0.topic == "study"}
                 dump(groups)
             }
         }
@@ -66,11 +66,33 @@ class GroupsViewController: UIViewController {
     @objc func setUpClubsButton() {
         print("clubs")
         //fetch data filtering on topic
+        DatabaseService.manager.getGroups(item: Group.self) {
+            [weak self] (result) in
+            
+            switch result {
+            case .failure(let error):
+                print("could not fetch groups: \(error)")
+            case .success(let groups):
+                self?.groups = groups.filter { $0.topic == "club"}
+                dump(groups)
+            }
+        }
     }
     
     @objc func setUpEventsButton() {
         print("events")
         //fetch data filtering on topic
+        DatabaseService.manager.getGroups(item: Group.self) {
+            [weak self] (result) in
+            
+            switch result {
+            case .failure(let error):
+                print("could not fetch groups: \(error)")
+            case .success(let groups):
+                self?.groups = groups.filter { $0.topic == "event"}
+                dump(groups)
+            }
+        }
     }
     
     @objc func addGroupVC() {

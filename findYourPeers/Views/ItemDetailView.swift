@@ -61,6 +61,49 @@ class ItemDetailView: UIView {
         cv.layer.cornerRadius = 10
         return cv
     }()
+    
+    public lazy var priceLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont(name: "Kohinoor Telugu", size: 20)
+        label.textColor = #colorLiteral(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
+        label.adjustsFontSizeToFitWidth = true
+        label.text = "Price: "
+        label.numberOfLines = 1
+        return label
+    }()
+    
+    public lazy var conditionLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont(name: "Kohinoor Telugu", size: 18)
+        label.textColor = #colorLiteral(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
+        label.adjustsFontSizeToFitWidth = true
+        label.text = "Condition: "
+        label.numberOfLines = 1
+        return label
+    }()
+    
+    public lazy var wishlistButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Add to wishlist", for: .normal)
+        button.backgroundColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+        button.titleLabel?.textColor = #colorLiteral(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
+        button.layer.cornerRadius = 10
+        button.layer.shadowOpacity = 0.3
+        button.layer.shadowRadius = 10
+        button.layer.shadowOffset = CGSize(width: 0, height: 4)
+        return button
+    }()
+    
+    public lazy var descriptionLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont(name: "Kohinoor Telugu", size: 16)
+        label.textColor = #colorLiteral(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
+        label.adjustsFontSizeToFitWidth = true
+        label.text = "Description:"
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        return label
+    }()
 
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
@@ -75,9 +118,13 @@ class ItemDetailView: UIView {
     private func commonInit() {
         setUpItemNameConstraints()
         setUpSellerNameConstraints()
-        setUpContantConstraints()
+        setUpContactConstraints()
         setUpItemImageConstraints()
         setUpImagesCollectionConstraints()
+        setUpPriceConstraints()
+        setUpConditionConstraints()
+        setUpWishlistButtonConstraints()
+        setUpDescripConstraints()
     }
     
     private func setUpItemNameConstraints() {
@@ -102,7 +149,7 @@ class ItemDetailView: UIView {
         ])
     }
 
-    private func setUpContantConstraints() {
+    private func setUpContactConstraints() {
         addSubview(contactSellerButton)
         
         contactSellerButton.translatesAutoresizingMaskIntoConstraints = false
@@ -141,5 +188,53 @@ class ItemDetailView: UIView {
         ])
     }
     
+    private func setUpPriceConstraints() {
+        addSubview(priceLabel)
+        
+        priceLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            priceLabel.topAnchor.constraint(equalTo: itemsCollectionView.bottomAnchor, constant: 20),
+            priceLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8)
+        ])
+    }
+    
+    private func setUpConditionConstraints() {
+        addSubview(conditionLabel)
+        
+        conditionLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            conditionLabel.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 14),
+            conditionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10)
+        ])
+        
+    }
+    
+    
+    private func setUpWishlistButtonConstraints() {
+        addSubview(wishlistButton)
+        
+        wishlistButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            wishlistButton.topAnchor.constraint(equalTo: itemsCollectionView.bottomAnchor, constant: 20),
+            wishlistButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
+            wishlistButton.widthAnchor.constraint(equalToConstant: 120),
+            wishlistButton.heightAnchor.constraint(equalToConstant: 44)
+        ])
+    }
+    
+    private func setUpDescripConstraints(){
+        addSubview(descriptionLabel)
+        
+        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            descriptionLabel.topAnchor.constraint(equalTo: conditionLabel.bottomAnchor, constant: 20),
+            descriptionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            descriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
+        ])
+    }
     
 }
