@@ -63,12 +63,12 @@ extension GroupDetailViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        guard let cell = tableView.dequeueReusableCell(withIdentifier: "GroupDetailViewCell", for: indexPath) as? GroupDetailViewCell else {
-//            fatalError("could not downcast to SearchViewTableViewCell")
-//        }
-//        let post = posts[indexPath.row]
-//        cell.configureCell(for: post)
-//        return cell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "GroupDetailViewCell", for: indexPath) as? GroupDetailViewCell else {
+            fatalError("could not downcast to SearchViewTableViewCell")
+        }
+        //let post = posts[indexPath.row]
+        //cell.configureCell(for: post)
+        return cell
     }
     
     
