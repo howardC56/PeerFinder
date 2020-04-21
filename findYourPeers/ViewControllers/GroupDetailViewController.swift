@@ -11,13 +11,13 @@ import UIKit
 class GroupDetailViewController: UIViewController {
 
     private var groupDetailView = GroupDetailView()
-    //private var group: Group!
+    private var group: Group!
     
-//    private var posts = [Post]() {
-//        didSet {
-//            groupDetailView.tableView.reloadData()
-//        }
-//    }
+    private var posts = [Post]() {
+        didSet {
+            groupDetailView.tableView.reloadData()
+        }
+    }
     
     private var isFavorite = false {
         didSet {
@@ -46,7 +46,7 @@ class GroupDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //navigationItem.title = group.name.capitalized
+        navigationItem.title = group.groupName.capitalized
         navigationItem.rightBarButtonItem = favorite
         groupDetailView.tableView.delegate = self
         groupDetailView.tableView.dataSource = self
@@ -58,15 +58,15 @@ class GroupDetailViewController: UIViewController {
 
 extension GroupDetailViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //posts.count
-        1
+        posts.count
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "GroupDetailViewCell", for: indexPath) as? GroupDetailViewCell else {
             fatalError("could not downcast to SearchViewTableViewCell")
         }
-        //let post = posts[indexPath.row]
+        let post = posts[indexPath.row]
         //cell.configureCell(for: post)
         return cell
     }
