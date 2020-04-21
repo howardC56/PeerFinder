@@ -10,14 +10,15 @@ import UIKit
 import FirebaseFirestore
 
 class MarketPlaceViewController: UIViewController {
-
+    
     private let marketPlaceView = MarketPlaceView()
     
     override func loadView() {
         view = marketPlaceView
         view.backgroundColor = .white
     }
-    private var listener: ListenerRegistration?
+    //private var listener: ListenerRegistration?
+    
     private var items = [Item]() {
         didSet {
             DispatchQueue.main.async {
@@ -28,25 +29,44 @@ class MarketPlaceViewController: UIViewController {
     private var searchQuery = "" {
         didSet {
             DispatchQueue.main.async {
-                self.marketPlaceView.collectionView.reloadData()
+                self.items = self.items.filter {$0.itemName.contains(self.searchQuery.lowercased())}
             }
         }
     }
+    private var refreshControl: UIRefreshControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
         configureSearchBar()
         configureNavBar()
-
+        configureRefreshControl()
+        getItems()
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         //add listener function
+
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
-        listener?.remove()
+        //listener?.remove()
+    }
+    @objc private func getItems() {
+        DatabaseService.manager.getItems(item: Item.self) { [weak self] (result) in
+            switch result {
+            case .failure(let error):
+                print("could not get items \(error)")
+                DispatchQueue.main.async {
+                    self?.refreshControl.endRefreshing()
+                }
+            case .success(let items):
+                self?.items = items
+                DispatchQueue.main.async {
+                    self?.refreshControl.endRefreshing()
+                }
+            }
+        }
     }
     private func configureCollectionView(){
         marketPlaceView.collectionView.delegate = self
@@ -56,13 +76,19 @@ class MarketPlaceViewController: UIViewController {
     private func configureSearchBar() {
         marketPlaceView.searchBar.delegate = self
     }
+    private func configureRefreshControl() {
+        refreshControl = UIRefreshControl()
+        refreshControl.tintColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+        marketPlaceView.collectionView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(getItems), for: .valueChanged)
+    }
     private func configureNavBar() {
         navigationItem.title = "Student Market Place"
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: nil)
         navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
     }
     
-
+    
 }
 extension MarketPlaceViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -86,12 +112,13 @@ extension MarketPlaceViewController: UICollectionViewDataSource {
         }
         let item = items[indexPath.row]
         cell.configureCell(item: item)
-        cell.backgroundColor = #colorLiteral(red: 0.9971715808, green: 0.8923018575, blue: 0.4402516186, alpha: 1)
+        //cell.backgroundColor = #colorLiteral(red: 0.9971715808, green: 0.8923018575, blue: 0.4402516186, alpha: 1)
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = items[indexPath.row]
-        //segue
+        let itemDetailVC = ItemDetailViewController()
+        //itemDetailVC.item = itxem
     }
     
     

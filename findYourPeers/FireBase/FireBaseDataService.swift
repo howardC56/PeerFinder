@@ -16,7 +16,7 @@ final class DatabaseService {
   static let groupsCollection = "groups"
   static let postsCollection = "posts"
   static let favoriteGroupsCollection = "favoriteGroups"
-  static let itemGroupCollection = "item"
+  static let itemGroupCollection = "items"
     static let favoriteItemCollection = "favoriteItems"
   private let db = Firestore.firestore()
   private init () {}
