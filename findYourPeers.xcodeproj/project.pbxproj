@@ -26,6 +26,7 @@
 		888950D1244E04F8003DDE1E /* FireBaseDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888950D0244E04F8003DDE1E /* FireBaseDataService.swift */; };
 		888950D7244E23E5003DDE1E /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888950D6244E23E5003DDE1E /* MainTabBarController.swift */; };
 		888950D9244E26F8003DDE1E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 888950D8244E26F8003DDE1E /* GoogleService-Info.plist */; };
+		888950DB244E7207003DDE1E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888950DA244E7207003DDE1E /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		888950D0244E04F8003DDE1E /* FireBaseDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseDataService.swift; sourceTree = "<group>"; };
 		888950D6244E23E5003DDE1E /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		888950D8244E26F8003DDE1E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		888950DA244E7207003DDE1E /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		B9CA310C14C1632521314CB1 /* Pods_findYourPeers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_findYourPeers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF90206A455DF28F11F59A71 /* Pods-findYourPeers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-findYourPeers.release.xcconfig"; path = "Target Support Files/Pods-findYourPeers/Pods-findYourPeers.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -163,6 +165,7 @@
 			children = (
 				888950A4244DFF8E003DDE1E /* AppDelegate.swift */,
 				888950A6244DFF8E003DDE1E /* SceneDelegate.swift */,
+				888950DA244E7207003DDE1E /* Extensions.swift */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
@@ -293,6 +296,7 @@
 				888950BF244E012A003DDE1E /* FollowedGroupsView.swift in Sources */,
 				888950A5244DFF8E003DDE1E /* AppDelegate.swift in Sources */,
 				888950C3244E0141003DDE1E /* GroupDetailView.swift in Sources */,
+				888950DB244E7207003DDE1E /* Extensions.swift in Sources */,
 				888950A7244DFF8E003DDE1E /* SceneDelegate.swift in Sources */,
 				888950C1244E0137003DDE1E /* GroupsView.swift in Sources */,
 				888950BB244E00D9003DDE1E /* GroupDetailViewController.swift in Sources */,
