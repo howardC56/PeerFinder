@@ -18,7 +18,9 @@ class GroupsViewController: UIViewController {
     
     private var groups = [Group]() {
         didSet{
-            groupsView.groupsCollectionView.reloadData()
+            DispatchQueue.main.async {
+                self.groupsView.groupsCollectionView.reloadData()
+            }
         }
     }
 
@@ -48,6 +50,17 @@ class GroupsViewController: UIViewController {
     @objc func setUpStudyButton() {
         print("study")
         //fetch data filtering on topic
+        DatabaseService.manager.getGroups(item: Group.self) {
+            [weak self] (result) in
+            
+            switch result {
+            case .failure(let error):
+                print("could not fetch groups: \(error)")
+            case .success(let groups):
+                self?.groups = groups
+                dump(groups)
+            }
+        }
     }
     
     @objc func setUpClubsButton() {
@@ -82,7 +95,7 @@ extension GroupsViewController: UICollectionViewDelegateFlowLayout, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return groups.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -90,6 +103,9 @@ extension GroupsViewController: UICollectionViewDelegateFlowLayout, UICollection
             fatalError("could not downcast to groupCell")
         }
         cell.backgroundColor = #colorLiteral(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
+        
+        let group = groups[indexPath.row]
+        cell.configureCell(for: group)
         
         return cell
     }
