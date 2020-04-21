@@ -10,7 +10,7 @@ import UIKit
 import FirebaseFirestore
 
 class MarketPlaceViewController: UIViewController {
-
+    
     private let marketPlaceView = MarketPlaceView()
     
     override func loadView() {
@@ -18,6 +18,7 @@ class MarketPlaceViewController: UIViewController {
         view.backgroundColor = .white
     }
     private var listener: ListenerRegistration?
+    
     private var items = [Item]() {
         didSet {
             DispatchQueue.main.async {
@@ -28,7 +29,7 @@ class MarketPlaceViewController: UIViewController {
     private var searchQuery = "" {
         didSet {
             DispatchQueue.main.async {
-                self.marketPlaceView.collectionView.reloadData()
+                self.items = self.items.filter {$0.itemName == (self.searchQuery.lowercased())}
             }
         }
     }
@@ -38,15 +39,29 @@ class MarketPlaceViewController: UIViewController {
         configureCollectionView()
         configureSearchBar()
         configureNavBar()
-
+        getItems()
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         //add listener function
+//        Firestore.firestore().addSnapshotsInSyncListener {
+//            <#code#>
+//        }
+
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         listener?.remove()
+    }
+    private func getItems() {
+        DatabaseService.manager.getItems(item: Item.self) { [weak self] (result) in
+            switch result {
+            case .failure(let error):
+                print("could not get items \(error)")
+            case .success(let items):
+                self?.items = items
+            }
+        }
     }
     private func configureCollectionView(){
         marketPlaceView.collectionView.delegate = self
@@ -62,7 +77,7 @@ class MarketPlaceViewController: UIViewController {
         navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
     }
     
-
+    
 }
 extension MarketPlaceViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -91,7 +106,8 @@ extension MarketPlaceViewController: UICollectionViewDataSource {
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = items[indexPath.row]
-        //segue
+        let itemDetailVC = ItemDetailViewController()
+        //itemDetailVC.item = itxem
     }
     
     

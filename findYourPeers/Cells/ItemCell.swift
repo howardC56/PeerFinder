@@ -102,7 +102,7 @@ class ItemCell: UICollectionViewCell {
 extension ItemCell {
     public func configureCell(item: Item) {
         itemNameLabel.text = item.itemName
-        datePostedLabel.text = item.datePosted.description
+        datePostedLabel.text = item.datePosted.convertToString()
         itemPriceLabel.text = "$\(item.itemPrice)"
     }
 }
