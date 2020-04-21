@@ -8,6 +8,12 @@
 
 import UIKit
 
+enum Category {
+    case study
+    case club
+    case event
+}
+
 class FollowedGroupsController: UIViewController {
 
     private let followedGroupsView = FollowedGroupsView()
@@ -16,31 +22,41 @@ class FollowedGroupsController: UIViewController {
         view = followedGroupsView
         followedGroupsView.backgroundColor = .systemBackground
     }
-    
+    private var selectedCategory: Category = .study {
+        didSet {
+            DispatchQueue.main.async {
+                self.followedGroupsView.collectionView.reloadData()
+            }
+        }
+    }
+     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
-        configureButtonActions()
+        followedGroupsView.categorySegmentedControl.addTarget(self, action: #selector(categorySelected(_:)), for: .valueChanged)
+        
     }
     private func configureCollectionView() {
         followedGroupsView.collectionView.delegate = self
         followedGroupsView.collectionView.dataSource = self
         followedGroupsView.collectionView.register(GroupCell.self, forCellWithReuseIdentifier: "groupCell")
     }
-    private func configureButtonActions() {
-        followedGroupsView.studyButton.addTarget(self, action: #selector(studyButtonPressed(_:)), for: .touchUpInside)
-        followedGroupsView.clubButton.addTarget(self, action: #selector(clubButtonPressed(_:)), for: .touchUpInside)
-        followedGroupsView.eventButton.addTarget(self, action: #selector(eventButtonPressed(_:)), for: .touchUpInside)
+    @objc private func categorySelected(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            print("selected study")
+        case 1:
+            print("selected club")
+        case 2:
+            print("selected event")
+        default:
+            print("default case hit")
+            
+        }
     }
-    @objc private func studyButtonPressed(_ sender: UIButton) {
-        //filter by study groups
-    }
-    @objc private func clubButtonPressed(_ sender: UIButton) {
-        //filter by clubs
-    }
-    @objc private func eventButtonPressed(_ sender: UIButton) {
-        //filter by events
-    }
+    
+    
+
 
 }
 extension FollowedGroupsController: UICollectionViewDelegateFlowLayout {
