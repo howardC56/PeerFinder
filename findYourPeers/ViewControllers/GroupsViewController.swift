@@ -57,7 +57,7 @@ class GroupsViewController: UIViewController {
             case .failure(let error):
                 print("could not fetch groups: \(error)")
             case .success(let groups):
-                self?.groups = groups.filter { $0.topic == "study"}
+                self?.groups = groups.filter { $0.category == "study"}
                 dump(groups)
             }
         }
@@ -73,7 +73,7 @@ class GroupsViewController: UIViewController {
             case .failure(let error):
                 print("could not fetch groups: \(error)")
             case .success(let groups):
-                self?.groups = groups.filter { $0.topic == "club"}
+                self?.groups = groups.filter { $0.category == "club"}
                 dump(groups)
             }
         }
@@ -89,7 +89,7 @@ class GroupsViewController: UIViewController {
             case .failure(let error):
                 print("could not fetch groups: \(error)")
             case .success(let groups):
-                self?.groups = groups.filter { $0.topic == "event"}
+                self?.groups = groups.filter { $0.category == "event"}
                 dump(groups)
             }
         }
@@ -97,14 +97,10 @@ class GroupsViewController: UIViewController {
     
     @objc func addGroupVC() {
         print("group insert")
-//        let createGroupVC = CreateGroupViewController()
-//        navigationController?.pushViewController(createGroupVC, animated: true)
-        
-        let itemVC = ItemDetailViewController()
-        navigationController?.pushViewController(itemVC, animated: true)
+        let createGroupVC = CreateGroupViewController()
+        navigationController?.pushViewController(createGroupVC, animated: true)
     }
     
-
 }
 
 extension GroupsViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
