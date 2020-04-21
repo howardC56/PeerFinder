@@ -108,7 +108,7 @@ class GroupsView: UIView {
         vStack.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            vStack.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
+            vStack.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 8),
             vStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             vStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             vStack.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.05)
@@ -136,7 +136,7 @@ class GroupsView: UIView {
             groupsCollectionView.topAnchor.constraint(equalTo: groupSearchBar.bottomAnchor, constant: 20),
             groupsCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             groupsCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            groupsCollectionView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.52)
+            groupsCollectionView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.50)
         ])
     }
     
@@ -146,7 +146,7 @@ class GroupsView: UIView {
         addGroup.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            addGroup.topAnchor.constraint(equalTo: groupsCollectionView.bottomAnchor, constant: 20),
+            addGroup.topAnchor.constraint(equalTo: groupsCollectionView.bottomAnchor, constant: 8),
             addGroup.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             addGroup.widthAnchor.constraint(equalToConstant: 44),
             addGroup.heightAnchor.constraint(equalToConstant: 44)
