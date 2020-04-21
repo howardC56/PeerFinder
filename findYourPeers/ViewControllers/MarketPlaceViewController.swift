@@ -17,7 +17,7 @@ class MarketPlaceViewController: UIViewController {
         view = marketPlaceView
         view.backgroundColor = .white
     }
-    private var listener: ListenerRegistration?
+    //private var listener: ListenerRegistration?
     
     private var items = [Item]() {
         didSet {
@@ -29,37 +29,42 @@ class MarketPlaceViewController: UIViewController {
     private var searchQuery = "" {
         didSet {
             DispatchQueue.main.async {
-                self.items = self.items.filter {$0.itemName == (self.searchQuery.lowercased())}
+                self.items = self.items.filter {$0.itemName.contains(self.searchQuery.lowercased())}
             }
         }
     }
+    private var refreshControl: UIRefreshControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
         configureSearchBar()
         configureNavBar()
+        configureRefreshControl()
         getItems()
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         //add listener function
-//        Firestore.firestore().addSnapshotsInSyncListener {
-//            <#code#>
-//        }
 
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
-        listener?.remove()
+        //listener?.remove()
     }
-    private func getItems() {
+    @objc private func getItems() {
         DatabaseService.manager.getItems(item: Item.self) { [weak self] (result) in
             switch result {
             case .failure(let error):
                 print("could not get items \(error)")
+                DispatchQueue.main.async {
+                    self?.refreshControl.endRefreshing()
+                }
             case .success(let items):
                 self?.items = items
+                DispatchQueue.main.async {
+                    self?.refreshControl.endRefreshing()
+                }
             }
         }
     }
@@ -70,6 +75,12 @@ class MarketPlaceViewController: UIViewController {
     }
     private func configureSearchBar() {
         marketPlaceView.searchBar.delegate = self
+    }
+    private func configureRefreshControl() {
+        refreshControl = UIRefreshControl()
+        refreshControl.tintColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+        marketPlaceView.collectionView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(getItems), for: .valueChanged)
     }
     private func configureNavBar() {
         navigationItem.title = "Student Market Place"
