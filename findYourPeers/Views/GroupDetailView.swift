@@ -54,7 +54,7 @@ final class GroupDetailView: UIView {
     
     public lazy var tableView: UITableView = {
         let tableV = UITableView()
-        tableV.rowHeight = 140
+        tableV.rowHeight = 100
         tableV.backgroundColor = .white
         return tableV
     }()
