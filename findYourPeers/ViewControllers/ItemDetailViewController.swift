@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import MessageUI
 
 class ItemDetailViewController: UIViewController {
     
@@ -43,6 +44,7 @@ class ItemDetailViewController: UIViewController {
         view.backgroundColor = .white
         images = item.itemImages
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "cart.fill.badge.plus"), style: .plain, target: self, action: #selector(addToCartAction(_:)))
+        itemDetailView.contactSellerButton.addTarget(self, action: #selector(openMailController(_:)), for: .touchUpInside)
         setUpCollectionView()
         updateUI()
     }
@@ -73,6 +75,29 @@ class ItemDetailViewController: UIViewController {
             }
         }
     }
+    
+    @objc private func openMailController(_ sender: UIButton) {
+        print("mail")
+        showMailComposer()
+    }
+    
+    private func showMailComposer() {
+        
+        guard MFMailComposeViewController.canSendMail() else {
+            //show alert
+            return }
+        
+        let composer = MFMailComposeViewController()
+        composer.mailComposeDelegate = self
+        composer.setToRecipients([item.sellerEmail])
+        composer.setSubject("Interested in \(item.itemName)")
+        composer.setMessageBody("I would like to purchase the item listed", isHTML: false)
+        present(composer, animated: true)
+    }
+    
+}
+
+extension ItemDetailViewController: MFMailComposeViewControllerDelegate {
     
 }
 
