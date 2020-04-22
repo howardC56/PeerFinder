@@ -17,7 +17,7 @@ class ItemDetailViewController: UIViewController {
         view = itemDetailView
     }
     
-    private var item: Item?
+    public var item: Item?
     
     //add image picker controller here
     
