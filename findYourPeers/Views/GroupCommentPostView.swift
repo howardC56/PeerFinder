@@ -75,7 +75,7 @@ class GroupCommentPostView: UIView {
     private func submitButtonSetup() {
         addSubview(submitButton)
         submitButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([submitButton.centerYAnchor.constraint(equalTo: centerYAnchor), submitButton.centerXAnchor.constraint(equalTo: centerXAnchor), submitButton.widthAnchor.constraint(equalToConstant: 50)])
+        NSLayoutConstraint.activate([submitButton.centerYAnchor.constraint(equalTo: centerYAnchor), submitButton.centerXAnchor.constraint(equalTo: centerXAnchor), submitButton.widthAnchor.constraint(equalToConstant: 100)])
     }
     
     private func cancelButtonConstraints() {

@@ -76,7 +76,7 @@ final class GroupDetailView: UIView {
         button.layer.shadowRadius = 5
         button.layer.shadowOpacity = 0.5
         button.layer.shadowOffset = CGSize(width: 0, height: 4)
-        button.layer.cornerRadius = 25
+        button.layer.cornerRadius = 30
         button.layer.borderColor = UIColor(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1).cgColor
         button.layer.borderWidth = 1.5
         button.layer.masksToBounds = true
@@ -95,13 +95,13 @@ final class GroupDetailView: UIView {
     }
     
     private func commonInit() {
+        buttonSetup()
         photoimageSetup()
         titleLabelSetup()
         categoryLabelSetup()
         descriptionLabelSetup()
         tableViewSetup()
         //commentBoxSetup()
-        buttonSetup()
         backgroundColor = .white
     }
     
@@ -127,7 +127,7 @@ final class GroupDetailView: UIView {
     
     private func tableViewSetup() {
         addSubview(tableView)
-        tableView.anchor(top: descriptionLabel.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 35, height: 300)
+        tableView.anchor(top: descriptionLabel.bottomAnchor, left: leftAnchor, bottom: commentButton.topAnchor, right: rightAnchor, paddingTop: 35, paddingBottom: 30)
     }
     
 //    private func commentBoxSetup() {
@@ -137,6 +137,6 @@ final class GroupDetailView: UIView {
     
     private func buttonSetup() {
         addSubview(commentButton)
-        commentButton.anchor(top: tableView.bottomAnchor, right: rightAnchor, paddingTop: 20, paddingRight: 30, width: 60, height: 60)
+        commentButton.anchor(bottom: safeAreaLayoutGuide.bottomAnchor, right: rightAnchor, paddingBottom: 20, paddingRight: 30, width: 60, height: 60)
     }
 }

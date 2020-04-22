@@ -117,11 +117,11 @@ class GroupDetailViewController: UIViewController {
         groupDetailView.categoryLabel.text = "Category: \(group.category)"
         groupDetailView.descriptionLabel.text = "created by: \(group.createdBy) \n\(group.description)"
         groupDetailView.titleLabel.text = group.groupName
-        groupDetailView.commentButton.addTarget(self, action: #selector(postButtonPressed(_:)), for: .touchUpInside)
+        groupDetailView.commentButton.addTarget(self, action: #selector(startPostButtonPressed(_:)), for: .touchUpInside)
         groupPostView.cancelButton.addTarget(self, action: #selector(cancelButtonPressed(_:)), for: .touchUpInside)
     }
 
-    @objc private func postButtonPressed(_ sender: UIButton) {
+    @objc private func startPostButtonPressed(_ sender: UIButton) {
         post = true
         view = groupPostView
         navigationController?.navigationBar.isHidden = true
