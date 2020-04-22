@@ -20,6 +20,8 @@ class ItemDetailViewController: UIViewController {
     
     public var item: Item
     
+    private var currentIndex = 0
+    
     init(_ item: Item) {
         self.item = item
         super.init(nibName: nil, bundle: nil)
@@ -120,15 +122,19 @@ class ItemDetailViewController: UIViewController {
         
         let messageComposer = MFMessageComposeViewController()
         messageComposer.body = "Hi! I'm interested in this item that you're selling."
-        messageComposer.recipients = ["6467757521"]
+        messageComposer.recipients = ["34734699643"]
         messageComposer.messageComposeDelegate = self
-        if let imageData = itemDetailView.imageView.image?.pngData() {
-            messageComposer.addAttachmentData(imageData, typeIdentifier: "public.data", filename: "item_image")
-        }else {
-            DispatchQueue.main.async {
-                self.showAlert(title: "No image selected", message: "Did not attach an image to message")
-            }
-        }
+//        if let imageData = itemDetailView.imageView.image?.pngData() {
+//            messageComposer.addAttachmentData(imageData, typeIdentifier: "public.data", filename: "item_image")
+//        }else {
+//            DispatchQueue.main.async {
+//                self.showAlert(title: "No image selected", message: "Did not attach an image to message")
+//            }
+//        }
+        let currentImage = images[currentIndex]
+        guard let url = URL(string: currentImage) else { return }
+        messageComposer.addAttachmentURL(url, withAlternateFilename: "item_image")
+            
         present(messageComposer, animated: true)
     }
     
@@ -140,10 +146,13 @@ extension ItemDetailViewController: MFMessageComposeViewControllerDelegate {
         switch result {
         case .cancelled:
             print("cancelled message")
+            dismiss(animated: true)
         case .failed:
             print("message failed to send")
+            dismiss(animated: true)
         case .sent:
             print("message sent")
+            dismiss(animated: true)
         default:
             print("default")
         }
@@ -206,6 +215,7 @@ extension ItemDetailViewController: UICollectionViewDelegateFlowLayout, UICollec
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let image = images[indexPath.row]
+        currentIndex = indexPath.row
         itemDetailView.imageView.kf.setImage(with: URL(string: image))
     }
     
