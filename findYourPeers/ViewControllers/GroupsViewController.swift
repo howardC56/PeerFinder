@@ -31,18 +31,31 @@ class GroupsViewController: UIViewController {
             }
         }
     }
-
+    
     var isFirst = false
+    
+    private var searchQuery = "" {
+        didSet {
+            if isFirst == true{
+                groups = groups.filter { $0.groupName.lowercased().contains(searchQuery.lowercased())}
+                print("groups:" + searchQuery)
+            } else {
+                newGroups = newGroups.filter { $0.groupName.lowercased().contains(searchQuery.lowercased())}
+                print(searchQuery)
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         view.backgroundColor = .white
         navigationItem.title = "Groups"
         navigationController?.navigationBar.prefersLargeTitles = true
         configureSegButtons()
         setUpCollectionView()
         isFirst = true
+        groupsView.groupSearchBar.delegate = self
         getGroups()
     }
     
@@ -56,10 +69,13 @@ class GroupsViewController: UIViewController {
         switch sender.selectedSegmentIndex {
         case 0:
             newGroups = groups.filter {$0.category == "study"}
+            print(isFirst)
         case 1:
             newGroups = groups.filter {$0.category == "club"}
+            print(isFirst)
         case 2:
-           newGroups = groups.filter {$0.category == "event"}
+            newGroups = groups.filter {$0.category == "event"}
+            print(isFirst)
         default:
             print("default case hit")
         }
@@ -103,7 +119,7 @@ extension GroupsViewController: UICollectionViewDelegateFlowLayout, UICollection
         if isFirst == true {
             return groups.count
         } else {
-        return newGroups.count
+            return newGroups.count
         }
     }
     
@@ -114,8 +130,8 @@ extension GroupsViewController: UICollectionViewDelegateFlowLayout, UICollection
         cell.backgroundColor = #colorLiteral(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
         
         if isFirst == false {
-        let group = newGroups[indexPath.row]
-        cell.configureCell(for: group)
+            let group = newGroups[indexPath.row]
+            cell.configureCell(for: group)
         } else {
             let group = groups[indexPath.row]
             cell.configureCell(for: group)
@@ -124,5 +140,16 @@ extension GroupsViewController: UICollectionViewDelegateFlowLayout, UICollection
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+    }
     
+}
+
+extension GroupsViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let searchText = searchBar.text else { return }
+        searchQuery = searchText
+        
+    }
 }
