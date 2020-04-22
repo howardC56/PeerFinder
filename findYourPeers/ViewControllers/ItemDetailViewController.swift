@@ -40,15 +40,29 @@ class ItemDetailViewController: UIViewController {
         }
     }
     
+    private var isInBag = false {
+        didSet{
+            if isInBag {
+                navigationItem.rightBarButtonItem?.image = UIImage(systemName: "bag.fill.badge.plus")
+            } else {
+                navigationItem.rightBarButtonItem?.image = UIImage(systemName: "bag.badge.plus")
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .white
         images = item.itemImages
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "cart.fill.badge.plus"), style: .plain, target: self, action: #selector(addToCartAction(_:)))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "bag.badge.plus"), style: .plain, target: self, action: #selector(addToCartAction(_:)))
         navigationItem.rightBarButtonItem?.tintColor = customBorderColor
         itemDetailView.contactSellerButton.addTarget(self, action: #selector(openMailController(_:)), for: .touchUpInside)
         setUpCollectionView()
+        
+        if isInBag == true {
+            navigationItem.rightBarButtonItem?.image = UIImage(systemName: "bag.fill.badge.plus")
+        }
         updateUI()
     }
     
@@ -68,14 +82,29 @@ class ItemDetailViewController: UIViewController {
     }
     
     @objc private func addToCartAction(_ sender: UIBarButtonItem){
-        DatabaseService.manager.addItemToFavorties(item) { (result) in
+        
+        if isInBag {
+            DatabaseService.manager.deleteItemFromFavorites(item) { [weak self] (result) in
+                
+                switch result {
+                case .failure(let error):
+                    print("could not delete from cart: \(error.localizedDescription)")
+                case .success:
+                    print("deleted from cart")
+                    self?.isInBag = false
+                }
+            }
+        } else {
+        DatabaseService.manager.addItemToFavorties(item) { [weak self] (result) in
             
             switch result {
             case .failure(let error):
-                print("could not add to cart: \(error)")
+                print("could not add to cart: \(error.localizedDescription)")
             case .success:
                 print("added to cart")
+                self?.isInBag = true
             }
+        }
         }
     }
     
