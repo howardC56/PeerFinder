@@ -85,6 +85,7 @@ class ItemDetailViewController: UIViewController {
         
         guard MFMailComposeViewController.canSendMail() else {
             //show alert
+            showAlert(title: "Device Error", message: "Your device cannot send e-mails")
             return }
         
         let composer = MFMailComposeViewController()
@@ -98,7 +99,28 @@ class ItemDetailViewController: UIViewController {
 }
 
 extension ItemDetailViewController: MFMailComposeViewControllerDelegate {
-    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        
+        if let _ = error {
+            controller.dismiss(animated: true)
+        }
+
+        switch result {
+        case .cancelled:
+            print("cancelled email")
+        case .failed:
+            print("failed to send email")
+        case .saved:
+            print("saved email")
+        case .sent:
+            print("email sent!")
+        default:
+            print("default ")
+            controller.dismiss(animated: true)
+        }
+        
+        controller.dismiss(animated: true)
+    }
 }
 
 extension ItemDetailViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
