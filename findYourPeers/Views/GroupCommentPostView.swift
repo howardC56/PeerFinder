@@ -10,16 +10,18 @@ import UIKit
 
 class GroupCommentPostView: UIView {
 
-    public lazy var descriptionLabel: UITextView = {
-        let label = UITextView()
+    public lazy var descriptionLabel: UITextField = {
+        let label = UITextField()
         label.font = UIFont(name: "Kohinoor Telugu", size: 16)
-        label.textColor = UIColor(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+        label.textColor = .black
         label.textAlignment = .left
         label.layer.borderWidth = 1
         label.layer.borderColor = UIColor(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1).cgColor
-        label.text = "Comment"
         label.sizeToFit()
-        label.isEditable = false
+        label.placeholder = "Comment"
+        label.contentVerticalAlignment = .top
+        label.setLeftPadding(10)
+        label.setRightPadding(10)
         return label
     }()
     
@@ -34,6 +36,21 @@ class GroupCommentPostView: UIView {
         return button
     }()
     
+    public lazy var cancelButton: UIButton = {
+        let button = UIButton(frame: CGRect(x: 350, y: 520, width: 50, height: 50))
+        button.setTitle("Cancel", for: .normal)
+        button.layer.cornerRadius = 15
+        button.layer.masksToBounds = false
+        button.tintColor = .blue
+        button.setTitleColor(.blue, for: .normal)
+        button.backgroundColor = .clear
+        button.layer.borderColor = UIColor.clear.cgColor
+        button.layer.borderWidth = 1.5
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
+        button.titleLabel?.font = UIFont(name: "AvenirNext-DemiBold", size: 17)
+        return button
+    }()
+    
     override init(frame:CGRect) {
         super.init(frame: UIScreen.main.bounds)
         commonInit()
@@ -44,9 +61,10 @@ class GroupCommentPostView: UIView {
     }
     
     private func commonInit() {
-        backgroundColor = UIColor(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
+        backgroundColor = .white
         descriptionLabelSetup()
         submitButtonSetup()
+        cancelButtonConstraints()
     }
     
     private func descriptionLabelSetup() {
@@ -57,7 +75,13 @@ class GroupCommentPostView: UIView {
     private func submitButtonSetup() {
         addSubview(submitButton)
         submitButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([submitButton.centerYAnchor.constraint(equalTo: centerYAnchor), submitButton.centerXAnchor.constraint(equalTo: centerXAnchor)])
+        NSLayoutConstraint.activate([submitButton.centerYAnchor.constraint(equalTo: centerYAnchor), submitButton.centerXAnchor.constraint(equalTo: centerXAnchor), submitButton.widthAnchor.constraint(equalToConstant: 50)])
+    }
+    
+    private func cancelButtonConstraints() {
+        addSubview(cancelButton)
+        cancelButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([cancelButton.centerXAnchor.constraint(equalTo: centerXAnchor), cancelButton.topAnchor.constraint(equalTo: submitButton.bottomAnchor, constant: 40), cancelButton.widthAnchor.constraint(equalToConstant: 100), cancelButton.heightAnchor.constraint(equalToConstant: 50)])
     }
 
 }

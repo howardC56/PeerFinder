@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import Kingfisher
 
 class GroupDetailViewController: UIViewController {
 
     private var groupDetailView = GroupDetailView()
     private var groupPostView = GroupCommentPostView()
     var group: Group!
+    private var post: Bool = false
     
     private var posts = [Post]() {
         didSet {
@@ -94,10 +96,44 @@ class GroupDetailViewController: UIViewController {
         groupDetailView.tableView.delegate = self
         groupDetailView.tableView.dataSource = self
         groupDetailView.tableView.register(GroupDetailViewCell.self, forCellReuseIdentifier: "GroupDetailViewCell")
+        configureDetails()
+        //isGroupFavorited(group)
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+            groupPostView.addGestureRecognizer(tap)
+
+    }
+
+    @objc func dismissKeyboard() {
+           view.endEditing(true)
+       }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        isGroupFavorited(group)
     }
     
+    private func configureDetails() {
+        groupDetailView.photoImageView.kf.setImage(with: URL(string: group.groupPhotoURL))
+        groupDetailView.categoryLabel.text = "Category: \(group.category)"
+        groupDetailView.descriptionLabel.text = "created by: \(group.createdBy) \n\(group.description)"
+        groupDetailView.titleLabel.text = group.groupName
+        groupDetailView.commentButton.addTarget(self, action: #selector(postButtonPressed(_:)), for: .touchUpInside)
+        groupPostView.cancelButton.addTarget(self, action: #selector(cancelButtonPressed(_:)), for: .touchUpInside)
+    }
 
-
+    @objc private func postButtonPressed(_ sender: UIButton) {
+        post = true
+        view = groupPostView
+        navigationController?.navigationBar.isHidden = true
+    }
+    
+    @objc private func cancelButtonPressed(_ sender: UIButton) {
+        post = false
+        groupPostView.descriptionLabel.text = ""
+        groupPostView.descriptionLabel.placeholder = "Comment"
+        view = groupDetailView
+        navigationController?.navigationBar.isHidden = false
+    }
 }
 
 extension GroupDetailViewController: UITableViewDelegate, UITableViewDataSource {
@@ -117,3 +153,4 @@ extension GroupDetailViewController: UITableViewDelegate, UITableViewDataSource 
     
     
 }
+
