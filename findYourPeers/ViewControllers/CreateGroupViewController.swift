@@ -41,10 +41,6 @@ class CreateGroupViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //let embadedViewController = UINavigationController(rootViewController: CreateGroupViewController())
-        // I think I do not need it but check in app
-       // _ = UINavigationController(rootViewController: CreateGroupViewController())
-        
         groupView.groupTopicTextField.delegate = self
         groupView.groupTopicTextField.delegate = self
         groupView.descriptionTextView.delegate = self
@@ -132,18 +128,11 @@ class CreateGroupViewController: UIViewController {
             case .success(let URL):
                 let imageURL = URL
                 groupPhotoURL = imageURL.absoluteString
+                let newGroup = Group(category: category, collegeName: collegeName, createdBy: createdBy, creatorId: creatorId, dateCreated: dateCreated, description: description, id: id, groupName: groupName, groupPhotoURL: groupPhotoURL, topic: topic)
+                self.createNewGroup(group: newGroup)
             }
         }
-        
-        let newGroup = Group(category: category, collegeName: collegeName, createdBy: createdBy, creatorId: creatorId, dateCreated: dateCreated, description: description, id: id, groupName: groupName, groupPhotoURL: groupPhotoURL, topic: topic)
-        
-        createNewGroup(group: newGroup)
-        print("added data to Firebase")
-        
-        present(UINavigationController(rootViewController: FollowedGroupsController()), animated: true)
-        
-       cancelButtonPressed()
-        
+        dismiss(animated: true, completion: nil)
     }
     
     private func createNewGroup(group: Group) {
@@ -160,8 +149,7 @@ class CreateGroupViewController: UIViewController {
         }
     }
     
-    
-    @objc private func cancelButtonPressed() {
+    private func clearAllFields() {
         groupView.groupNameTextField.text = nil
         groupView.groupNameTextField.placeholder = "Enter Name For Group"
         groupView.groupTopicTextField.text = nil
@@ -170,6 +158,11 @@ class CreateGroupViewController: UIViewController {
         groupView.descriptionTextView.textColor = UIColor.lightGray
         groupView.categorySegmentedControl.selectedSegmentIndex = 0
         groupView.imageView.image = UIImage(systemName: "photo.fill")
+    }
+    
+    @objc private func cancelButtonPressed() {
+        let groupsVC = GroupsViewController()
+        navigationController?.pushViewController(groupsVC, animated: true)
     }
 }
 
