@@ -23,7 +23,7 @@ class FollowedGroupsController: UIViewController {
         view = followedGroupsView
         followedGroupsView.backgroundColor = .white
     }
-    private var listener: ListenerRegistration?
+    //private var listener: ListenerRegistration?
     private var followedGroups = [Group]() {
         didSet {
             DispatchQueue.main.async {
@@ -39,35 +39,42 @@ class FollowedGroupsController: UIViewController {
             }
         }
     }
+    private var refreshControl: UIRefreshControl!
      
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
         configureSegmentControllerAndNavBar()
         fetchFollowedGroups()
+        configureRefreshControl()
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-//        Firestore.firestore().collection(DatabaseService.userCollection).document(user.uid).collection(DatabaseService.artFavoritesCollection).addSnapshotListener { [weak self] (snapshot, error) in
-//            if let error = error {
-//                self?.showAlert(title: "error", message: error.localizedDescription)
-//            } else if let snapshot = snapshot {
-//                let items = snapshot.documents.compactMap { try? $0.data(as: ArtObject.self) }
-//                self?.artPieces = items
-//            }
-//        }
+        //TODO: add listener
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
-        listener?.remove()
+        //listener?.remove()
     }
-    private func fetchFollowedGroups() {
+    private func configureRefreshControl() {
+        refreshControl = UIRefreshControl()
+        refreshControl.tintColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+        followedGroupsView.collectionView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(fetchFollowedGroups), for: .valueChanged)
+    }
+    @objc private func fetchFollowedGroups() {
         DatabaseService.manager.getFavoriteGroups(item: Group.self, completion: { [weak self] (result) in
             switch result {
             case .failure(let error):
                 print("could not get user's groups \(error.localizedDescription)")
+                DispatchQueue.main.async {
+                    self?.refreshControl.endRefreshing()
+                }
             case .success(let groups):
                 self?.followedGroups = groups
+                DispatchQueue.main.async {
+                    self?.refreshControl.endRefreshing()
+                }
             }
             
         })
@@ -122,7 +129,10 @@ extension FollowedGroupsController: UICollectionViewDataSource {
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //code to segue to group detail
+        let group = followedGroups[indexPath.row]
+        let groupDetailVC = GroupDetailViewController()
+        //groupDetailVC.group = group
+        
     }
     
 }

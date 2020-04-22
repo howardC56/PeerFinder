@@ -68,7 +68,7 @@ class ItemCell: UICollectionViewCell {
             itemImageView.topAnchor.constraint(equalTo: topAnchor),
             itemImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
             itemImageView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            itemImageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.3)
+            itemImageView.widthAnchor.constraint(equalToConstant: 120)
         ])
     }
     private func itemNameConstraints() {
@@ -76,7 +76,7 @@ class ItemCell: UICollectionViewCell {
         itemNameLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             itemNameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            itemNameLabel.leadingAnchor.constraint(equalTo: itemImageView.trailingAnchor, constant: 8),
+            itemNameLabel.leadingAnchor.constraint(equalTo: itemImageView.trailingAnchor, constant: 20),
             itemNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
         ])
     }
@@ -85,7 +85,7 @@ class ItemCell: UICollectionViewCell {
         datePostedLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             datePostedLabel.topAnchor.constraint(equalTo: itemNameLabel.bottomAnchor, constant: 10),
-            datePostedLabel.leadingAnchor.constraint(equalTo: itemImageView.trailingAnchor, constant: 8),
+            datePostedLabel.leadingAnchor.constraint(equalTo: itemImageView.trailingAnchor, constant: 20),
             datePostedLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
         ])
     }
@@ -102,7 +102,11 @@ class ItemCell: UICollectionViewCell {
 extension ItemCell {
     public func configureCell(item: Item) {
         itemNameLabel.text = item.itemName
-        datePostedLabel.text = item.datePosted.description
+        datePostedLabel.text = item.datePosted.convertToString()
         itemPriceLabel.text = "$\(item.itemPrice)"
+        if let firstImage = item.itemImages.first {
+            itemImageView.kf.setImage(with: URL(string: firstImage))
+        }
+        
     }
 }
