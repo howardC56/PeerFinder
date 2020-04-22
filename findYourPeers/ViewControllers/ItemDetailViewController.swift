@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import MessageUI
 
 class ItemDetailViewController: UIViewController {
     
@@ -17,7 +18,7 @@ class ItemDetailViewController: UIViewController {
         view = itemDetailView
     }
     
-    public var item: Item?
+    public var item: Item
     
     init(_ item: Item) {
         self.item = item
@@ -41,9 +42,62 @@ class ItemDetailViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .white
-        //itemDetailView.itemsCollectionView.delegate = self
-        //itemDetailView.itemsCollectionView.dataSource = self
+        images = item.itemImages
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "cart.fill.badge.plus"), style: .plain, target: self, action: #selector(addToCartAction(_:)))
+        itemDetailView.contactSellerButton.addTarget(self, action: #selector(openMailController(_:)), for: .touchUpInside)
+        setUpCollectionView()
+        updateUI()
     }
+    
+    private func updateUI() {
+        itemDetailView.itemName.text = "\(item.itemName)"
+        itemDetailView.sellerName.text = "Seller: \(item.sellerName)"
+        itemDetailView.priceLabel.text = "Price: \(item.itemPrice)"
+        itemDetailView.conditionLabel.text = "Condition: \(item.itemCondition)"
+        itemDetailView.descriptionLabel.text = "\(item.itemDescription)"
+        itemDetailView.imageView.kf.setImage(with: URL(string: item.itemImages.first ?? ""))
+    }
+    
+    private func setUpCollectionView(){
+        itemDetailView.itemsCollectionView.delegate = self
+        itemDetailView.itemsCollectionView.dataSource = self
+        itemDetailView.itemsCollectionView.register(ItemDetailCell.self, forCellWithReuseIdentifier: "itemDetailCell")
+    }
+    
+    @objc private func addToCartAction(_ sender: UIBarButtonItem){
+        DatabaseService.manager.addItemToFavorties(item) { (result) in
+            
+            switch result {
+            case .failure(let error):
+                print("could not add to cart: \(error)")
+            case .success:
+                print("added to cart")
+            }
+        }
+    }
+    
+    @objc private func openMailController(_ sender: UIButton) {
+        print("mail")
+        showMailComposer()
+    }
+    
+    private func showMailComposer() {
+        
+        guard MFMailComposeViewController.canSendMail() else {
+            //show alert
+            return }
+        
+        let composer = MFMailComposeViewController()
+        composer.mailComposeDelegate = self
+        composer.setToRecipients([item.sellerEmail])
+        composer.setSubject("Interested in \(item.itemName)")
+        composer.setMessageBody("I would like to purchase the item listed", isHTML: false)
+        present(composer, animated: true)
+    }
+    
+}
+
+extension ItemDetailViewController: MFMailComposeViewControllerDelegate {
     
 }
 
@@ -60,7 +114,7 @@ extension ItemDetailViewController: UICollectionViewDelegateFlowLayout, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return images.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -69,10 +123,14 @@ extension ItemDetailViewController: UICollectionViewDelegateFlowLayout, UICollec
         }
         
         let image = images[indexPath.row]
-        cell.imageView.kf.setImage(with: URL(string: image))
+        cell.configureCell(for: image)
         
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let image = images[indexPath.row]
+        itemDetailView.imageView.kf.setImage(with: URL(string: image))
+    }
     
 }

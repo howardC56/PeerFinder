@@ -82,17 +82,17 @@ class ItemDetailView: UIView {
         return label
     }()
     
-    public lazy var wishlistButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Add to wishlist", for: .normal)
-        button.backgroundColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
-        button.titleLabel?.textColor = #colorLiteral(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
-        button.layer.cornerRadius = 10
-        button.layer.shadowOpacity = 0.3
-        button.layer.shadowRadius = 10
-        button.layer.shadowOffset = CGSize(width: 0, height: 4)
-        return button
-    }()
+//    public lazy var wishlistButton: UIButton = {
+//        let button = UIButton()
+//        button.setTitle("Add to wishlist", for: .normal)
+//        button.backgroundColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+//        button.titleLabel?.textColor = #colorLiteral(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
+//        button.layer.cornerRadius = 10
+//        button.layer.shadowOpacity = 0.3
+//        button.layer.shadowRadius = 10
+//        button.layer.shadowOffset = CGSize(width: 0, height: 4)
+//        return button
+//    }()
     
     public lazy var descriptionLabel: UILabel = {
         let label = UILabel()
@@ -123,7 +123,7 @@ class ItemDetailView: UIView {
         setUpImagesCollectionConstraints()
         setUpPriceConstraints()
         setUpConditionConstraints()
-        setUpWishlistButtonConstraints()
+//        setUpWishlistButtonConstraints()
         setUpDescripConstraints()
     }
     
@@ -212,18 +212,18 @@ class ItemDetailView: UIView {
     }
     
     
-    private func setUpWishlistButtonConstraints() {
-        addSubview(wishlistButton)
-        
-        wishlistButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            wishlistButton.topAnchor.constraint(equalTo: itemsCollectionView.bottomAnchor, constant: 20),
-            wishlistButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
-            wishlistButton.widthAnchor.constraint(equalToConstant: 120),
-            wishlistButton.heightAnchor.constraint(equalToConstant: 44)
-        ])
-    }
+//    private func setUpWishlistButtonConstraints() {
+//        addSubview(wishlistButton)
+//
+//        wishlistButton.translatesAutoresizingMaskIntoConstraints = false
+//
+//        NSLayoutConstraint.activate([
+//            wishlistButton.topAnchor.constraint(equalTo: itemsCollectionView.bottomAnchor, constant: 20),
+//            wishlistButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
+//            wishlistButton.widthAnchor.constraint(equalToConstant: 120),
+//            wishlistButton.heightAnchor.constraint(equalToConstant: 44)
+//        ])
+//    }
     
     private func setUpDescripConstraints(){
         addSubview(descriptionLabel)
