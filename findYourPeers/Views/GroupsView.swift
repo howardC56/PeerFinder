@@ -17,9 +17,9 @@ class GroupsView: UIView {
     let white = UIColor(white: 1.0, alpha: 1.0)
 
     public lazy var categorySegmentedControl: UISegmentedControl = {
-        let categories = ["Study", "Clubs", "Events", "All"]
+        let categories = ["All", "Study", "Clubs", "Events",]
         let sc = UISegmentedControl(items: categories)
-        sc.selectedSegmentIndex = UISegmentedControl.noSegment
+        sc.selectedSegmentIndex = 0
         sc.tintColor = customGoldColor
         sc.backgroundColor = customBlueColor
         sc.layer.borderColor = customBlueColor.cgColor
@@ -37,7 +37,6 @@ class GroupsView: UIView {
         search.placeholder = "Enter a group name"
         search.layer.cornerRadius = 20
         search.layer.masksToBounds = true
-        search.barTintColor = customBlueColor
         search.searchTextField.backgroundColor = .white
         return search
     }()
@@ -46,7 +45,7 @@ class GroupsView: UIView {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         let cv = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-        cv.backgroundColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+        cv.backgroundColor = .white
         cv.layer.cornerRadius = 10
         return cv
     }()
@@ -87,9 +86,9 @@ class GroupsView: UIView {
         groupSearchBar.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            groupSearchBar.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 8),
-            groupSearchBar.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            groupSearchBar.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
+            groupSearchBar.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            groupSearchBar.leadingAnchor.constraint(equalTo: leadingAnchor),
+            groupSearchBar.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
     }
     
@@ -114,7 +113,7 @@ class GroupsView: UIView {
             groupsCollectionView.topAnchor.constraint(equalTo: categorySegmentedControl.bottomAnchor, constant: 20),
             groupsCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             groupsCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            groupsCollectionView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.50)
+            groupsCollectionView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
         ])
     }
     
@@ -124,8 +123,9 @@ class GroupsView: UIView {
         addGroup.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            addGroup.topAnchor.constraint(equalTo: groupsCollectionView.bottomAnchor, constant: 8),
-            addGroup.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+//            addGroup.topAnchor.constraint(equalTo: groupsCollectionView.bottomAnchor, constant: 8),
+            addGroup.trailingAnchor.constraint(equalTo: groupsCollectionView.trailingAnchor, constant: -8),
+            addGroup.bottomAnchor.constraint(equalTo: groupsCollectionView.bottomAnchor, constant: -20),
             addGroup.widthAnchor.constraint(equalToConstant: 54),
             addGroup.heightAnchor.constraint(equalToConstant: 54)
         ])
