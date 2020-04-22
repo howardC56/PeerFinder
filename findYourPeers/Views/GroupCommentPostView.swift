@@ -16,10 +16,11 @@ class GroupCommentPostView: UIView {
         label.textColor = .black
         label.textAlignment = .left
         label.layer.borderWidth = 1
-        label.layer.borderColor = UIColor(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1).cgColor
+        label.layer.borderColor = customBorderColor.cgColor
         label.sizeToFit()
         label.placeholder = "Comment"
         label.contentVerticalAlignment = .top
+        label.backgroundColor = .white
         label.setLeftPadding(10)
         label.setRightPadding(10)
         return label
@@ -28,7 +29,7 @@ class GroupCommentPostView: UIView {
     public lazy var submitButton: UIButton = {
         let button = UIButton()
         button.setTitle("Post", for: .normal)
-        button.backgroundColor = #colorLiteral(red: 0.01115901116, green: 0.2440761924, blue: 0.6173175573, alpha: 1)
+        button.backgroundColor = customMainColor
         button.layer.cornerRadius = 10
         button.layer.shadowOpacity = 0.3
         button.layer.shadowRadius = 10
@@ -41,8 +42,8 @@ class GroupCommentPostView: UIView {
         button.setTitle("Cancel", for: .normal)
         button.layer.cornerRadius = 15
         button.layer.masksToBounds = false
-        button.tintColor = .blue
-        button.setTitleColor(.blue, for: .normal)
+        button.tintColor = customHighlight
+        button.setTitleColor(customHighlight, for: .normal)
         button.backgroundColor = .clear
         button.layer.borderColor = UIColor.clear.cgColor
         button.layer.borderWidth = 1.5

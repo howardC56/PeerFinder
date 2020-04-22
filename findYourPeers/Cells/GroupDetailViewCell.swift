@@ -57,7 +57,7 @@ class GroupDetailViewCell: UITableViewCell {
     
     private func dateLabelConstraints() {
         addSubview(dateCreatedLabel)
-        dateCreatedLabel.anchor(top: topAnchor, right: rightAnchor, paddingTop: 10, paddingRight: 10, width: 80, height: 35)
+        dateCreatedLabel.anchor(top: topAnchor, right: rightAnchor, paddingTop: 10, paddingRight: 10, width: 100, height: 35)
     }
     
     private func postNameSetup() {
@@ -67,7 +67,7 @@ class GroupDetailViewCell: UITableViewCell {
     
     private func postSetup() {
         addSubview(postLabel)
-        postLabel.anchor(top: postUserNameLabel.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 20, paddingLeft: 10, paddingBottom: 10, paddingRight: 10)
+        postLabel.anchor(top: postUserNameLabel.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 20, paddingLeft: 15, paddingBottom: 10, paddingRight: 10)
     }
 
 }

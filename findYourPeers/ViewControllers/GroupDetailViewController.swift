@@ -114,7 +114,7 @@ class GroupDetailViewController: UIViewController {
     
     private func configureDetails() {
         groupDetailView.photoImageView.kf.setImage(with: URL(string: group.groupPhotoURL))
-        groupDetailView.categoryLabel.text = "Category: \(group.category)"
+        groupDetailView.categoryLabel.text = "Category: \(group.category.capitalized)"
         groupDetailView.descriptionLabel.text = "created by: \(group.createdBy) \n\(group.description)"
         groupDetailView.titleLabel.text = group.groupName
         groupDetailView.commentButton.addTarget(self, action: #selector(startPostButtonPressed(_:)), for: .touchUpInside)
