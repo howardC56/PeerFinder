@@ -11,7 +11,7 @@ import UIKit
 class GroupDetailViewController: UIViewController {
 
     private var groupDetailView = GroupDetailView()
-    private var group: Group!
+     var group: Group!
     
     private var posts = [Post]() {
         didSet {
