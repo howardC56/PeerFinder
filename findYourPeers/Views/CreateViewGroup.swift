@@ -72,19 +72,19 @@ class CreateViewGroup: UIView {
     }()
     
     public lazy var categorySegmentedControl: UISegmentedControl = {
-        let categories = ["Study", "Clubs", "Events"]
-        let sc = UISegmentedControl(items: categories)
-        sc.selectedSegmentIndex = 0
-        sc.tintColor = customBlueColor
-        sc.backgroundColor = .white
-        sc.layer.borderColor = customBlueColor.cgColor
-        let attributes = [NSAttributedString.Key.font: UIFont(name: "Kohinoor Telugu", size: 20.0), NSAttributedString.Key.foregroundColor: customBlueColor]
-        sc.setTitleTextAttributes(attributes as [NSAttributedString.Key : Any], for: .normal)
-        sc.selectedSegmentTintColor = customGoldColor
-        sc.layer.borderWidth = 3.0
-        sc.layer.cornerRadius = 20
-        return sc
-        }()
+    let categories = ["Study", "Clubs", "Events"]
+    let sc = UISegmentedControl(items: categories)
+    sc.selectedSegmentIndex = 0
+    sc.tintColor = customGoldColor
+    sc.backgroundColor = customBlueColor
+    sc.layer.borderColor = customBlueColor.cgColor
+        let attributes = [NSAttributedString.Key.font: UIFont(name: "Kohinoor Telugu", size: 20.0), NSAttributedString.Key.foregroundColor: UIColor(white: 1.0, alpha: 1.0)]
+    sc.setTitleTextAttributes(attributes as [NSAttributedString.Key : Any], for: .normal)
+    sc.selectedSegmentTintColor = customGoldColor
+    sc.layer.borderWidth = 3.0
+    sc.layer.cornerRadius = 20
+    return sc
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
@@ -99,10 +99,10 @@ class CreateViewGroup: UIView {
     private func commonInit(){
         setupImageViewConstraints()
         setupChangeImageButtonConstraints()
+        setupCategorySegmentedControlConstraints()
         setupGroupNameTextFieldConstraints()
         setupGroupTopicTextFieldConstraints()
         setupDescriptionTextViewConstraints()
-        setupCategorySegmentedControlConstraints()
     }
     
     private func setupImageViewConstraints() {
@@ -126,12 +126,41 @@ class CreateViewGroup: UIView {
                   changeImageButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -40)
               ])
           }
+   
+    /*
+    var buttonBottomConstraint = NSLayoutConstraint()
+
+    private func configureSubmitButton() {
+        submitButton.translatesAutoresizingMaskIntoConstraints = false
+        buttonBottomConstraint = submitButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -20)
+        buttonBottomConstraint.isActive = true
+        submitButton.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor).isActive = true
+    }
+    Then, we will create a function that can reset the constraint.
+    public func moveViewsToAccommodateKeyboard(with rect: CGRect, and duration: Double) {
+        let size = rect.size
+        buttonBottomConstraint.constant = -(size.height + 20)
+        UIView.animate(withDuration: duration){
+            self.layoutIfNeeded()
+        }
+    }
+ */
+    
+    private func setupCategorySegmentedControlConstraints() {
+          addSubview(categorySegmentedControl)
+          categorySegmentedControl.translatesAutoresizingMaskIntoConstraints = false
+          NSLayoutConstraint.activate([
+             categorySegmentedControl.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 30),
+           categorySegmentedControl.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+           categorySegmentedControl.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
+          ])
+      }
     
     private func setupGroupNameTextFieldConstraints() {
         addSubview(groupNameTextField)
         groupNameTextField.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            groupNameTextField.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 25),
+            groupNameTextField.topAnchor.constraint(equalTo: categorySegmentedControl.bottomAnchor, constant: 25),
          groupNameTextField.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.05),
          groupNameTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
          groupNameTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
@@ -155,21 +184,10 @@ class CreateViewGroup: UIView {
            descriptionTextView.translatesAutoresizingMaskIntoConstraints = false
            NSLayoutConstraint.activate([
               descriptionTextView.topAnchor.constraint(equalTo: groupTopicTextField.bottomAnchor, constant: 25),
-            descriptionTextView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.10),
+            descriptionTextView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.30),
             descriptionTextView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             descriptionTextView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
+            //descriptionTextView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 100)
            ])
        }
-    
-    private func setupCategorySegmentedControlConstraints() {
-        addSubview(categorySegmentedControl)
-        categorySegmentedControl.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-           categorySegmentedControl.topAnchor.constraint(equalTo: descriptionTextView.bottomAnchor, constant: 30),
-         categorySegmentedControl.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.10),
-         categorySegmentedControl.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-         categorySegmentedControl.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
-        ])
-    }
-    
 }
