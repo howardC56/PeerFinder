@@ -103,7 +103,7 @@ class GroupsViewController: UIViewController {
     @objc func addGroupVC() {
         print("group insert")
         let createGroupVC = CreateGroupViewController()
-        present(createGroupVC, animated: true)
+        present(UINavigationController(rootViewController: createGroupVC), animated: true)
     }
     
 }
