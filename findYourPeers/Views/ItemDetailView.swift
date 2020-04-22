@@ -34,7 +34,7 @@ class ItemDetailView: UIView {
     public lazy var contactSellerButton: UIButton = {
         let button = UIButton()
         button.setTitle("Contact Seller", for: .normal)
-        button.backgroundColor = customButtonColor
+        button.backgroundColor = customHighlight
         button.titleLabel?.textColor = .black
         button.layer.cornerRadius = 10
         button.layer.borderWidth = 2
@@ -47,19 +47,19 @@ class ItemDetailView: UIView {
     
     public lazy var imageView: UIImageView = {
         let image = UIImageView()
-      image.image = UIImage(systemName: "photo.fill")
-      image.tintColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
-      image.backgroundColor = #colorLiteral(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
-    //add shadow
-      image.layer.cornerRadius = 10
-         return image
-     }()
+        image.image = UIImage(systemName: "photo.fill")
+        image.layer.shadowOpacity = 0.4
+        image.layer.shadowRadius = 10
+        return image
+    }()
     
     public lazy var itemsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let cv = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-        cv.backgroundColor = #colorLiteral(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
+        cv.backgroundColor = customHighlight
+        cv.layer.borderWidth = 2
+        cv.layer.borderColor = customBorderColor.cgColor
         cv.layer.cornerRadius = 10
         return cv
     }()
@@ -67,8 +67,7 @@ class ItemDetailView: UIView {
     public lazy var priceLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Kohinoor Telugu", size: 20)
-        label.textColor = #colorLiteral(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
-        label.adjustsFontSizeToFitWidth = true
+        label.textColor = .darkText
         label.text = "Price: "
         label.numberOfLines = 1
         return label
@@ -77,8 +76,7 @@ class ItemDetailView: UIView {
     public lazy var conditionLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Kohinoor Telugu", size: 18)
-        label.textColor = #colorLiteral(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
-        label.adjustsFontSizeToFitWidth = true
+        label.textColor = .darkText
         label.text = "Condition: "
         label.numberOfLines = 1
         return label
@@ -87,14 +85,14 @@ class ItemDetailView: UIView {
     public lazy var descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Kohinoor Telugu", size: 16)
-        label.textColor = #colorLiteral(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
+        label.textColor = .black
         label.adjustsFontSizeToFitWidth = true
         label.text = "Description:"
         label.textAlignment = .center
         label.numberOfLines = 0
         return label
     }()
-
+    
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
         commonInit()
@@ -137,7 +135,7 @@ class ItemDetailView: UIView {
             sellerName.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10)
         ])
     }
-
+    
     private func setUpContactConstraints() {
         addSubview(contactSellerButton)
         
@@ -184,7 +182,7 @@ class ItemDetailView: UIView {
         
         NSLayoutConstraint.activate([
             priceLabel.topAnchor.constraint(equalTo: itemsCollectionView.bottomAnchor, constant: 20),
-            priceLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8)
+            priceLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20)
         ])
     }
     
@@ -195,7 +193,7 @@ class ItemDetailView: UIView {
         
         NSLayoutConstraint.activate([
             conditionLabel.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 14),
-            conditionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10)
+            conditionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20)
         ])
         
     }

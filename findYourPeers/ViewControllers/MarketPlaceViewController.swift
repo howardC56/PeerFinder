@@ -115,6 +115,7 @@ extension MarketPlaceViewController: UICollectionViewDataSource {
 
         let itemDetailVC = ItemDetailViewController(item)
         navigationController?.pushViewController(itemDetailVC, animated: true)
+        navigationController?.navigationBar.tintColor = customBorderColor
     }
     
     
