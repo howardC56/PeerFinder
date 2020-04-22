@@ -67,17 +67,17 @@ class GroupsViewController: UIViewController {
         isFirst = false
         switch sender.selectedSegmentIndex {
         case 0:
-            newGroups = groups.filter {$0.category == "study"}
-            print(isFirst)
-        case 1:
-            newGroups = groups.filter {$0.category == "club"}
-            print(isFirst)
-        case 2:
-            newGroups = groups.filter {$0.category == "event"}
-            print(isFirst)
-        case 3:
             isFirst = true
             getGroups()
+        case 1:
+            newGroups = groups.filter {$0.category == "study"}
+            print(isFirst)
+        case 2:
+            newGroups = groups.filter {$0.category == "club"}
+            print(isFirst)
+        case 3:
+            newGroups = groups.filter {$0.category == "event"}
+            print(isFirst)
         default:
             print("default case hit")
         }
@@ -103,7 +103,7 @@ class GroupsViewController: UIViewController {
     @objc func addGroupVC() {
         print("group insert")
         let createGroupVC = CreateGroupViewController()
-        navigationController?.pushViewController(createGroupVC, animated: true)
+        present(createGroupVC, animated: true)
     }
     
 }
@@ -144,13 +144,13 @@ extension GroupsViewController: UICollectionViewDelegateFlowLayout, UICollection
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if isFirst == true {
-        let group = groups[indexPath.row]
-         let groupDetailVC = GroupDetailViewController(group)
-         groupDetailVC.group = group
+            let group = groups[indexPath.row]
+            let groupDetailVC = GroupDetailViewController(group)
+            groupDetailVC.group = group
             navigationController?.pushViewController(groupDetailVC, animated: true)
         } else {
             let group = newGroups[indexPath.row]
-         let groupDetailVC = GroupDetailViewController(group)
+            let groupDetailVC = GroupDetailViewController(group)
             groupDetailVC.group = group
             navigationController?.pushViewController(groupDetailVC, animated: true)
         }
