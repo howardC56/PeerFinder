@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class GroupCell: UICollectionViewCell {
     override func layoutSubviews() {
@@ -17,11 +18,11 @@ class GroupCell: UICollectionViewCell {
     
     public lazy var groupImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
+    
     public lazy var labelStack: UIStackView = {
-        
         let stack = UIStackView(arrangedSubviews: [groupNameLabel, groupTopicLabel, dateCreatedLabel])
         stack.axis = .vertical
         stack.alignment = .center
@@ -33,6 +34,7 @@ class GroupCell: UICollectionViewCell {
     public lazy var groupNameLabel: UILabel = {
         let label = UILabel()
         label.text = "Group Name"
+        label.numberOfLines = 1
         label.textColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
         label.font = UIFont(name: "Kohinoor Telugu", size: 20)
         return label
@@ -40,6 +42,7 @@ class GroupCell: UICollectionViewCell {
     public lazy var groupTopicLabel: UILabel = {
         let label = UILabel()
         label.text = "Group Topic (math, science, etc)"
+        label.numberOfLines = 1
         label.textColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
         label.font = UIFont(name: "Kohinoor Telugu", size: 17)
         return label
@@ -47,6 +50,7 @@ class GroupCell: UICollectionViewCell {
     public lazy var dateCreatedLabel: UILabel = {
         let label = UILabel()
         label.text = "created date"
+        label.numberOfLines = 1
         label.textColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
         label.font = UIFont(name: "Kohinoor Telugu", size: 17)
         return label
@@ -62,32 +66,54 @@ class GroupCell: UICollectionViewCell {
     }
     private func commonInit() {
         groupImageConstraints()
-        labelStackConstraints()
+        groupNameLabelConstraints()
+        groupTopicLabelConstraints()
     }
     private func groupImageConstraints() {
         addSubview(groupImageView)
         groupImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            groupImageView.topAnchor.constraint(equalTo: topAnchor),
-            groupImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            groupImageView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            groupImageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.3)
+            groupImageView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
+            groupImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
+            groupImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
+            groupImageView.widthAnchor.constraint(equalToConstant: 120)
         ])
     }
-    private func labelStackConstraints() {
-        addSubview(labelStack)
-        labelStack.translatesAutoresizingMaskIntoConstraints = false
+    private func groupNameLabelConstraints() {
+        addSubview(groupNameLabel)
+        groupNameLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            labelStack.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-            labelStack.leadingAnchor.constraint(equalTo: groupImageView.trailingAnchor, constant: 10),
-            labelStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            labelStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10)
+            groupNameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            groupNameLabel.leadingAnchor.constraint(equalTo: groupImageView.trailingAnchor, constant: 20),
+            groupNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
+        ])
+    }
+    private func groupTopicLabelConstraints() {
+        addSubview(groupTopicLabel)
+        groupTopicLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            groupTopicLabel.topAnchor.constraint(equalTo: groupNameLabel.bottomAnchor, constant: 8),
+            groupTopicLabel.leadingAnchor.constraint(equalTo: groupImageView.trailingAnchor, constant: 20),
+            groupTopicLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
+        ])
+    }
+    private func dateCreatedLabelConstraints() {
+        addSubview(dateCreatedLabel)
+        dateCreatedLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            dateCreatedLabel.topAnchor.constraint(equalTo: groupTopicLabel.bottomAnchor, constant: 8),
+            dateCreatedLabel.leadingAnchor.constraint(equalTo: groupImageView.trailingAnchor, constant: 20),
+            dateCreatedLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
         ])
     }
     
+    
 }
 extension GroupCell {
-    private func configureCell() {
-        //TODO: - add configure cell for group model
+    public func configureCell(for group: Group) {
+        groupImageView.kf.setImage(with: URL(string: group.groupPhotoURL))
+        groupNameLabel.text = "\(group.groupName)"
+        groupTopicLabel.text = "\(group.topic)"
+        dateCreatedLabel.text = "\(group.dateCreated.convertToString())"
     }
 }
