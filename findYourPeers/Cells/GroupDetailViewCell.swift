@@ -13,14 +13,14 @@ class GroupDetailViewCell: UITableViewCell {
     public lazy var postUserNameLabel: UILabel = {
         let label = UILabel()
         label.text = "user Name"
-        label.textColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+        label.textColor = .black
         label.font = UIFont(name: "Kohinoor Telugu", size: 14)
         return label
     }()
     public lazy var postLabel: UILabel = {
         let label = UILabel()
         label.text = "comments"
-        label.textColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+        label.textColor = .black
         label.adjustsFontSizeToFitWidth = true
         label.font = UIFont(name: "Kohinoor Telugu", size: 17)
         return label
@@ -28,7 +28,8 @@ class GroupDetailViewCell: UITableViewCell {
     public lazy var dateCreatedLabel: UILabel = {
         let label = UILabel()
         label.text = "created date"
-        label.textColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+        label.textColor = .black
+        label.adjustsFontSizeToFitWidth = true
         label.font = UIFont(name: "Kohinoor Telugu", size: 12)
         return label
     }()
@@ -45,6 +46,7 @@ class GroupDetailViewCell: UITableViewCell {
     private func commonInit() {
         dateLabelConstraints()
         postNameSetup()
+        postSetup()
     }
     
     func configureCell(post: Post) {
@@ -55,7 +57,7 @@ class GroupDetailViewCell: UITableViewCell {
     
     private func dateLabelConstraints() {
         addSubview(dateCreatedLabel)
-        dateCreatedLabel.anchor(top: topAnchor, right: rightAnchor, paddingTop: 10, paddingRight: 10, width: 50, height: 35)
+        dateCreatedLabel.anchor(top: topAnchor, right: rightAnchor, paddingTop: 10, paddingRight: 10, width: 80, height: 35)
     }
     
     private func postNameSetup() {

@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import Kingfisher
 
 class GroupDetailViewController: UIViewController {
 
     private var groupDetailView = GroupDetailView()
     private var groupPostView = GroupCommentPostView()
     var group: Group!
+    private var post: Bool = false
     
     private var posts = [Post]() {
         didSet {
@@ -94,10 +96,82 @@ class GroupDetailViewController: UIViewController {
         groupDetailView.tableView.delegate = self
         groupDetailView.tableView.dataSource = self
         groupDetailView.tableView.register(GroupDetailViewCell.self, forCellReuseIdentifier: "GroupDetailViewCell")
+        configureDetails()
+        //isGroupFavorited(group)
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+            groupPostView.addGestureRecognizer(tap)
+        getPosts()
+    }
+
+    @objc func dismissKeyboard() {
+           view.endEditing(true)
+       }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        isGroupFavorited(group)
     }
     
+    private func configureDetails() {
+        groupDetailView.photoImageView.kf.setImage(with: URL(string: group.groupPhotoURL))
+        groupDetailView.categoryLabel.text = "Category: \(group.category)"
+        groupDetailView.descriptionLabel.text = "created by: \(group.createdBy) \n\(group.description)"
+        groupDetailView.titleLabel.text = group.groupName
+        groupDetailView.commentButton.addTarget(self, action: #selector(startPostButtonPressed(_:)), for: .touchUpInside)
+        groupPostView.cancelButton.addTarget(self, action: #selector(cancelButtonPressed), for: .touchUpInside)
+        groupPostView.submitButton.addTarget(self, action: #selector(submitPostButtonPressed(_:)), for: .touchUpInside)
+    }
 
-
+    @objc private func startPostButtonPressed(_ sender: UIButton) {
+        post = true
+        view = groupPostView
+        navigationController?.navigationBar.isHidden = true
+    }
+    
+    @objc private func cancelButtonPressed() {
+        post = false
+        groupPostView.descriptionLabel.text = ""
+        groupPostView.descriptionLabel.placeholder = "Comment"
+        view = groupDetailView
+        navigationController?.navigationBar.isHidden = false
+    }
+    
+    @objc private func submitPostButtonPressed(_ sender: UIButton) {
+        let text = groupPostView.descriptionLabel.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard let finishedText = text, !finishedText.isEmpty else {
+            self.showAlert(title: "HuH?", message: "add stuff")
+            return
+        }
+        let userName = "Antonio Flores"
+        let userID = "6cy5BFsR14xyjGXWBvDq"
+        let timePosted = Date()
+        let id = UUID().uuidString
+        let post = Post(userName: userName, userId: userID, timePosted: timePosted, postText: finishedText, id: id)
+        DatabaseService.manager.createPost(post, group: group) { [weak self] (result) in
+            DispatchQueue.main.async {
+            switch result {
+            case .failure(let error):
+                self?.showAlert(title: "error creating post", message: "\(error)")
+            case .success:
+                self?.posts.append(post)
+                self?.cancelButtonPressed()
+            }
+            }
+        }
+    }
+    
+    private func getPosts() {
+        DatabaseService.manager.getPosts(item: Post.self, group: group) { [weak self] (result) in
+            DispatchQueue.main.async {
+            switch result {
+            case .failure(let error):
+                self?.showAlert(title: "error getting posts", message: "\(error)")
+            case .success(let posts):
+                self?.posts = posts
+            }
+        }
+        }
+    }
 }
 
 extension GroupDetailViewController: UITableViewDelegate, UITableViewDataSource {
@@ -117,3 +191,4 @@ extension GroupDetailViewController: UITableViewDelegate, UITableViewDataSource 
     
     
 }
+

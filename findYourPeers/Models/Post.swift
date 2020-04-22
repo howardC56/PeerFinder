@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Post: Codable {
+struct Post: Codable & Identifiable {
     let userName: String
     let userId: String
     let timePosted: Date
