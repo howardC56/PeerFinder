@@ -118,7 +118,8 @@ class GroupDetailViewController: UIViewController {
         groupDetailView.descriptionLabel.text = "created by: \(group.createdBy) \n\(group.description)"
         groupDetailView.titleLabel.text = group.groupName
         groupDetailView.commentButton.addTarget(self, action: #selector(startPostButtonPressed(_:)), for: .touchUpInside)
-        groupPostView.cancelButton.addTarget(self, action: #selector(cancelButtonPressed(_:)), for: .touchUpInside)
+        groupPostView.cancelButton.addTarget(self, action: #selector(cancelButtonPressed), for: .touchUpInside)
+        groupPostView.submitButton.addTarget(self, action: #selector(submitPostButtonPressed(_:)), for: .touchUpInside)
     }
 
     @objc private func startPostButtonPressed(_ sender: UIButton) {
@@ -127,12 +128,38 @@ class GroupDetailViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
     }
     
-    @objc private func cancelButtonPressed(_ sender: UIButton) {
+    @objc private func cancelButtonPressed() {
         post = false
         groupPostView.descriptionLabel.text = ""
         groupPostView.descriptionLabel.placeholder = "Comment"
         view = groupDetailView
         navigationController?.navigationBar.isHidden = false
+    }
+    
+    @objc private func submitPostButtonPressed(_ sender: UIButton) {
+        let text = groupPostView.descriptionLabel.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard let finishedText = text, !finishedText.isEmpty else {
+            self.showAlert(title: "HuH?", message: "add stuff")
+            return
+        }
+        let userName = "Antonio Flores"
+        let userID = "6cy5BFsR14xyjGXWBvDq"
+        let timePosted = Date()
+        let id = UUID().uuidString
+        let post = Post(userName: userName, userId: userID, timePosted: timePosted, postText: finishedText, id: id)
+        DatabaseService.manager.createPost(post) { [weak self] (result) in
+            switch result {
+            case .failure(let error):
+                self?.showAlert(title: "error creating post", message: "\(error)")
+            case .success:
+                self?.posts.append(post)
+                self?.cancelButtonPressed()
+            }
+        }
+    }
+    
+    private func getPosts() {
+        
     }
 }
 

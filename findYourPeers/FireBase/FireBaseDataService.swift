@@ -109,6 +109,17 @@ final class DatabaseService {
         }
     }
     
+    public func getPosts<T: Codable>(item: T.Type, completion: @escaping (Result<[T], Error>) -> ()) {
+        db.collection(DatabaseService.userCollection).document("6cy5BFsR14xyjGXWBvDq").collection(DatabaseService.postsCollection).getDocuments { (snapshot, error) in
+                if let error = error {
+                    completion(.failure(error))
+                } else if let snapshot = snapshot {
+                    let items = snapshot.documents.compactMap { try? $0.data(as: T.self) }
+                    completion(.success(items))
+        }
+    }
+    }
+    
     public func createItem<T: Codable & Identifiable>(_ item: T, completion: @escaping (Result<Bool, Error>) -> ()) {
         let document = db.collection(DatabaseService.itemGroupCollection).document(item.id as! String)
         do {
