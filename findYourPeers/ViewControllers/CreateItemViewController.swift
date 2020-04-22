@@ -39,13 +39,22 @@ class CreateItemViewController: UIViewController {
             condition = selectedCondition.rawValue
         }
     }
+    private var keyboardIsVisible = false
+    private var collectionViewConstraint: NSLayoutConstraint?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+       //collectionViewConstraint?.constant = createItemView.itemImageCollection.topAnchor.constraint(equalTo: createItemView.itemImageCollection.topAnchor).constant
+        
         configureNavBar()
         configureCollectionView()
         configureButton()
         configureTextfield()
+        registerKeyboardNotifications()
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        unregisterKeyboardNotifications()
     }
     private func configureTextfield() {
         createItemView.itemDescriptionTextField.delegate = self
@@ -174,4 +183,22 @@ extension CreateItemViewController: UIImagePickerControllerDelegate, UINavigatio
         dismiss(animated: true)
     }
 }
-
+extension CreateItemViewController {
+    private func registerKeyboardNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    private func unregisterKeyboardNotifications() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+    }
+    @objc private func keyboardWillShow(_ notification: Notification) {
+        view.frame.origin.y = -200
+    }
+    @objc private func keyboardWillHide(_ notification: Notification) {
+        dismissKeyboard()
+    }
+    @objc private func dismissKeyboard() {
+        view.frame.origin.y = 0
+    }
+}
