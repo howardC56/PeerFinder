@@ -10,6 +10,11 @@ import UIKit
 
 class ItemDetailCell: UICollectionViewCell {
     
+    public lazy var label: UILabel = {
+        let label = UILabel()
+        return label
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
