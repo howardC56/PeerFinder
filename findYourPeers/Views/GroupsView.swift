@@ -8,11 +8,13 @@
 
 import UIKit
 
+let customSeaFoam = #colorLiteral(red: 0.5972397923, green: 0.8876212239, blue: 0.7878088355, alpha: 1)
+
+let customLightRobin = #colorLiteral(red: 0.3553702235, green: 0.7033417821, blue: 0.7145221829, alpha: 1)
+
+let customBorderColor = #colorLiteral(red: 0, green: 0.382160157, blue: 0.3518279195, alpha: 1)
+
 class GroupsView: UIView {
-    
-    let customBlueColor = UIColor(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
-    
-    let customGoldColor = UIColor(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
     
     let white = UIColor(white: 1.0, alpha: 1.0)
 
@@ -20,13 +22,13 @@ class GroupsView: UIView {
         let categories = ["All", "Study", "Clubs", "Events",]
         let sc = UISegmentedControl(items: categories)
         sc.selectedSegmentIndex = 0
-        sc.tintColor = customGoldColor
-        sc.backgroundColor = customBlueColor
-        sc.layer.borderColor = customBlueColor.cgColor
-        let attributes = [NSAttributedString.Key.font: UIFont(name: "Kohinoor Telugu", size: 20.0), NSAttributedString.Key.foregroundColor: white]
+        sc.tintColor = customLightRobin
+        sc.backgroundColor = customSeaFoam
+        sc.layer.borderColor = #colorLiteral(red: 0, green: 0.382160157, blue: 0.3518279195, alpha: 1)
+        let attributes = [NSAttributedString.Key.font: UIFont(name: "Futura", size: 18.0), NSAttributedString.Key.foregroundColor: white]
         sc.setTitleTextAttributes(attributes as [NSAttributedString.Key : Any], for: .normal)
-        sc.selectedSegmentTintColor = customGoldColor
-        sc.layer.borderWidth = 3.0
+        sc.selectedSegmentTintColor = customLightRobin
+        sc.layer.borderWidth = 2
         sc.layer.cornerRadius = 20
         return sc
         }()
@@ -57,7 +59,9 @@ class GroupsView: UIView {
         button.layer.shadowOpacity = 0.25
         button.layer.shadowRadius = 5
         button.layer.shadowOffset = CGSize(width: 0, height: 4)
-        button.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 0.1332651377, green: 0.7317578197, blue: 0.6140573621, alpha: 1)
+        button.layer.borderWidth = 2
+        button.layer.borderColor = #colorLiteral(red: 0, green: 0.382160157, blue: 0.3518279195, alpha: 1)
         button.tintColor = .white
         return button
     }()
@@ -123,7 +127,6 @@ class GroupsView: UIView {
         addGroup.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-//            addGroup.topAnchor.constraint(equalTo: groupsCollectionView.bottomAnchor, constant: 8),
             addGroup.trailingAnchor.constraint(equalTo: groupsCollectionView.trailingAnchor, constant: -8),
             addGroup.bottomAnchor.constraint(equalTo: groupsCollectionView.bottomAnchor, constant: -20),
             addGroup.widthAnchor.constraint(equalToConstant: 54),

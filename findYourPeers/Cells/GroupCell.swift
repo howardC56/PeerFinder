@@ -35,15 +35,15 @@ class GroupCell: UICollectionViewCell {
         let label = UILabel()
         label.text = "Group Name"
         label.numberOfLines = 1
-        label.textColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
-        label.font = UIFont(name: "Kohinoor Telugu", size: 20)
+        label.textColor = .black
+        label.font = UIFont(name: "Futura", size: 20)
         return label
     }()
     public lazy var groupTopicLabel: UILabel = {
         let label = UILabel()
         label.text = "Group Topic (math, science, etc)"
         label.numberOfLines = 1
-        label.textColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+        label.textColor = .darkGray
         label.font = UIFont(name: "Kohinoor Telugu", size: 17)
         return label
     }()
@@ -51,7 +51,7 @@ class GroupCell: UICollectionViewCell {
         let label = UILabel()
         label.text = "created date"
         label.numberOfLines = 1
-        label.textColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+        label.textColor = .systemGray2
         label.font = UIFont(name: "Kohinoor Telugu", size: 17)
         return label
     }()
@@ -68,6 +68,7 @@ class GroupCell: UICollectionViewCell {
         groupImageConstraints()
         groupNameLabelConstraints()
         groupTopicLabelConstraints()
+        dateCreatedLabelConstraints()
     }
     private func groupImageConstraints() {
         addSubview(groupImageView)
