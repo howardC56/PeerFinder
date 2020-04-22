@@ -46,9 +46,9 @@ class ItemDetailCell: UICollectionViewCell {
         ])
     }
     
-    private func configureCell(for item: Item) {
+    public func configureCell(for image: String) {
         
-//        imageView.kf.setImage(with: item.itemImages)
+        imageView.kf.setImage(with: URL(string: image))
         
     }
 }
