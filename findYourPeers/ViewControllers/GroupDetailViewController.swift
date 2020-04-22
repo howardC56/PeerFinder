@@ -12,7 +12,7 @@ class GroupDetailViewController: UIViewController {
 
     private var groupDetailView = GroupDetailView()
     private var groupPostView = GroupCommentPostView()
-     var group: Group!
+    var group: Group!
     
     private var posts = [Post]() {
         didSet {
