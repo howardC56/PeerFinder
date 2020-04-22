@@ -97,7 +97,7 @@ class GroupDetailViewController: UIViewController {
         groupDetailView.tableView.dataSource = self
         groupDetailView.tableView.register(GroupDetailViewCell.self, forCellReuseIdentifier: "GroupDetailViewCell")
         configureDetails()
-        //isGroupFavorited(group)
+        isGroupFavorited(group)
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
             groupPostView.addGestureRecognizer(tap)
         getPosts()
