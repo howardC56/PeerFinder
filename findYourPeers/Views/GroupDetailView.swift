@@ -99,7 +99,7 @@ final class GroupDetailView: UIView {
         categoryLabelSetup()
         descriptionLabelSetup()
         tableViewSetup()
-        commentBoxSetup()
+        //commentBoxSetup()
         buttonSetup()
         backgroundColor = UIColor(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
     }
@@ -126,16 +126,16 @@ final class GroupDetailView: UIView {
     
     private func tableViewSetup() {
         addSubview(tableView)
-        tableView.anchor(top: descriptionLabel.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 25)
+        tableView.anchor(top: descriptionLabel.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 25, height: 300)
     }
     
-    private func commentBoxSetup() {
-        addSubview(commentBox)
-        commentBox.anchor(top: tableView.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, paddingTop: 15, paddingLeft: 30, paddingBottom: 30, width: bounds.width * 0.75)
-    }
+//    private func commentBoxSetup() {
+//        addSubview(commentBox)
+//        commentBox.anchor(top: tableView.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, paddingTop: 15, paddingLeft: 30, paddingBottom: 30, width: bounds.width * 0.75)
+//    }
     
     private func buttonSetup() {
         addSubview(commentButton)
-        commentButton.anchor(top: commentBox.topAnchor, right: rightAnchor, paddingTop: 20, paddingRight: 30, width: 60, height: 60)
+        commentButton.anchor(top: tableView.bottomAnchor, right: rightAnchor, paddingTop: 20, paddingRight: 30, width: 60, height: 60)
     }
 }
