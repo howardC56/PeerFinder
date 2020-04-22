@@ -165,5 +165,9 @@ extension GroupsViewController: UISearchBarDelegate {
         guard let searchText = searchBar.text else { return }
         searchQuery = searchText
         searchBar.resignFirstResponder()
+        
+        if searchText.isEmpty {
+            getGroups()
+        }
     }
 }
