@@ -29,6 +29,14 @@ class ItemDetailViewController: UIViewController {
     }
     
     
+    private var images = [String]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.itemDetailView.itemsCollectionView.reloadData()
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -59,6 +67,9 @@ extension ItemDetailViewController: UICollectionViewDelegateFlowLayout, UICollec
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "itemDetailCell", for: indexPath) as? ItemDetailCell else {
             fatalError("could not downcast to ItemDetailCell")
         }
+        
+        let image = images[indexPath.row]
+        cell.imageView.kf.setImage(with: URL(string: image))
         
         return cell
     }
