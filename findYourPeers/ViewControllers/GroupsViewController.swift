@@ -141,7 +141,17 @@ extension GroupsViewController: UICollectionViewDelegateFlowLayout, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        if isFirst == true {
+        let group = groups[indexPath.row]
+         let groupDetailVC = GroupDetailViewController(group)
+         groupDetailVC.group = group
+            navigationController?.pushViewController(groupDetailVC, animated: true)
+        } else {
+            let group = newGroups[indexPath.row]
+         let groupDetailVC = GroupDetailViewController(group)
+            groupDetailVC.group = group
+            navigationController?.pushViewController(groupDetailVC, animated: true)
+        }
     }
     
 }
