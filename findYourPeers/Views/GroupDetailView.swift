@@ -107,7 +107,7 @@ final class GroupDetailView: UIView {
     
     private func photoimageSetup() {
     addSubview(photoImageView)
-        photoImageView.anchor(top: safeAreaLayoutGuide.topAnchor, left: leftAnchor, paddingTop: 20, paddingLeft: 15, width: 150, height: 150)
+        photoImageView.anchor(top: safeAreaLayoutGuide.topAnchor, left: leftAnchor, paddingTop: 20, paddingLeft: 15, width: 150, height: 180)
     }
     
     private func titleLabelSetup() {

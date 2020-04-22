@@ -100,7 +100,7 @@ class GroupDetailViewController: UIViewController {
         //isGroupFavorited(group)
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
             groupPostView.addGestureRecognizer(tap)
-
+        getPosts()
     }
 
     @objc func dismissKeyboard() {
@@ -147,7 +147,8 @@ class GroupDetailViewController: UIViewController {
         let timePosted = Date()
         let id = UUID().uuidString
         let post = Post(userName: userName, userId: userID, timePosted: timePosted, postText: finishedText, id: id)
-        DatabaseService.manager.createPost(post) { [weak self] (result) in
+        DatabaseService.manager.createPost(post, group: group) { [weak self] (result) in
+            DispatchQueue.main.async {
             switch result {
             case .failure(let error):
                 self?.showAlert(title: "error creating post", message: "\(error)")
@@ -155,11 +156,21 @@ class GroupDetailViewController: UIViewController {
                 self?.posts.append(post)
                 self?.cancelButtonPressed()
             }
+            }
         }
     }
     
     private func getPosts() {
-        
+        DatabaseService.manager.getPosts(item: Post.self, group: group) { [weak self] (result) in
+            DispatchQueue.main.async {
+            switch result {
+            case .failure(let error):
+                self?.showAlert(title: "error getting posts", message: "\(error)")
+            case .success(let posts):
+                self?.posts = posts
+            }
+        }
+        }
     }
 }
 

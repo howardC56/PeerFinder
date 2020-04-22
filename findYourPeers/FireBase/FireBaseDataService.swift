@@ -99,8 +99,8 @@ final class DatabaseService {
     }
     }
     
-    public func createPost<T: Codable & Identifiable>(_ item: T, completion: @escaping (Result<Bool, Error>) -> ()) {
-        let document = db.collection(DatabaseService.postsCollection).document(item.id as! String)
+    public func createPost<T: Codable & Identifiable>(_ item: T, group: Group, completion: @escaping (Result<Bool, Error>) -> ()) {
+        let document = db.collection(DatabaseService.postsCollection).document(group.id ).collection(DatabaseService.postsCollection).document(item.id as! String)
         do {
             try document.setData(from: item)
             completion(.success(true))
@@ -109,8 +109,8 @@ final class DatabaseService {
         }
     }
     
-    public func getPosts<T: Codable>(item: T.Type, completion: @escaping (Result<[T], Error>) -> ()) {
-        db.collection(DatabaseService.userCollection).document("6cy5BFsR14xyjGXWBvDq").collection(DatabaseService.postsCollection).getDocuments { (snapshot, error) in
+    public func getPosts<T: Codable & Identifiable>(item: T.Type, group: Group, completion: @escaping (Result<[T], Error>) -> ()) {
+        db.collection(DatabaseService.postsCollection).document(group.id ).collection(DatabaseService.postsCollection).getDocuments { (snapshot, error) in
                 if let error = error {
                     completion(.failure(error))
                 } else if let snapshot = snapshot {
