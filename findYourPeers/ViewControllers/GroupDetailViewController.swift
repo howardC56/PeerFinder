@@ -12,12 +12,21 @@ class GroupDetailViewController: UIViewController {
 
     private var groupDetailView = GroupDetailView()
     private var groupPostView = GroupCommentPostView()
-     var group: Group?
+     var group: Group!
     
     private var posts = [Post]() {
         didSet {
             groupDetailView.tableView.reloadData()
         }
+    }
+    
+    init(_ group: Group) {
+        self.group = group
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     private var isFavorite = false {
