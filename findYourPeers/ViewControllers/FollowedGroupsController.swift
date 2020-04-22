@@ -124,8 +124,7 @@ extension FollowedGroupsController: UICollectionViewDataSource {
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let group = followedGroups[indexPath.row]
-        let groupDetailVC = GroupDetailViewController()
-        groupDetailVC.group = group
+        let groupDetailVC = GroupDetailViewController(group)
         navigationController?.pushViewController(groupDetailVC, animated: true)
         
     }

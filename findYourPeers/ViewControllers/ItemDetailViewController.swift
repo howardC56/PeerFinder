@@ -25,8 +25,8 @@ class ItemDetailViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .white
-        itemDetailView.itemsCollectionView.delegate = self
-        itemDetailView.itemsCollectionView.dataSource = self
+        //itemDetailView.itemsCollectionView.delegate = self
+        //itemDetailView.itemsCollectionView.dataSource = self
     }
     
 }
