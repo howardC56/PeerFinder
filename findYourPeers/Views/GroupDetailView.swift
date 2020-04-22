@@ -60,19 +60,12 @@ final class GroupDetailView: UIView {
         return tableV
     }()
     
-    public lazy var commentBox: UITextField = {
-       let comment = UITextField()
-        comment.placeholder = "comment here"
-        return comment
-    }()
-    
     public lazy var commentButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "plus"), for: .normal)
         button.tintColor = .black
         button.backgroundColor = UIColor(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
         button.layer.shadowColor = UIColor.darkGray.cgColor
-        //button.layer.shadowPath = UIBezierPath(roundedRect: button.bounds, cornerRadius: 25).cgPath
         button.layer.shadowRadius = 5
         button.layer.shadowOpacity = 0.5
         button.layer.shadowOffset = CGSize(width: 0, height: 4)
@@ -95,13 +88,12 @@ final class GroupDetailView: UIView {
     }
     
     private func commonInit() {
-        buttonSetup()
         photoimageSetup()
         titleLabelSetup()
         categoryLabelSetup()
         descriptionLabelSetup()
         tableViewSetup()
-        //commentBoxSetup()
+        buttonSetup()
         backgroundColor = .white
     }
     
@@ -127,13 +119,8 @@ final class GroupDetailView: UIView {
     
     private func tableViewSetup() {
         addSubview(tableView)
-        tableView.anchor(top: descriptionLabel.bottomAnchor, left: leftAnchor, bottom: commentButton.topAnchor, right: rightAnchor, paddingTop: 35, paddingBottom: 30)
+        tableView.anchor(top: descriptionLabel.bottomAnchor, left: leftAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, right: rightAnchor, paddingTop: 35, paddingBottom: 30)
     }
-    
-//    private func commentBoxSetup() {
-//        addSubview(commentBox)
-//        commentBox.anchor(top: tableView.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, paddingTop: 15, paddingLeft: 30, paddingBottom: 30, width: bounds.width * 0.75)
-//    }
     
     private func buttonSetup() {
         addSubview(commentButton)
