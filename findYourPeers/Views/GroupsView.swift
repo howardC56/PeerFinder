@@ -17,7 +17,7 @@ class GroupsView: UIView {
     let white = UIColor(white: 1.0, alpha: 1.0)
 
     public lazy var categorySegmentedControl: UISegmentedControl = {
-        let categories = ["Study", "Clubs", "Events"]
+        let categories = ["Study", "Clubs", "Events", "All"]
         let sc = UISegmentedControl(items: categories)
         sc.selectedSegmentIndex = UISegmentedControl.noSegment
         sc.tintColor = customGoldColor

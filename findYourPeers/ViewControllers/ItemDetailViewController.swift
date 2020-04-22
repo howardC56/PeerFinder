@@ -19,7 +19,15 @@ class ItemDetailViewController: UIViewController {
     
     public var item: Item?
     
-    //add image picker controller here
+    init(_ item: Item) {
+        self.item = item
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +56,9 @@ extension ItemDetailViewController: UICollectionViewDelegateFlowLayout, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "bruh", for: indexPath)
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "itemDetailCell", for: indexPath) as? ItemDetailCell else {
+            fatalError("could not downcast to ItemDetailCell")
+        }
         
         return cell
     }
