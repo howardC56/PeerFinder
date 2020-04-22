@@ -106,9 +106,9 @@ extension MarketPlaceViewController: UICollectionViewDataSource {
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = items[indexPath.row]
-        let itemDetailVC = ItemDetailViewController()
-        itemDetailVC.item = item
-        navigationController?.pushViewController(itemDetailVC, animated: true)
+//        let itemDetailVC = ItemDetailViewController()
+//        itemDetailVC.item = item
+//        navigationController?.pushViewController(itemDetailVC, animated: true)
     }
     
     

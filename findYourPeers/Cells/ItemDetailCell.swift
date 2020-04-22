@@ -45,4 +45,10 @@ class ItemDetailCell: UICollectionViewCell {
             imageView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
+    
+    private func configureCell(for item: Item) {
+        
+//        imageView.kf.setImage(with: item.itemImages)
+        
+    }
 }
