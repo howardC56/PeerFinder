@@ -139,7 +139,7 @@ class GroupDetailViewController: UIViewController {
     @objc private func submitPostButtonPressed(_ sender: UIButton) {
         let text = groupPostView.descriptionLabel.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         guard let finishedText = text, !finishedText.isEmpty else {
-            self.showAlert(title: "HuH?", message: "add stuff")
+            sender.shake()
             return
         }
         let userName = "Antonio Flores"
