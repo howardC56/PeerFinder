@@ -46,6 +46,7 @@ class ItemDetailViewController: UIViewController {
         view.backgroundColor = .white
         images = item.itemImages
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "cart.fill.badge.plus"), style: .plain, target: self, action: #selector(addToCartAction(_:)))
+        navigationItem.rightBarButtonItem?.tintColor = customBorderColor
         itemDetailView.contactSellerButton.addTarget(self, action: #selector(openMailController(_:)), for: .touchUpInside)
         setUpCollectionView()
         updateUI()
@@ -186,7 +187,7 @@ extension ItemDetailViewController: UICollectionViewDelegateFlowLayout, UICollec
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let itemSpacing: CGFloat = 1
-        let maxWidth = CGFloat(80)
+        let maxWidth = UIScreen.main.bounds.width * 0.2
         let numberOfItems: CGFloat = 1
         let totalSpace: CGFloat = numberOfItems * itemSpacing
         let itemWidth: CGFloat = (maxWidth - totalSpace) / numberOfItems
