@@ -78,14 +78,28 @@ class ItemDetailViewController: UIViewController {
     
     @objc private func openMailController(_ sender: UIButton) {
         print("mail")
-        showMailComposer()
+            //turn this into an action sheet
+            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            let emailAction = UIAlertAction(title: "Send an e-mail", style: .default) { (alertAction) in
+                self.showMailComposer()
+            }
+            let messageAction = UIAlertAction(title: "Send a message", style: .default) { (alertAction) in
+                //add message controller here
+                self.showMessageComposer()
+            }
+            alertController.addAction(emailAction)
+            alertController.addAction(messageAction)
+            present(alertController, animated: true)
+
     }
     
     private func showMailComposer() {
         
         guard MFMailComposeViewController.canSendMail() else {
             //show alert
-            showAlert(title: "Device Error", message: "Your device cannot send e-mails")
+            DispatchQueue.main.async {
+                self.showAlert(title: "Device Error", message: "Your device cannot send e-mails")
+            }
             return }
         
         let composer = MFMailComposeViewController()
@@ -95,6 +109,46 @@ class ItemDetailViewController: UIViewController {
         composer.setMessageBody("I would like to purchase the item listed", isHTML: false)
         present(composer, animated: true)
     }
+    
+    private func showMessageComposer() {
+        
+        if !MFMessageComposeViewController.canSendText() {
+            DispatchQueue.main.async {
+                self.showAlert(title: "Device Error", message: "Your device cannot send e-mails")
+            }
+        }
+        
+        let messageComposer = MFMessageComposeViewController()
+        messageComposer.body = "Hi! I'm interested in this item that you're selling."
+        messageComposer.recipients = ["6467757521"]
+        messageComposer.messageComposeDelegate = self
+        if let imageData = itemDetailView.imageView.image?.pngData() {
+            messageComposer.addAttachmentData(imageData, typeIdentifier: "public.data", filename: "item_image")
+        }else {
+            DispatchQueue.main.async {
+                self.showAlert(title: "No image selected", message: "Did not attach an image to message")
+            }
+        }
+        present(messageComposer, animated: true)
+    }
+    
+}
+
+extension ItemDetailViewController: MFMessageComposeViewControllerDelegate {
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        
+        switch result {
+        case .cancelled:
+            print("cancelled message")
+        case .failed:
+            print("message failed to send")
+        case .sent:
+            print("message sent")
+        default:
+            print("default")
+        }
+    }
+    
     
 }
 
