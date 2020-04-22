@@ -17,7 +17,7 @@ final class DatabaseService {
   static let postsCollection = "posts"
   static let favoriteGroupsCollection = "favoriteGroups"
   static let itemGroupCollection = "items"
-    static let favoriteItemCollection = "favoriteItems"
+  static let favoriteItemCollection = "favoriteItems"
   private let db = Firestore.firestore()
   private init () {}
     
@@ -54,7 +54,7 @@ final class DatabaseService {
     }
 
     public func addGroupToFavorties<T: Codable & Identifiable>(_ item: T, completion: @escaping (Result<Bool, Error>) -> ()) {
-        let document = db.collection(DatabaseService.favoriteGroupsCollection).document(item.id as! String)
+        let document = db.collection(DatabaseService.userCollection).document("6cy5BFsR14xyjGXWBvDq").collection(DatabaseService.favoriteGroupsCollection).document(item.id as! String)
         do {
             try document.setData(from: item)
             completion(.success(true))
@@ -64,7 +64,7 @@ final class DatabaseService {
     }
     
     public func deleteGroupFromFavorites<T: Codable & Identifiable>(_ item: T, completion: @escaping (Result<Bool, Error>) -> ()) {
-            db.collection(DatabaseService.favoriteGroupsCollection).document(item.id as! String).delete { (error) in
+            db.collection(DatabaseService.userCollection).document("6cy5BFsR14xyjGXWBvDq").collection(DatabaseService.favoriteGroupsCollection).document(item.id as! String).delete { (error) in
                     if let error = error {
                         completion(.failure(error))
                     } else {
@@ -74,7 +74,7 @@ final class DatabaseService {
     }
     
     public func groupIsFavorited<T: Codable & Identifiable>(_ item: T, completion: @escaping (Result<Bool, Error>) -> ()) {
-        db.collection(DatabaseService.favoriteGroupsCollection).whereField("id", isEqualTo: item.id as! String).getDocuments { (snapshot, error) in
+        db.collection(DatabaseService.userCollection).document("6cy5BFsR14xyjGXWBvDq").collection(DatabaseService.favoriteGroupsCollection).whereField("id", isEqualTo: item.id as! String).getDocuments { (snapshot, error) in
                 if let error = error {
                     completion(.failure(error))
                 } else if let snapshot = snapshot {
@@ -89,7 +89,7 @@ final class DatabaseService {
     }
     
     public func getFavoriteGroups<T: Codable>(item: T.Type, completion: @escaping (Result<[T], Error>) -> ()) {
-        db.collection(DatabaseService.favoriteGroupsCollection).getDocuments { (snapshot, error) in
+        db.collection(DatabaseService.userCollection).document("6cy5BFsR14xyjGXWBvDq").collection(DatabaseService.favoriteGroupsCollection).getDocuments { (snapshot, error) in
                 if let error = error {
                     completion(.failure(error))
                 } else if let snapshot = snapshot {
@@ -141,7 +141,7 @@ final class DatabaseService {
     }
 
     public func addItemToFavorties<T: Codable & Identifiable>(_ item: T, completion: @escaping (Result<Bool, Error>) -> ()) {
-        let document = db.collection(DatabaseService.favoriteItemCollection).document(item.id as! String)
+        let document = db.collection(DatabaseService.userCollection).document("6cy5BFsR14xyjGXWBvDq").collection(DatabaseService.favoriteItemCollection).document(item.id as! String)
         do {
             try document.setData(from: item)
             completion(.success(true))
@@ -151,7 +151,7 @@ final class DatabaseService {
     }
     
     public func deleteItemFromFavorites<T: Codable & Identifiable>(_ item: T, completion: @escaping (Result<Bool, Error>) -> ()) {
-            db.collection(DatabaseService.favoriteItemCollection).document(item.id as! String).delete { (error) in
+            db.collection(DatabaseService.userCollection).document("6cy5BFsR14xyjGXWBvDq").collection(DatabaseService.favoriteItemCollection).document(item.id as! String).delete { (error) in
                     if let error = error {
                         completion(.failure(error))
                     } else {
@@ -161,7 +161,7 @@ final class DatabaseService {
     }
     
     public func itemIsFavorited<T: Codable & Identifiable>(_ item: T, completion: @escaping (Result<Bool, Error>) -> ()) {
-        db.collection(DatabaseService.favoriteItemCollection).whereField("id", isEqualTo: item.id as! String).getDocuments { (snapshot, error) in
+        db.collection(DatabaseService.userCollection).document("6cy5BFsR14xyjGXWBvDq").collection(DatabaseService.favoriteItemCollection).whereField("id", isEqualTo: item.id as! String).getDocuments { (snapshot, error) in
                 if let error = error {
                     completion(.failure(error))
                 } else if let snapshot = snapshot {
@@ -176,7 +176,7 @@ final class DatabaseService {
     }
     
     public func getitemFavoriteGroups<T: Codable>(item: T.Type, completion: @escaping (Result<[T], Error>) -> ()) {
-        db.collection(DatabaseService.favoriteItemCollection).getDocuments { (snapshot, error) in
+        db.collection(DatabaseService.userCollection).document("6cy5BFsR14xyjGXWBvDq").collection(DatabaseService.favoriteItemCollection).getDocuments { (snapshot, error) in
                 if let error = error {
                     completion(.failure(error))
                 } else if let snapshot = snapshot {
