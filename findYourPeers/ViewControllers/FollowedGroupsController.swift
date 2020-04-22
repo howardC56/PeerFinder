@@ -10,6 +10,7 @@ import UIKit
 import FirebaseFirestore
 
 enum Category: String {
+    case all = "all"
     case study = "study"
     case club = "club"
     case event = "event"
@@ -32,7 +33,7 @@ class FollowedGroupsController: UIViewController {
         }
     }
     
-    private var selectedCategory: Category = .study {
+    private var selectedCategory: Category = .all {
         didSet {
             DispatchQueue.main.async {
                 self.followedGroupsView.collectionView.reloadData()
@@ -85,12 +86,15 @@ class FollowedGroupsController: UIViewController {
     @objc private func categorySelected(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
+            selectedCategory = .all
+            fetchFollowedGroups()
+        case 1:
             selectedCategory = .study
             followedGroups = followedGroups.filter {$0.category == selectedCategory.rawValue}
-        case 1:
+        case 2:
             selectedCategory = .club
             followedGroups = followedGroups.filter {$0.category == selectedCategory.rawValue}
-        case 2:
+        case 3:
             selectedCategory = .event
             followedGroups = followedGroups.filter {$0.category == selectedCategory.rawValue}
         default:

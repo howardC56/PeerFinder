@@ -41,10 +41,6 @@ class CreateGroupViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //let embadedViewController = UINavigationController(rootViewController: CreateGroupViewController())
-        // I think I do not need it but check in app
-       // _ = UINavigationController(rootViewController: CreateGroupViewController())
-        
         groupView.groupTopicTextField.delegate = self
         groupView.groupTopicTextField.delegate = self
         groupView.descriptionTextView.delegate = self
@@ -138,10 +134,7 @@ class CreateGroupViewController: UIViewController {
                 self.createNewGroup(group: newGroup)
             }
         }
-        
-        present(UINavigationController(rootViewController: FollowedGroupsController()), animated: true)
-        
-       clearAllFields()
+        dismiss(animated: true, completion: nil)
     }
     
     private func createNewGroup(group: Group) {
