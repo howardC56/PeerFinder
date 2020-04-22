@@ -11,7 +11,8 @@ import UIKit
 class GroupDetailViewController: UIViewController {
 
     private var groupDetailView = GroupDetailView()
-     var group: Group!
+    private var groupPostView = GroupCommentPostView()
+     var group: Group
     
     private var posts = [Post]() {
         didSet {
@@ -83,6 +84,7 @@ class GroupDetailViewController: UIViewController {
         navigationItem.rightBarButtonItem = favorite
         groupDetailView.tableView.delegate = self
         groupDetailView.tableView.dataSource = self
+        groupDetailView.tableView.register(GroupDetailViewCell.self, forCellReuseIdentifier: "GroupDetailViewCell")
     }
     
 
