@@ -163,8 +163,7 @@ class CreateGroupViewController: UIViewController {
     }
     
     @objc private func cancelButtonPressed() {
-        let groupsVC = GroupsViewController()
-        navigationController?.pushViewController(groupsVC, animated: true)
+        dismiss(animated: true, completion: nil)
     }
 }
 
