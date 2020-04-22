@@ -76,6 +76,9 @@ class GroupsViewController: UIViewController {
         case 2:
             newGroups = groups.filter {$0.category == "event"}
             print(isFirst)
+        case 3:
+            isFirst = true
+            getGroups()
         default:
             print("default case hit")
         }
