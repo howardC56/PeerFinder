@@ -18,7 +18,7 @@ class GroupCell: UICollectionViewCell {
     
     public lazy var groupImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
@@ -34,6 +34,7 @@ class GroupCell: UICollectionViewCell {
     public lazy var groupNameLabel: UILabel = {
         let label = UILabel()
         label.text = "Group Name"
+        label.numberOfLines = 1
         label.textColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
         label.font = UIFont(name: "Kohinoor Telugu", size: 20)
         return label
@@ -41,6 +42,7 @@ class GroupCell: UICollectionViewCell {
     public lazy var groupTopicLabel: UILabel = {
         let label = UILabel()
         label.text = "Group Topic (math, science, etc)"
+        label.numberOfLines = 1
         label.textColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
         label.font = UIFont(name: "Kohinoor Telugu", size: 17)
         return label
@@ -48,6 +50,7 @@ class GroupCell: UICollectionViewCell {
     public lazy var dateCreatedLabel: UILabel = {
         let label = UILabel()
         label.text = "created date"
+        label.numberOfLines = 1
         label.textColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
         label.font = UIFont(name: "Kohinoor Telugu", size: 17)
         return label
@@ -73,7 +76,7 @@ class GroupCell: UICollectionViewCell {
             groupImageView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
             groupImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
             groupImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
-            groupImageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.2)
+            groupImageView.widthAnchor.constraint(equalToConstant: 120)
         ])
     }
     private func groupNameLabelConstraints() {
