@@ -122,19 +122,15 @@ class ItemDetailViewController: UIViewController {
         
         let messageComposer = MFMessageComposeViewController()
         messageComposer.body = "Hi! I'm interested in this item that you're selling."
-        messageComposer.recipients = ["34734699643"]
+        messageComposer.recipients = ["3474699643"]
         messageComposer.messageComposeDelegate = self
-//        if let imageData = itemDetailView.imageView.image?.pngData() {
-//            messageComposer.addAttachmentData(imageData, typeIdentifier: "public.data", filename: "item_image")
-//        }else {
-//            DispatchQueue.main.async {
-//                self.showAlert(title: "No image selected", message: "Did not attach an image to message")
-//            }
-//        }
-        let currentImage = images[currentIndex]
-        guard let url = URL(string: currentImage) else { return }
-        messageComposer.addAttachmentURL(url, withAlternateFilename: "item_image")
-            
+        if let imageData = itemDetailView.imageView.image?.pngData() {
+            messageComposer.addAttachmentData(imageData, typeIdentifier: "public.data", filename: "item_image")
+        }else {
+            DispatchQueue.main.async {
+                self.showAlert(title: "No image selected", message: "Did not attach an image to message")
+            }
+        }
         present(messageComposer, animated: true)
     }
     
