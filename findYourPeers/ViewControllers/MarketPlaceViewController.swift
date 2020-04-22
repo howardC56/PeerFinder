@@ -81,7 +81,8 @@ class MarketPlaceViewController: UIViewController {
     }
     @objc private func addItemButtonPressed(_ sender: UIButton) {
         let createItemVC = CreateItemViewController()
-        present(createItemVC, animated: true)
+      
+        present(UINavigationController(rootViewController: createItemVC), animated: true)
     }
     
     

@@ -23,7 +23,7 @@ final class GroupDetailView: UIView {
         label.textColor = .black
         label.adjustsFontSizeToFitWidth = true
         label.text = "Title Here"
-        label.textAlignment = .center
+        label.textAlignment = .left
         label.numberOfLines = 0
         return label
     }()
@@ -34,7 +34,7 @@ final class GroupDetailView: UIView {
         label.textColor = .black
            label.adjustsFontSizeToFitWidth = true
            label.text = "category Here"
-           label.textAlignment = .center
+           label.textAlignment = .left
            label.numberOfLines = 0
            return label
        }()
@@ -46,10 +46,11 @@ final class GroupDetailView: UIView {
            label.textAlignment = .left
            label.layer.cornerRadius = 10
            label.layer.borderWidth = 1
-           label.layer.borderColor = UIColor(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1).cgColor
+           label.layer.borderColor = customBorderColor.cgColor
            label.text = "Date Posted: , UserName: , Description:"
            label.sizeToFit()
            label.isEditable = false
+        label.backgroundColor = .clear
            return label
        }()
     
@@ -63,14 +64,14 @@ final class GroupDetailView: UIView {
     public lazy var commentButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "plus"), for: .normal)
-        button.tintColor = .black
-        button.backgroundColor = UIColor(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+        button.tintColor = .white
+        button.backgroundColor = customButtonColor
         button.layer.shadowColor = UIColor.darkGray.cgColor
         button.layer.shadowRadius = 5
         button.layer.shadowOpacity = 0.5
         button.layer.shadowOffset = CGSize(width: 0, height: 4)
         button.layer.cornerRadius = 30
-        button.layer.borderColor = UIColor(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1).cgColor
+        button.layer.borderColor = customBorderColor.cgColor
         button.layer.borderWidth = 1.5
         button.layer.masksToBounds = true
         button.clipsToBounds = false
@@ -89,12 +90,12 @@ final class GroupDetailView: UIView {
     
     private func commonInit() {
         photoimageSetup()
-        titleLabelSetup()
+        //titleLabelSetup()
         categoryLabelSetup()
         descriptionLabelSetup()
         tableViewSetup()
         buttonSetup()
-        backgroundColor = .white
+        backgroundColor = customMainColor
     }
     
     private func photoimageSetup() {
@@ -102,24 +103,25 @@ final class GroupDetailView: UIView {
         photoImageView.anchor(top: safeAreaLayoutGuide.topAnchor, left: leftAnchor, paddingTop: 20, paddingLeft: 15, width: 150, height: 180)
     }
     
-    private func titleLabelSetup() {
-        addSubview(titleLabel)
-        titleLabel.anchor(top: safeAreaLayoutGuide.topAnchor, left: photoImageView.rightAnchor, right: rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 15)
-    }
+//    private func titleLabelSetup() {
+//        addSubview(titleLabel)
+//        titleLabel.anchor(top: safeAreaLayoutGuide.topAnchor, left: photoImageView.rightAnchor, right: rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 15)
+//    }
     
     private func categoryLabelSetup() {
         addSubview(categoryLabel)
-        categoryLabel.anchor(top: titleLabel.bottomAnchor, left: titleLabel.leftAnchor, right: titleLabel.rightAnchor, paddingTop: 20)
+        categoryLabel.anchor(top: safeAreaLayoutGuide.topAnchor, left: photoImageView.rightAnchor, right: rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 15)
     }
     
     private func descriptionLabelSetup() {
         addSubview(descriptionLabel)
-        descriptionLabel.anchor(top: categoryLabel.bottomAnchor, left: titleLabel.leftAnchor, right: titleLabel.rightAnchor, height: 80)
+        descriptionLabel.anchor(top: categoryLabel.bottomAnchor, left: categoryLabel.leftAnchor, bottom: photoImageView.bottomAnchor, right: categoryLabel.rightAnchor)
     }
     
     private func tableViewSetup() {
         addSubview(tableView)
         tableView.anchor(top: descriptionLabel.bottomAnchor, left: leftAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, right: rightAnchor, paddingTop: 35, paddingBottom: 30)
+
     }
     
     private func buttonSetup() {
