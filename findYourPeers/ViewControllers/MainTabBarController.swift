@@ -35,7 +35,7 @@ class MainTabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tabBar.tintColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+        self.tabBar.tintColor = customBorderColor
         viewControllers = [UINavigationController(rootViewController: collectionsViewController), UINavigationController(rootViewController: searchViewController),  UINavigationController(rootViewController: marketPlaceViewController),UINavigationController(rootViewController: itemWishlistViewController)]
         
     }

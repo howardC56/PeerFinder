@@ -129,7 +129,9 @@ extension GroupsViewController: UICollectionViewDelegateFlowLayout, UICollection
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "groupCell", for: indexPath) as? GroupCell else {
             fatalError("could not downcast to groupCell")
         }
-        cell.backgroundColor = #colorLiteral(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
+        cell.backgroundColor = .clear
+        cell.layer.borderWidth = 2
+        cell.layer.borderColor = #colorLiteral(red: 0, green: 0.382160157, blue: 0.3518279195, alpha: 1)
         
         if isFirst == false {
             let group = newGroups[indexPath.row]
@@ -162,6 +164,6 @@ extension GroupsViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchText = searchBar.text else { return }
         searchQuery = searchText
-        
+        searchBar.resignFirstResponder()
     }
 }
