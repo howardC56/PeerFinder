@@ -17,7 +17,6 @@ class MarketPlaceViewController: UIViewController {
         view = marketPlaceView
         view.backgroundColor = .white
     }
-    //private var listener: ListenerRegistration?
     
     private var items = [Item]() {
         didSet {
@@ -42,15 +41,6 @@ class MarketPlaceViewController: UIViewController {
         configureNavBar()
         configureRefreshControl()
         getItems()
-    }
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        //add listener function
-
-    }
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
-        //listener?.remove()
     }
     @objc private func getItems() {
         DatabaseService.manager.getItems(item: Item.self) { [weak self] (result) in
@@ -112,13 +102,13 @@ extension MarketPlaceViewController: UICollectionViewDataSource {
         }
         let item = items[indexPath.row]
         cell.configureCell(item: item)
-        //cell.backgroundColor = #colorLiteral(red: 0.9971715808, green: 0.8923018575, blue: 0.4402516186, alpha: 1)
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = items[indexPath.row]
         let itemDetailVC = ItemDetailViewController()
-        //itemDetailVC.item = itxem
+        itemDetailVC.item = item
+        navigationController?.pushViewController(itemDetailVC, animated: true)
     }
     
     

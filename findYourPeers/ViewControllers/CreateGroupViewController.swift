@@ -75,7 +75,9 @@ class CreateGroupViewController: UIViewController {
     private func configureNavBar() {
         navigationItem.title = "Create Group"
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: customBlueColor,
-            NSAttributedString.Key.font: UIFont(name: "Kohinoor Telugu", size: 26.0) as Any]
+            NSAttributedString.Key.font: UIFont(name: "Kohinoor Telugu", size: 20.0) as Any]
+        
+       // UINavigationBar.appearance().title
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(createGroupButtonPressed))
        navigationItem.rightBarButtonItem?.tintColor = customBlueColor

@@ -17,7 +17,7 @@ class ItemDetailViewController: UIViewController {
         view = itemDetailView
     }
     
-    private var item: Item?
+    public var item: Item?
     
     //add image picker controller here
     
@@ -25,8 +25,8 @@ class ItemDetailViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .white
-        itemDetailView.itemsCollectionView.delegate = self
-        itemDetailView.itemsCollectionView.dataSource = self
+        //itemDetailView.itemsCollectionView.delegate = self
+        //itemDetailView.itemsCollectionView.dataSource = self
     }
     
 }

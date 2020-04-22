@@ -23,22 +23,62 @@ class GroupsViewController: UIViewController {
             }
         }
     }
-
+    
+    private var newGroups = [Group]() {
+        didSet{
+            DispatchQueue.main.async {
+                self.groupsView.groupsCollectionView.reloadData()
+            }
+        }
+    }
+    
+    var isFirst = false
+    
+    private var searchQuery = "" {
+        didSet {
+            if isFirst == true{
+                groups = groups.filter { $0.groupName.lowercased().contains(searchQuery.lowercased())}
+                print("groups:" + searchQuery)
+            } else {
+                newGroups = newGroups.filter { $0.groupName.lowercased().contains(searchQuery.lowercased())}
+                print(searchQuery)
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         view.backgroundColor = .white
         navigationItem.title = "Groups"
         navigationController?.navigationBar.prefersLargeTitles = true
-        configureButtons()
+        configureSegButtons()
         setUpCollectionView()
+        isFirst = true
+        groupsView.groupSearchBar.delegate = self
+        getGroups()
     }
     
-    private func configureButtons() {
-        groupsView.studyButton.addTarget(self, action: #selector(setUpStudyButton), for: .touchUpInside)
-        groupsView.clubsButton.addTarget(self, action: #selector(setUpClubsButton), for: .touchUpInside)
-        groupsView.eventsButton.addTarget(self, action: #selector(setUpEventsButton), for: .touchUpInside)
+    private func configureSegButtons() {
+        groupsView.categorySegmentedControl.addTarget(self, action: #selector(categoryChosen(_:)), for: .valueChanged)
         groupsView.addGroup.addTarget(self, action: #selector(addGroupVC), for: .touchUpInside)
+    }
+    
+    @objc private func categoryChosen(_ sender: UISegmentedControl) {
+        isFirst = false
+        switch sender.selectedSegmentIndex {
+        case 0:
+            newGroups = groups.filter {$0.category == "study"}
+            print(isFirst)
+        case 1:
+            newGroups = groups.filter {$0.category == "club"}
+            print(isFirst)
+        case 2:
+            newGroups = groups.filter {$0.category == "event"}
+            print(isFirst)
+        default:
+            print("default case hit")
+        }
     }
     
     private func setUpCollectionView() {
@@ -47,50 +87,13 @@ class GroupsViewController: UIViewController {
         groupsView.groupsCollectionView.register(GroupCell.self, forCellWithReuseIdentifier: "groupCell")
     }
     
-    @objc func setUpStudyButton() {
-        print("study")
-        //fetch data filtering on topic
-        DatabaseService.manager.getGroups(item: Group.self) {
-            [weak self] (result) in
-            
-            switch result {
+    private func getGroups() {
+        DatabaseService.manager.getGroups(item: Group.self) { [weak self] (result) in
+            switch result{
             case .failure(let error):
-                print("could not fetch groups: \(error)")
+                print("no groups available: \(error)")
             case .success(let groups):
-                self?.groups = groups.filter { $0.category == "study"}
-                dump(groups)
-            }
-        }
-    }
-    
-    @objc func setUpClubsButton() {
-        print("clubs")
-        //fetch data filtering on topic
-        DatabaseService.manager.getGroups(item: Group.self) {
-            [weak self] (result) in
-            
-            switch result {
-            case .failure(let error):
-                print("could not fetch groups: \(error)")
-            case .success(let groups):
-                self?.groups = groups.filter { $0.category == "club"}
-                dump(groups)
-            }
-        }
-    }
-    
-    @objc func setUpEventsButton() {
-        print("events")
-        //fetch data filtering on topic
-        DatabaseService.manager.getGroups(item: Group.self) {
-            [weak self] (result) in
-            
-            switch result {
-            case .failure(let error):
-                print("could not fetch groups: \(error)")
-            case .success(let groups):
-                self?.groups = groups.filter { $0.category == "event"}
-                dump(groups)
+                self?.groups = groups
             }
         }
     }
@@ -113,7 +116,11 @@ extension GroupsViewController: UICollectionViewDelegateFlowLayout, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return groups.count
+        if isFirst == true {
+            return groups.count
+        } else {
+            return newGroups.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -122,11 +129,37 @@ extension GroupsViewController: UICollectionViewDelegateFlowLayout, UICollection
         }
         cell.backgroundColor = #colorLiteral(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
         
-        let group = groups[indexPath.row]
-        cell.configureCell(for: group)
+        if isFirst == false {
+            let group = newGroups[indexPath.row]
+            cell.configureCell(for: group)
+        } else {
+            let group = groups[indexPath.row]
+            cell.configureCell(for: group)
+        }
         
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if isFirst == true {
+        let group = groups[indexPath.row]
+         let groupDetailVC = GroupDetailViewController(group)
+         groupDetailVC.group = group
+            navigationController?.pushViewController(groupDetailVC, animated: true)
+        } else {
+            let group = newGroups[indexPath.row]
+         let groupDetailVC = GroupDetailViewController(group)
+            groupDetailVC.group = group
+            navigationController?.pushViewController(groupDetailVC, animated: true)
+        }
+    }
     
+}
+
+extension GroupsViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let searchText = searchBar.text else { return }
+        searchQuery = searchText
+        
+    }
 }

@@ -10,55 +10,34 @@ import UIKit
 
 class GroupsView: UIView {
     
-    public lazy var studyButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Study", for: .normal)
-        button.backgroundColor = #colorLiteral(red: 0.01115901116, green: 0.2440761924, blue: 0.6173175573, alpha: 1)
-        button.layer.cornerRadius = 10
-        button.layer.shadowOpacity = 0.3
-        button.layer.shadowRadius = 10
-        button.layer.shadowOffset = CGSize(width: 0, height: 4)
-        return button
-    }()
+    let customBlueColor = UIColor(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
     
-    public lazy var clubsButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Clubs", for: .normal)
-        button.backgroundColor = #colorLiteral(red: 0.01115901116, green: 0.2440761924, blue: 0.6173175573, alpha: 1)
-        button.layer.cornerRadius = 10
-        button.layer.shadowOpacity = 0.3
-        button.layer.shadowRadius = 10
-        button.layer.shadowOffset = CGSize(width: 0, height: 4)
-        return button
-    }()
+    let customGoldColor = UIColor(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
     
-    public lazy var eventsButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Events", for: .normal)
-        button.backgroundColor = #colorLiteral(red: 0.01115901116, green: 0.2440761924, blue: 0.6173175573, alpha: 1)
-        button.layer.cornerRadius = 10
-        button.layer.shadowOpacity = 0.3
-        button.layer.shadowRadius = 10
-        button.layer.shadowOffset = CGSize(width: 0, height: 4)
-        return button
-    }()
+    let white = UIColor(white: 1.0, alpha: 1.0)
+
+    public lazy var categorySegmentedControl: UISegmentedControl = {
+        let categories = ["Study", "Clubs", "Events"]
+        let sc = UISegmentedControl(items: categories)
+        sc.selectedSegmentIndex = UISegmentedControl.noSegment
+        sc.tintColor = customGoldColor
+        sc.backgroundColor = customBlueColor
+        sc.layer.borderColor = customBlueColor.cgColor
+        let attributes = [NSAttributedString.Key.font: UIFont(name: "Kohinoor Telugu", size: 20.0), NSAttributedString.Key.foregroundColor: white]
+        sc.setTitleTextAttributes(attributes as [NSAttributedString.Key : Any], for: .normal)
+        sc.selectedSegmentTintColor = customGoldColor
+        sc.layer.borderWidth = 3.0
+        sc.layer.cornerRadius = 20
+        return sc
+        }()
     
-    
-    public lazy var vStack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [studyButton, clubsButton, eventsButton])
-        stack.axis = .horizontal
-        stack.distribution = .fillEqually
-        stack.alignment = .fill
-        stack.spacing = 20
-        return stack
-    }()
     
     public lazy var groupSearchBar: UISearchBar = {
         let search = UISearchBar()
         search.placeholder = "Enter a group name"
         search.layer.cornerRadius = 20
         search.layer.masksToBounds = true
-        search.barTintColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+        search.barTintColor = customBlueColor
         search.searchTextField.backgroundColor = .white
         return search
     }()
@@ -75,11 +54,11 @@ class GroupsView: UIView {
     public lazy var addGroup: UIButton = {
        let button = UIButton()
         button.setImage(UIImage(systemName: "plus"), for: .normal)
-        button.layer.cornerRadius = 22
+        button.layer.cornerRadius = 27
         button.layer.shadowOpacity = 0.25
         button.layer.shadowRadius = 5
         button.layer.shadowOffset = CGSize(width: 0, height: 4)
-        button.backgroundColor = #colorLiteral(red: 0, green: 0.6697600484, blue: 0.7905663848, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
         button.tintColor = .white
         return button
     }()
@@ -95,25 +74,12 @@ class GroupsView: UIView {
     }
     
     private func commonInit() {
-        setUpVstack()
         setUpGroupSearchConstraints()
+        setUpSegConstraints()
         setUpCVConstraints()
         setUpAddButtonConstraints()
     }
-    
-    
-    private func setUpVstack() {
-        addSubview(vStack)
-        
-        vStack.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            vStack.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 8),
-            vStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            vStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            vStack.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.05)
-        ])
-    }
+
     
     private func setUpGroupSearchConstraints() {
         addSubview(groupSearchBar)
@@ -121,9 +87,21 @@ class GroupsView: UIView {
         groupSearchBar.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            groupSearchBar.topAnchor.constraint(equalTo: vStack.bottomAnchor, constant: 20),
+            groupSearchBar.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 8),
             groupSearchBar.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             groupSearchBar.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
+        ])
+    }
+    
+    private func setUpSegConstraints() {
+        addSubview(categorySegmentedControl)
+        
+        categorySegmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            categorySegmentedControl.topAnchor.constraint(equalTo: groupSearchBar.bottomAnchor, constant: 14),
+            categorySegmentedControl.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            categorySegmentedControl.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
         ])
     }
     
@@ -133,7 +111,7 @@ class GroupsView: UIView {
         groupsCollectionView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            groupsCollectionView.topAnchor.constraint(equalTo: groupSearchBar.bottomAnchor, constant: 20),
+            groupsCollectionView.topAnchor.constraint(equalTo: categorySegmentedControl.bottomAnchor, constant: 20),
             groupsCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             groupsCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             groupsCollectionView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.50)
@@ -148,8 +126,8 @@ class GroupsView: UIView {
         NSLayoutConstraint.activate([
             addGroup.topAnchor.constraint(equalTo: groupsCollectionView.bottomAnchor, constant: 8),
             addGroup.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            addGroup.widthAnchor.constraint(equalToConstant: 44),
-            addGroup.heightAnchor.constraint(equalToConstant: 44)
+            addGroup.widthAnchor.constraint(equalToConstant: 54),
+            addGroup.heightAnchor.constraint(equalToConstant: 54)
         ])
     }
     

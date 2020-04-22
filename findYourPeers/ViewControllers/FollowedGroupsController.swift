@@ -9,21 +9,21 @@
 import UIKit
 import FirebaseFirestore
 
-enum Category {
-    case study
-    case club
-    case event
+enum Category: String {
+    case study = "study"
+    case club = "club"
+    case event = "event"
 }
 
 class FollowedGroupsController: UIViewController {
-
+    
     private let followedGroupsView = FollowedGroupsView()
     
     override func loadView() {
         view = followedGroupsView
         followedGroupsView.backgroundColor = .white
     }
-    //private var listener: ListenerRegistration?
+    
     private var followedGroups = [Group]() {
         didSet {
             DispatchQueue.main.async {
@@ -40,7 +40,7 @@ class FollowedGroupsController: UIViewController {
         }
     }
     private var refreshControl: UIRefreshControl!
-     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
@@ -48,14 +48,7 @@ class FollowedGroupsController: UIViewController {
         fetchFollowedGroups()
         configureRefreshControl()
     }
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        //TODO: add listener
-    }
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
-        //listener?.remove()
-    }
+    
     private func configureRefreshControl() {
         refreshControl = UIRefreshControl()
         refreshControl.tintColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
@@ -93,13 +86,13 @@ class FollowedGroupsController: UIViewController {
         switch sender.selectedSegmentIndex {
         case 0:
             selectedCategory = .study
-            followedGroups = followedGroups.filter {$0.category == "study"}
+            followedGroups = followedGroups.filter {$0.category == selectedCategory.rawValue}
         case 1:
             selectedCategory = .club
-            followedGroups = followedGroups.filter {$0.category == "club"}
+            followedGroups = followedGroups.filter {$0.category == selectedCategory.rawValue}
         case 2:
             selectedCategory = .event
-           followedGroups = followedGroups.filter {$0.category == "event"}
+            followedGroups = followedGroups.filter {$0.category == selectedCategory.rawValue}
         default:
             print("default case hit")
         }
@@ -125,13 +118,14 @@ extension FollowedGroupsController: UICollectionViewDataSource {
         guard let cell = followedGroupsView.collectionView.dequeueReusableCell(withReuseIdentifier: "groupCell", for: indexPath) as? GroupCell else {
             fatalError("failed to cast to group cell")
         }
-        cell.backgroundColor = #colorLiteral(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
+        let group = followedGroups[indexPath.row]
+        cell.configureCell(for: group)
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let group = followedGroups[indexPath.row]
-        let groupDetailVC = GroupDetailViewController()
-        //groupDetailVC.group = group
+        let groupDetailVC = GroupDetailViewController(group)
+        navigationController?.pushViewController(groupDetailVC, animated: true)
         
     }
     

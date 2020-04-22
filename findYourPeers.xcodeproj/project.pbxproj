@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7FBBA4614D8150661BAD314A /* Pods_findYourPeers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9CA310C14C1632521314CB1 /* Pods_findYourPeers.framework */; };
+		800787EE245092F40042BF49 /* ItemDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800787ED245092F40042BF49 /* ItemDetailCell.swift */; };
 		884F7FE224508BD200C3D76A /* GroupCommentPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884F7FE124508BD200C3D76A /* GroupCommentPostView.swift */; };
 		888950A5244DFF8E003DDE1E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888950A4244DFF8E003DDE1E /* AppDelegate.swift */; };
 		888950A7244DFF8E003DDE1E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888950A6244DFF8E003DDE1E /* SceneDelegate.swift */; };
@@ -46,6 +47,7 @@
 
 /* Begin PBXFileReference section */
 		36666A3680C28FE4BE868EC4 /* Pods-findYourPeers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-findYourPeers.debug.xcconfig"; path = "Target Support Files/Pods-findYourPeers/Pods-findYourPeers.debug.xcconfig"; sourceTree = "<group>"; };
+		800787ED245092F40042BF49 /* ItemDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailCell.swift; sourceTree = "<group>"; };
 		884F7FE124508BD200C3D76A /* GroupCommentPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCommentPostView.swift; sourceTree = "<group>"; };
 		888950A1244DFF8E003DDE1E /* findYourPeers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = findYourPeers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		888950A4244DFF8E003DDE1E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 				C69DE08D244E48E200D86E30 /* GroupCell.swift */,
 				888950DC244F43FC003DDE1E /* GroupDetailViewCell.swift */,
 				C69DE09F244F60EB00D86E30 /* ItemCell.swift */,
+				800787ED245092F40042BF49 /* ItemDetailCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -355,6 +358,7 @@
 				888950BD244E0110003DDE1E /* CreateGroupViewController.swift in Sources */,
 				C69DE092244F470600D86E30 /* ItemDetailViewController.swift in Sources */,
 				C69DE09C244F490700D86E30 /* ContactSellerView.swift in Sources */,
+				800787EE245092F40042BF49 /* ItemDetailCell.swift in Sources */,
 				C69DE09A244F48FA00D86E30 /* ItemDetailView.swift in Sources */,
 				888950BF244E012A003DDE1E /* FollowedGroupsView.swift in Sources */,
 				888950A5244DFF8E003DDE1E /* AppDelegate.swift in Sources */,
