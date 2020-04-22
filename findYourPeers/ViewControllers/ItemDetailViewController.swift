@@ -42,6 +42,7 @@ class ItemDetailViewController: UIViewController {
         
         view.backgroundColor = .white
         images = item.itemImages
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "cart.fill.badge.plus"), style: .plain, target: self, action: #selector(addToCartAction(_:)))
         setUpCollectionView()
         updateUI()
     }
@@ -59,6 +60,18 @@ class ItemDetailViewController: UIViewController {
         itemDetailView.itemsCollectionView.delegate = self
         itemDetailView.itemsCollectionView.dataSource = self
         itemDetailView.itemsCollectionView.register(ItemDetailCell.self, forCellWithReuseIdentifier: "itemDetailCell")
+    }
+    
+    @objc private func addToCartAction(_ sender: UIBarButtonItem){
+        DatabaseService.manager.addItemToFavorties(item) { (result) in
+            
+            switch result {
+            case .failure(let error):
+                print("could not add to cart: \(error)")
+            case .success:
+                print("added to cart")
+            }
+        }
     }
     
 }
