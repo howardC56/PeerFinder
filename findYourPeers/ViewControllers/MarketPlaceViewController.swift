@@ -40,6 +40,7 @@ class MarketPlaceViewController: UIViewController {
         configureSearchBar()
         configureNavBar()
         configureRefreshControl()
+        configureButton()
         getItems()
     }
     @objc private func getItems() {
@@ -74,8 +75,13 @@ class MarketPlaceViewController: UIViewController {
     }
     private func configureNavBar() {
         navigationItem.title = "Student Market Place"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: nil)
-        navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
+    }
+    private func configureButton() {
+        marketPlaceView.addItemButton.addTarget(self, action: #selector(addItemButtonPressed(_:)), for: .touchUpInside)
+    }
+    @objc private func addItemButtonPressed(_ sender: UIButton) {
+        let createItemVC = CreateItemViewController()
+        present(createItemVC, animated: true)
     }
     
     

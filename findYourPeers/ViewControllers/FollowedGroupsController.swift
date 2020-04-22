@@ -24,7 +24,7 @@ class FollowedGroupsController: UIViewController {
         view = followedGroupsView
         followedGroupsView.backgroundColor = .white
     }
-    
+    private var allGroups = [Group]()
     private var followedGroups = [Group]() {
         didSet {
             DispatchQueue.main.async {
@@ -65,7 +65,7 @@ class FollowedGroupsController: UIViewController {
                     self?.refreshControl.endRefreshing()
                 }
             case .success(let groups):
-                self?.followedGroups = groups
+                self?.allGroups = groups
                 DispatchQueue.main.async {
                     self?.refreshControl.endRefreshing()
                 }
@@ -87,16 +87,16 @@ class FollowedGroupsController: UIViewController {
         switch sender.selectedSegmentIndex {
         case 0:
             selectedCategory = .all
-            fetchFollowedGroups()
+            followedGroups = allGroups
         case 1:
             selectedCategory = .study
-            followedGroups = followedGroups.filter {$0.category == selectedCategory.rawValue}
+            followedGroups = allGroups.filter {$0.category == selectedCategory.rawValue}
         case 2:
             selectedCategory = .club
-            followedGroups = followedGroups.filter {$0.category == selectedCategory.rawValue}
+            followedGroups = allGroups.filter {$0.category == selectedCategory.rawValue}
         case 3:
             selectedCategory = .event
-            followedGroups = followedGroups.filter {$0.category == selectedCategory.rawValue}
+            followedGroups = allGroups.filter {$0.category == selectedCategory.rawValue}
         default:
             print("default case hit")
         }
