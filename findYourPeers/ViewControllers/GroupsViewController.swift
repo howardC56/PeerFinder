@@ -100,7 +100,7 @@ class GroupsViewController: UIViewController {
         }
     }
     
-    @objc func addGroupVC() {
+    @objc func addGroupVC(_ sender: UIButton) {
         print("group insert")
         let createGroupVC = CreateGroupViewController()
         present(UINavigationController(rootViewController: createGroupVC), animated: true)

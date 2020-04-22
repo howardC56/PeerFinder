@@ -13,7 +13,7 @@ class ItemDetailView: UIView {
     public lazy var itemName: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Kohinoor Telugu", size: 24)
-        label.textColor = UIColor(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
+        label.textColor = .black
         label.adjustsFontSizeToFitWidth = true
         label.text = "Item Name"
         label.numberOfLines = 3
@@ -23,7 +23,7 @@ class ItemDetailView: UIView {
     public lazy var sellerName: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Kohinoor Telugu", size: 16)
-        label.textColor = UIColor(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
+        label.textColor = .darkGray
         label.adjustsFontSizeToFitWidth = true
         label.text = "Seller Name"
         label.textAlignment = .center
@@ -34,9 +34,11 @@ class ItemDetailView: UIView {
     public lazy var contactSellerButton: UIButton = {
         let button = UIButton()
         button.setTitle("Contact Seller", for: .normal)
-        button.backgroundColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
-        button.titleLabel?.textColor = #colorLiteral(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
+        button.backgroundColor = customButtonColor
+        button.titleLabel?.textColor = .black
         button.layer.cornerRadius = 10
+        button.layer.borderWidth = 2
+        button.layer.borderColor = customBorderColor.cgColor
         button.layer.shadowOpacity = 0.3
         button.layer.shadowRadius = 10
         button.layer.shadowOffset = CGSize(width: 0, height: 4)
@@ -82,18 +84,6 @@ class ItemDetailView: UIView {
         return label
     }()
     
-//    public lazy var wishlistButton: UIButton = {
-//        let button = UIButton()
-//        button.setTitle("Add to wishlist", for: .normal)
-//        button.backgroundColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
-//        button.titleLabel?.textColor = #colorLiteral(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
-//        button.layer.cornerRadius = 10
-//        button.layer.shadowOpacity = 0.3
-//        button.layer.shadowRadius = 10
-//        button.layer.shadowOffset = CGSize(width: 0, height: 4)
-//        return button
-//    }()
-    
     public lazy var descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Kohinoor Telugu", size: 16)
@@ -123,7 +113,6 @@ class ItemDetailView: UIView {
         setUpImagesCollectionConstraints()
         setUpPriceConstraints()
         setUpConditionConstraints()
-//        setUpWishlistButtonConstraints()
         setUpDescripConstraints()
     }
     
@@ -210,20 +199,6 @@ class ItemDetailView: UIView {
         ])
         
     }
-    
-    
-//    private func setUpWishlistButtonConstraints() {
-//        addSubview(wishlistButton)
-//
-//        wishlistButton.translatesAutoresizingMaskIntoConstraints = false
-//
-//        NSLayoutConstraint.activate([
-//            wishlistButton.topAnchor.constraint(equalTo: itemsCollectionView.bottomAnchor, constant: 20),
-//            wishlistButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
-//            wishlistButton.widthAnchor.constraint(equalToConstant: 120),
-//            wishlistButton.heightAnchor.constraint(equalToConstant: 44)
-//        ])
-//    }
     
     private func setUpDescripConstraints(){
         addSubview(descriptionLabel)

@@ -8,11 +8,13 @@
 
 import UIKit
 
-let customSeaFoam = #colorLiteral(red: 0.5972397923, green: 0.8876212239, blue: 0.7878088355, alpha: 1)
+let customHighlight = #colorLiteral(red: 0.3553702235, green: 0.7033417821, blue: 0.7145221829, alpha: 1)
 
-let customLightRobin = #colorLiteral(red: 0.3553702235, green: 0.7033417821, blue: 0.7145221829, alpha: 1)
+let customMainColor = #colorLiteral(red: 0.1332651377, green: 0.7317578197, blue: 0.6140573621, alpha: 1)
 
 let customBorderColor = #colorLiteral(red: 0, green: 0.382160157, blue: 0.3518279195, alpha: 1)
+
+let customButtonColor = #colorLiteral(red: 0.1332651377, green: 0.7317578197, blue: 0.6140573621, alpha: 1)
 
 class GroupsView: UIView {
     
@@ -22,12 +24,12 @@ class GroupsView: UIView {
         let categories = ["All", "Study", "Clubs", "Events",]
         let sc = UISegmentedControl(items: categories)
         sc.selectedSegmentIndex = 0
-        sc.tintColor = customLightRobin
-        sc.backgroundColor = customSeaFoam
-        sc.layer.borderColor = #colorLiteral(red: 0, green: 0.382160157, blue: 0.3518279195, alpha: 1)
+        sc.tintColor = customHighlight
+        sc.backgroundColor = customHighlight
+        sc.layer.borderColor = customBorderColor.cgColor
         let attributes = [NSAttributedString.Key.font: UIFont(name: "Futura", size: 18.0), NSAttributedString.Key.foregroundColor: white]
         sc.setTitleTextAttributes(attributes as [NSAttributedString.Key : Any], for: .normal)
-        sc.selectedSegmentTintColor = customLightRobin
+        sc.selectedSegmentTintColor = customHighlight
         sc.layer.borderWidth = 2
         sc.layer.cornerRadius = 20
         return sc
@@ -59,9 +61,9 @@ class GroupsView: UIView {
         button.layer.shadowOpacity = 0.25
         button.layer.shadowRadius = 5
         button.layer.shadowOffset = CGSize(width: 0, height: 4)
-        button.backgroundColor = #colorLiteral(red: 0.1332651377, green: 0.7317578197, blue: 0.6140573621, alpha: 1)
+        button.backgroundColor = customButtonColor
         button.layer.borderWidth = 2
-        button.layer.borderColor = #colorLiteral(red: 0, green: 0.382160157, blue: 0.3518279195, alpha: 1)
+        button.layer.borderColor = customBorderColor.cgColor
         button.tintColor = .white
         return button
     }()
