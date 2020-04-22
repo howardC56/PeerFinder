@@ -51,7 +51,6 @@ class GroupsViewController: UIViewController {
         
         view.backgroundColor = .white
         navigationItem.title = "Groups"
-        navigationController?.navigationBar.prefersLargeTitles = true
         configureSegButtons()
         setUpCollectionView()
         isFirst = true
