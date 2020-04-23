@@ -8,7 +8,7 @@
 
 import UIKit
 
-let customHighlight = #colorLiteral(red: 0.1917455792, green: 0.3806588054, blue: 0.3900330663, alpha: 1)
+let customHighlight = #colorLiteral(red: 0.5958901048, green: 0.7962107062, blue: 0.7127075791, alpha: 1)
 
 let customMainColor = #colorLiteral(red: 0.1332651377, green: 0.7317578197, blue: 0.6140573621, alpha: 1)
 
