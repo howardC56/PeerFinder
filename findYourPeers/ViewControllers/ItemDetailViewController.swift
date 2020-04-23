@@ -125,21 +125,21 @@ class ItemDetailViewController: UIViewController {
     }
     
     @objc private func openMailController(_ sender: UIButton) {
-        print("mail")
-            //turn this into an action sheet
-            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
             let emailAction = UIAlertAction(title: "Send an e-mail", style: .default) { (alertAction) in
                 self.showMailComposer()
             }
             let messageAction = UIAlertAction(title: "Send a message", style: .default) { (alertAction) in
-                //add message controller here
                 self.showMessageComposer()
             }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-            alertController.addAction(emailAction)
-            alertController.addAction(messageAction)
-        alertController.addAction(cancelAction)
-            present(alertController, animated: true)
+        emailAction.setValue(customBorderColor, forKey: "titleTextColor")
+        messageAction.setValue(customMainColor, forKey: "titleTextColor")
+        cancelAction.setValue(UIColor.red, forKey: "titleTextColor")
+            actionSheet.addAction(emailAction)
+            actionSheet.addAction(messageAction)
+        actionSheet.addAction(cancelAction)
+            present(actionSheet, animated: true)
 
     }
     
