@@ -187,6 +187,7 @@ extension GroupDetailViewController: UITableViewDelegate, UITableViewDataSource 
         }
         let post = posts[indexPath.row]
         cell.configureCell(post: post)
+        cell.isUserInteractionEnabled = false
         return cell
     }
     
