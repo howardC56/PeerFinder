@@ -200,6 +200,11 @@ extension GroupsViewController: UICollectionViewDelegateFlowLayout, UICollection
 }
 
 extension GroupsViewController: UISearchBarDelegate {
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = true
+    }
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         guard let searchText = searchBar.text else { return }
@@ -207,6 +212,13 @@ extension GroupsViewController: UISearchBarDelegate {
         if searchText.isEmpty {
             getGroups()
         }
+        
         searchQuery = searchText
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
+        searchBar.showsCancelButton = false
     }
 }
