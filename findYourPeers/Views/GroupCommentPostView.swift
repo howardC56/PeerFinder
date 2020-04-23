@@ -21,6 +21,7 @@ class GroupCommentPostView: UIView {
         label.placeholder = "Comment"
         label.contentVerticalAlignment = .top
         label.backgroundColor = .white
+        label.layer.cornerRadius = 10
         label.setLeftPadding(10)
         label.setRightPadding(10)
         return label

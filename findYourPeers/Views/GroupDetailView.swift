@@ -103,11 +103,6 @@ final class GroupDetailView: UIView {
         photoImageView.anchor(top: safeAreaLayoutGuide.topAnchor, left: leftAnchor, paddingTop: 20, paddingLeft: 15, width: 150, height: 180)
     }
     
-//    private func titleLabelSetup() {
-//        addSubview(titleLabel)
-//        titleLabel.anchor(top: safeAreaLayoutGuide.topAnchor, left: photoImageView.rightAnchor, right: rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 15)
-//    }
-    
     private func categoryLabelSetup() {
         addSubview(categoryLabel)
         categoryLabel.anchor(top: safeAreaLayoutGuide.topAnchor, left: photoImageView.rightAnchor, right: rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 15)
@@ -120,7 +115,7 @@ final class GroupDetailView: UIView {
     
     private func tableViewSetup() {
         addSubview(tableView)
-        tableView.anchor(top: descriptionLabel.bottomAnchor, left: leftAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, right: rightAnchor, paddingTop: 35, paddingBottom: 30)
+        tableView.anchor(top: descriptionLabel.bottomAnchor, left: leftAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, right: rightAnchor, paddingTop: 35)
 
     }
     
