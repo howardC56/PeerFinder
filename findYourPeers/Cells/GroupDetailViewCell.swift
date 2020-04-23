@@ -47,6 +47,7 @@ class GroupDetailViewCell: UITableViewCell {
         dateLabelConstraints()
         postNameSetup()
         postSetup()
+        backgroundColor = .white
     }
     
     func configureCell(post: Post) {
