@@ -21,7 +21,9 @@ class GroupCell: UICollectionViewCell {
     
     public lazy var groupImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.cornerRadius = 13
+        imageView.clipsToBounds = true
         return imageView
     }()
     
