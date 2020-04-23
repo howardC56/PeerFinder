@@ -59,10 +59,6 @@ class ItemDetailViewController: UIViewController {
         navigationItem.rightBarButtonItem?.tintColor = customBorderColor
         itemDetailView.contactSellerButton.addTarget(self, action: #selector(openMailController(_:)), for: .touchUpInside)
         setUpCollectionView()
-        
-        if isInBag == true {
-            navigationItem.rightBarButtonItem?.image = UIImage(systemName: "bag.fill.badge.plus")
-        }
         updateUI()
     }
     
@@ -73,6 +69,25 @@ class ItemDetailViewController: UIViewController {
         itemDetailView.conditionLabel.text = "Condition: \(item.itemCondition)"
         itemDetailView.descriptionLabel.text = "\(item.itemDescription)"
         itemDetailView.imageView.kf.setImage(with: URL(string: item.itemImages.first ?? ""))
+        favCheck()
+    }
+    
+    private func favCheck() {
+        DatabaseService.manager.itemIsFavorited(item) { [weak self] (result) in
+            
+            switch result {
+            case .failure(let error):
+                DispatchQueue.main.async {
+                  self?.showAlert(title: "Try again", message: error.localizedDescription)
+                }
+            case .success(let success):
+                if success {
+                    self?.isInBag = true
+                } else {
+                    self?.isInBag = false
+                }
+            }
+        }
     }
     
     private func setUpCollectionView(){
@@ -154,8 +169,11 @@ class ItemDetailViewController: UIViewController {
         messageComposer.body = "Hi! I'm interested in this item that you're selling."
         messageComposer.recipients = ["3474699643"]
         messageComposer.messageComposeDelegate = self
-        if let imageData = itemDetailView.imageView.image?.pngData() {
-            messageComposer.addAttachmentData(imageData, typeIdentifier: "public.data", filename: "item_image")
+        
+        guard let image = itemDetailView.imageView.image else { return }
+        
+        if let imageData = image.pngData(){
+            messageComposer.addAttachmentData(imageData, typeIdentifier: "public.data", filename: "item_image.png")
         }else {
             DispatchQueue.main.async {
                 self.showAlert(title: "No image selected", message: "Did not attach an image to message")
