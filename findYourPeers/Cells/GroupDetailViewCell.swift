@@ -51,7 +51,7 @@ class GroupDetailViewCell: UITableViewCell {
     }
     
     func configureCell(post: Post) {
-        dateCreatedLabel.text = "\(post.timePosted)"
+        dateCreatedLabel.text = "\(post.timePosted.convertToString())"
         postUserNameLabel.text = post.userName
         postLabel.text = post.postText
     }
