@@ -60,7 +60,7 @@ class GroupsViewController: UIViewController {
         refreshControl = UIRefreshControl()
         refreshControl.tintColor = customButtonColor
         groupsView.groupsCollectionView.refreshControl = refreshControl
-        refreshControl.addTarget(self, action: #selector(selectedRefresh), for: .valueChanged)
+        refreshControl.addTarget(self, action: #selector(getGroups), for: .valueChanged)
     }
     
     override func viewDidLoad() {
@@ -90,14 +90,17 @@ class GroupsViewController: UIViewController {
             getGroups()
         case 1:
             selectedCategory = .study
+            isFirst = false
             newGroups = groups.filter {$0.category == selectedCategory.rawValue}
             print(isFirst)
         case 2:
             selectedCategory = .club
+            isFirst = false
             newGroups = groups.filter {$0.category == selectedCategory.rawValue}
             print(isFirst)
         case 3:
             selectedCategory = .event
+            isFirst = false
             newGroups = groups.filter {$0.category == selectedCategory.rawValue}
             print(isFirst)
         default:
@@ -105,8 +108,7 @@ class GroupsViewController: UIViewController {
         }
     }
     
-    @objc private func selectedRefresh() {
-        if isFirst == false {
+    @objc private func getGroups() {
         DatabaseService.manager.getGroups(item: Group.self) { (result) in
             
             switch result {
@@ -116,14 +118,22 @@ class GroupsViewController: UIViewController {
                     self.refreshControl.endRefreshing()
                 }
             case .success(let groups):
-                self.newGroups = groups.filter { $0.category == self.selectedCategory.rawValue}
-                self.refreshControl.endRefreshing()
+                
+                if self.isFirst {
+                    self.newGroups = groups
+                    self.groups = groups
+                    DispatchQueue.main.async {
+                        self.refreshControl.endRefreshing()
+                    }
+                } else {
+                    self.newGroups = groups.filter { $0.category == self.selectedCategory.rawValue}
+                    DispatchQueue.main.async {
+                        self.refreshControl.endRefreshing()
+                    }
+                }
             }
         }
-        } else {
-            self.newGroups = groups
-            self.refreshControl.endRefreshing()
-        }
+
     }
     
     private func setUpCollectionView() {
@@ -132,19 +142,7 @@ class GroupsViewController: UIViewController {
         groupsView.groupsCollectionView.register(GroupCell.self, forCellWithReuseIdentifier: "groupCell")
     }
     
-    private func getGroups() {
-        DatabaseService.manager.getGroups(item: Group.self) { [weak self] (result) in
-            switch result{
-            case .failure(let error):
-                print("no groups available: \(error)")
-            case .success(let groups):
-                self?.groups = groups
-            }
-        }
-    }
-    
     @objc func addGroupVC(_ sender: UIButton) {
-        print("group insert")
         let createGroupVC = CreateGroupViewController()
         present(UINavigationController(rootViewController: createGroupVC), animated: true)
     }
@@ -203,12 +201,12 @@ extension GroupsViewController: UICollectionViewDelegateFlowLayout, UICollection
 
 extension GroupsViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard let searchText = searchBar.text else { return }
-        searchQuery = searchText
         searchBar.resignFirstResponder()
+        guard let searchText = searchBar.text else { return }
         
         if searchText.isEmpty {
             getGroups()
         }
+        searchQuery = searchText
     }
 }
