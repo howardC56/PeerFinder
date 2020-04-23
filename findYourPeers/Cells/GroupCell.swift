@@ -14,6 +14,9 @@ class GroupCell: UICollectionViewCell {
         super.layoutSubviews()
         self.clipsToBounds = true
         self.layer.cornerRadius = 13
+        self.backgroundColor = .clear
+        self.layer.borderWidth = 2
+        self.layer.borderColor = #colorLiteral(red: 0, green: 0.382160157, blue: 0.3518279195, alpha: 1)
     }
     
     public lazy var groupImageView: UIImageView = {
