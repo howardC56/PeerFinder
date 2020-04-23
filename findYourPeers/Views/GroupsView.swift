@@ -117,8 +117,8 @@ class GroupsView: UIView {
         
         NSLayoutConstraint.activate([
             groupsCollectionView.topAnchor.constraint(equalTo: categorySegmentedControl.bottomAnchor, constant: 20),
-            groupsCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            groupsCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            groupsCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
+            groupsCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
             groupsCollectionView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
         ])
     }
