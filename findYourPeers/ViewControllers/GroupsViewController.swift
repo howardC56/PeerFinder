@@ -16,6 +16,8 @@ class GroupsViewController: UIViewController {
         view = groupsView
     }
     
+    private var refreshControl: UIRefreshControl!
+    
     private var groups = [Group]() {
         didSet{
             DispatchQueue.main.async {
@@ -34,6 +36,14 @@ class GroupsViewController: UIViewController {
     
     var isFirst = false
     
+    private var selectedCategory: Category = .all {
+        didSet{
+            DispatchQueue.main.async {
+                self.groupsView.groupsCollectionView.reloadData()
+            }
+        }
+    }
+    
     private var searchQuery = "" {
         didSet {
             if isFirst == true{
@@ -46,11 +56,19 @@ class GroupsViewController: UIViewController {
         }
     }
     
+    private func configureRefreshControl() {
+        refreshControl = UIRefreshControl()
+        refreshControl.tintColor = customButtonColor
+        groupsView.groupsCollectionView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(selectedRefresh), for: .valueChanged)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .white
         navigationItem.title = "Groups"
+        configureRefreshControl()
         configureSegButtons()
         setUpCollectionView()
         isFirst = true
@@ -67,19 +85,44 @@ class GroupsViewController: UIViewController {
         isFirst = false
         switch sender.selectedSegmentIndex {
         case 0:
+            selectedCategory = .all
             isFirst = true
             getGroups()
         case 1:
-            newGroups = groups.filter {$0.category == "study"}
+            selectedCategory = .study
+            newGroups = groups.filter {$0.category == selectedCategory.rawValue}
             print(isFirst)
         case 2:
-            newGroups = groups.filter {$0.category == "club"}
+            selectedCategory = .club
+            newGroups = groups.filter {$0.category == selectedCategory.rawValue}
             print(isFirst)
         case 3:
-            newGroups = groups.filter {$0.category == "event"}
+            selectedCategory = .event
+            newGroups = groups.filter {$0.category == selectedCategory.rawValue}
             print(isFirst)
         default:
             print("default case hit")
+        }
+    }
+    
+    @objc private func selectedRefresh() {
+        if isFirst == false {
+        DatabaseService.manager.getGroups(item: Group.self) { (result) in
+            
+            switch result {
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    self.showAlert(title: "Error", message: "Could not load groups: \(error.localizedDescription)")
+                    self.refreshControl.endRefreshing()
+                }
+            case .success(let groups):
+                self.newGroups = groups.filter { $0.category == self.selectedCategory.rawValue}
+                self.refreshControl.endRefreshing()
+            }
+        }
+        } else {
+            self.newGroups = groups
+            self.refreshControl.endRefreshing()
         }
     }
     
@@ -129,9 +172,7 @@ extension GroupsViewController: UICollectionViewDelegateFlowLayout, UICollection
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "groupCell", for: indexPath) as? GroupCell else {
             fatalError("could not downcast to groupCell")
         }
-        cell.backgroundColor = .clear
-        cell.layer.borderWidth = 2
-        cell.layer.borderColor = #colorLiteral(red: 0, green: 0.382160157, blue: 0.3518279195, alpha: 1)
+        
         
         if isFirst == false {
             let group = newGroups[indexPath.row]

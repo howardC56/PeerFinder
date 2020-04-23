@@ -120,7 +120,8 @@ final class GroupDetailView: UIView {
     
     private func tableViewSetup() {
         addSubview(tableView)
-        tableView.anchor(top: descriptionLabel.bottomAnchor, left: leftAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, right: rightAnchor, paddingTop: 35)
+        tableView.anchor(top: descriptionLabel.bottomAnchor, left: leftAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, right: rightAnchor, paddingTop: 35, paddingBottom: 30)
+
     }
     
     private func buttonSetup() {

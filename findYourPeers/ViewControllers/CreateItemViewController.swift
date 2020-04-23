@@ -44,8 +44,6 @@ class CreateItemViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       //collectionViewConstraint?.constant = createItemView.itemImageCollection.topAnchor.constraint(equalTo: createItemView.itemImageCollection.topAnchor).constant
-        
         configureNavBar()
         configureCollectionView()
         configureButton()
@@ -63,7 +61,11 @@ class CreateItemViewController: UIViewController {
     }
     private func configureNavBar() {
         navigationItem.title = "Add Item"
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "checkmark"), style: .plain, target: self, action: #selector(finishedButtonPressed(_:)))
+        navigationItem.rightBarButtonItem?.tintColor = customBorderColor
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .plain, target: self, action: #selector(xbuttonPressed(_:)))
+        navigationItem.leftBarButtonItem?.tintColor = customBorderColor
     }
     private func configureCollectionView() {
         createItemView.itemImageCollection.delegate = self
@@ -74,7 +76,9 @@ class CreateItemViewController: UIViewController {
         createItemView.addImageButton.addTarget(self, action: #selector(addPhotoButtonPressed(_:)), for: .touchUpInside)
         createItemView.itemConditionSC.addTarget(self, action: #selector(selectedItemCondition(_:)), for: .valueChanged)
     }
-    
+    @objc private func xbuttonPressed(_ sender: UIBarButtonItem) {
+        dismiss(animated: true)
+    }
     @objc private func selectedItemCondition(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:

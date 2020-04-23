@@ -22,6 +22,8 @@ class ItemWishlistViewController: UIViewController {
         view.backgroundColor = .white
     }
     
+    
+    
     private var myItems = [Item]() {
         didSet {
             DispatchQueue.main.async {

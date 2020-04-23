@@ -8,10 +8,6 @@
 
 import UIKit
 class CreateItemView: UIView {
-    let customBlueColor = UIColor(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
-    
-    let customGoldColor = UIColor(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
-    let white = UIColor(white: 1.0, alpha: 1.0)
     
     public lazy var itemImageCollection: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -22,33 +18,48 @@ class CreateItemView: UIView {
     }()
     public lazy var addImageButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Add Photo", for: .normal)
+        button.setTitle(" Add Photo ", for: .normal)
         button.layer.cornerRadius = 13
         button.layer.shadowOpacity = 0.25
         button.layer.shadowRadius = 5
         button.layer.shadowOffset = CGSize(width: 0, height: 4)
-        button.backgroundColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+        button.backgroundColor = customButtonColor
+        button.layer.borderWidth = 2
+        button.layer.borderColor = customBorderColor.cgColor
         button.tintColor = .white
         return button
     }()
     public lazy var itemNameTextField: UITextField = {
-       let textField = UITextField()
+        let textField = UITextField()
         textField.placeholder = "enter item name"
         textField.borderStyle = .line
+        textField.layer.borderWidth = 1
+        textField.layer.borderColor = #colorLiteral(red: 0, green: 0.382160157, blue: 0.3518279195, alpha: 1)
+        textField.clipsToBounds = true
+        textField.layer.cornerRadius = 13
         textField.textAlignment = .center
+        
         return textField
     }()
     public lazy var itemPriceTextField: UITextField = {
-       let textField = UITextField()
+        let textField = UITextField()
         textField.placeholder = "enter price for item"
         textField.keyboardType = .numbersAndPunctuation
+        textField.layer.borderWidth = 1
+        textField.layer.borderColor = #colorLiteral(red: 0, green: 0.382160157, blue: 0.3518279195, alpha: 1)
         textField.borderStyle = .line
+        textField.clipsToBounds = true
+        textField.layer.cornerRadius = 13
         textField.textAlignment = .center
         return textField
     }()
     public lazy var itemDescriptionTextField: UITextField = {
-       let textField = UITextField()
+        let textField = UITextField()
         textField.placeholder = "enter item details"
+        textField.layer.borderWidth = 1
+        textField.layer.borderColor = #colorLiteral(red: 0, green: 0.382160157, blue: 0.3518279195, alpha: 1)
+        textField.clipsToBounds = true
+        textField.layer.cornerRadius = 13
         textField.textAlignment = .center
         textField.borderStyle = .line
         return textField
@@ -57,13 +68,13 @@ class CreateItemView: UIView {
         let conditions = ["New", "Used"]
         let sc = UISegmentedControl(items: conditions)
         sc.selectedSegmentIndex = 0
-        sc.tintColor = customGoldColor
-        sc.backgroundColor = customBlueColor
-        sc.layer.borderColor = customBlueColor.cgColor
-        let attributes = [NSAttributedString.Key.font: UIFont(name: "Kohinoor Telugu", size: 20.0), NSAttributedString.Key.foregroundColor: white]
+        sc.tintColor = customHighlight
+        sc.backgroundColor = customHighlight
+        sc.layer.borderColor = customBorderColor.cgColor
+        let attributes = [NSAttributedString.Key.font: UIFont(name: "Futura", size: 18.0), NSAttributedString.Key.foregroundColor: UIColor(white: 1.0, alpha: 1.0)]
         sc.setTitleTextAttributes(attributes as [NSAttributedString.Key : Any], for: .normal)
-        sc.selectedSegmentTintColor = customGoldColor
-        sc.layer.borderWidth = 3.0
+        sc.selectedSegmentTintColor = customHighlight
+        sc.layer.borderWidth = 2
         sc.layer.cornerRadius = 20
         return sc
     }()

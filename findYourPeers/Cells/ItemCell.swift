@@ -10,37 +10,40 @@ import UIKit
 
 class ItemCell: UICollectionViewCell {
     
-    override func layoutSubviews() {
+       override func layoutSubviews() {
         super.layoutSubviews()
         self.clipsToBounds = true
         self.layer.cornerRadius = 13
+        self.backgroundColor = .clear
+        self.layer.borderWidth = 2
+        self.layer.borderColor = #colorLiteral(red: 0, green: 0.382160157, blue: 0.3518279195, alpha: 1)
     }
     
     public lazy var itemImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     public lazy var itemNameLabel: UILabel = {
         let label = UILabel()
         label.text = "Item Name"
-        label.textColor = #colorLiteral(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
-        label.font = UIFont(name: "Kohinoor Telugu", size: 20)
+        label.textColor = .black
+        label.font = UIFont(name: "Futura", size: 20)
         return label
     }()
     public lazy var datePostedLabel: UILabel = {
         let label = UILabel()
         label.text = "Date Posted"
-        label.textColor = #colorLiteral(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
+        label.textColor = .darkGray
         label.font = UIFont(name: "Kohinoor Telugu", size: 17)
         return label
     }()
     public lazy var itemPriceLabel: UILabel = {
         let label = UILabel()
         label.text = "Price"
-        label.textColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+        label.textColor = .white
         label.textAlignment = .center
-        label.backgroundColor = #colorLiteral(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
+        label.backgroundColor = customMainColor
         label.clipsToBounds = true
         label.layer.cornerRadius = 10
         label.font = UIFont(name: "Kohinoor Telugu", size: 17)
