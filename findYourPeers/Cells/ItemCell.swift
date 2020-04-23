@@ -69,7 +69,7 @@ class ItemCell: UICollectionViewCell {
         itemImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             itemImageView.topAnchor.constraint(equalTo: topAnchor),
-            itemImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            itemImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             itemImageView.bottomAnchor.constraint(equalTo: bottomAnchor),
             itemImageView.widthAnchor.constraint(equalToConstant: 120)
         ])
@@ -106,7 +106,8 @@ extension ItemCell {
     public func configureCell(item: Item) {
         itemNameLabel.text = item.itemName
         datePostedLabel.text = item.datePosted.convertToString()
-        itemPriceLabel.text = "$\(item.itemPrice)"
+        let price = String(format: "$%.02f", item.itemPrice)
+        itemPriceLabel.text = price
         if let firstImage = item.itemImages.first {
             itemImageView.kf.setImage(with: URL(string: firstImage))
         }

@@ -22,7 +22,7 @@ class FollowedGroupsView: UIView {
         let sc = UISegmentedControl(items: categories)
         sc.selectedSegmentIndex = 0
         sc.tintColor = customHighlight
-        sc.backgroundColor = customHighlight
+        sc.backgroundColor = customMainColor
         sc.layer.borderColor = customBorderColor.cgColor
         let attributes = [NSAttributedString.Key.font: UIFont(name: "Futura", size: 18.0), NSAttributedString.Key.foregroundColor: UIColor(white: 1.0, alpha: 1.0)]
         sc.setTitleTextAttributes(attributes as [NSAttributedString.Key : Any], for: .normal)

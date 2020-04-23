@@ -156,7 +156,7 @@ class ItemDetailView: UIView {
         
         NSLayoutConstraint.activate([
             imageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            imageView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -100),
+            imageView.topAnchor.constraint(equalTo: sellerName.bottomAnchor, constant: 20),
             imageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.5),
             imageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.2)
         ])

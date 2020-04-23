@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import FirebaseStorage
+import FirebaseFirestore
 
 enum ItemCondition: String {
     case new = "new"
@@ -26,13 +28,18 @@ class CreateItemViewController: UIViewController {
         ip.delegate = self
         return ip
     }()
-    private var selectedImage = UIImage()
-    private var itemImages = [UIImage]() {
+    private var selectedImage: UIImage? {
         didSet {
-            createItemView.itemImageCollection.reloadData()
+            createItemView.itemImage.image = selectedImage
         }
     }
-    private var imageURLs = [String]()
+    
+//    private var itemImages = [UIImage]() {
+//        didSet {
+//            createItemView.itemImageCollection.reloadData()
+//        }
+//    }
+//    private var imageURLs = [String]()
     private var condition: String?
     private var selectedCondition: ItemCondition = .new {
         didSet {
@@ -45,11 +52,13 @@ class CreateItemViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavBar()
-        configureCollectionView()
+        //configureCollectionView()
         configureButton()
         configureTextfield()
         registerKeyboardNotifications()
+        
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         unregisterKeyboardNotifications()
@@ -61,17 +70,16 @@ class CreateItemViewController: UIViewController {
     }
     private func configureNavBar() {
         navigationItem.title = "Add Item"
-        
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "checkmark"), style: .plain, target: self, action: #selector(finishedButtonPressed(_:)))
         navigationItem.rightBarButtonItem?.tintColor = customBorderColor
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .plain, target: self, action: #selector(xbuttonPressed(_:)))
         navigationItem.leftBarButtonItem?.tintColor = customBorderColor
     }
-    private func configureCollectionView() {
-        createItemView.itemImageCollection.delegate = self
-        createItemView.itemImageCollection.dataSource = self
-        createItemView.itemImageCollection.register(ItemDetailCell.self, forCellWithReuseIdentifier: "itemImageCell")
-    }
+//    private func configureCollectionView() {
+//        createItemView.itemImageCollection.delegate = self
+//        createItemView.itemImageCollection.dataSource = self
+//        createItemView.itemImageCollection.register(ItemDetailCell.self, forCellWithReuseIdentifier: "itemImageCell")
+//    }
     private func configureButton() {
         createItemView.addImageButton.addTarget(self, action: #selector(addPhotoButtonPressed(_:)), for: .touchUpInside)
         createItemView.itemConditionSC.addTarget(self, action: #selector(selectedItemCondition(_:)), for: .valueChanged)
@@ -108,21 +116,35 @@ class CreateItemViewController: UIViewController {
         present(alertController, animated: true)
     }
     @objc private func finishedButtonPressed(_ sender: UIBarButtonItem) {
-        
         guard let itemName = createItemView.itemNameTextField.text, !itemName.isEmpty,
-            let itemPrice = createItemView.itemPriceTextField.text, !itemPrice.isEmpty,
-            let itemDescription = createItemView.itemDescriptionTextField.text, !itemDescription.isEmpty, let itemCondition = condition else {
+            let itemPrice = createItemView.itemPriceTextField.text, !itemPrice.isEmpty, let priceDouble = Double(itemPrice) ,
+            let itemDescription = createItemView.itemDescriptionTextField.text, !itemDescription.isEmpty, let itemCondition = condition,
+         let selectedImage = selectedImage else {
                 DispatchQueue.main.async {
                     self.showAlert(title: "Missing Fields", message: "Please fill in all fields")
                 }
                 return
         }
-        
-        
-        
-        let newItem = Item(datePosted: Date(), id: UUID().uuidString , itemCondition: itemCondition, itemDescription: itemDescription, itemImages: imageURLs, itemName: itemName, itemPrice: Double(Int(itemPrice) ?? 0), sellerEmail: "antonioflores@pursuit.org", sellerId: "6cy5BFsR14xyjGXWBvDq", sellerName: "Antonio Flores")
-        
-        DatabaseService.manager.createItem(newItem) { [weak self] (result) in
+        let id = UUID().uuidString
+        let resizedImage = UIImage.resizeImage(originalImage: selectedImage, rect: createItemView.itemImage.bounds)
+        var imageURL = String()
+        FireBaseStorage.shared.uploadPhoto(itemID: id, image: resizedImage) { [weak self] (result) in
+            switch result {
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    self?.showAlert(title: "Error", message: "Issues saving image \(error.localizedDescription)")
+                }
+            case .success(let url):
+                imageURL = url.absoluteString
+                
+                let newItem = Item(datePosted: Date(), id: id, itemCondition: itemCondition, itemDescription: itemDescription, itemImages: [imageURL], itemName: itemName, itemPrice: priceDouble, sellerEmail: "antonioflores@pursuit.org", sellerId: "6cy5BFsR14xyjGXWBvDq", sellerName: "Antonio Flores")
+                self?.createItem(item: newItem)
+            }
+        }
+
+    }
+    private func createItem(item: Item) {
+        DatabaseService.manager.createItem(item) { [weak self] (result) in
             switch result {
             case .failure(let error):
                 DispatchQueue.main.async {
@@ -130,7 +152,7 @@ class CreateItemViewController: UIViewController {
                 }
             case .success:
                 DispatchQueue.main.async {
-                    self?.showAlert(title: "Success", message: "\(itemName) was added to the Marketplace!")
+                    self?.showAlert(title: "Success", message: "\(item.itemName) was added to the Marketplace!")
                 }
                 
                 
@@ -156,32 +178,30 @@ extension CreateItemViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: itemWidth, height: 80)
     }
 }
-extension CreateItemViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return itemImages.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = createItemView.itemImageCollection.dequeueReusableCell(withReuseIdentifier: "itemImageCell", for: indexPath) as? ItemDetailCell else {
-            fatalError("could not cast to ItemDetailCell")
-        }
-        let image = itemImages[indexPath.row]
-        cell.imageView.image = image
-        return cell
-    }
-    
-    
-}
+//extension CreateItemViewController: UICollectionViewDataSource {
+//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        return itemImages.count
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        guard let cell = createItemView.itemImageCollection.dequeueReusableCell(withReuseIdentifier: "itemImageCell", for: indexPath) as? ItemDetailCell else {
+//            fatalError("could not cast to ItemDetailCell")
+//        }
+//        let image = itemImages[indexPath.row]
+//        cell.imageView.image = image
+//        return cell
+//    }
+//
+//
+//}
 extension CreateItemViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             selectedImage = image
-            itemImages.append(selectedImage)
-            createItemView.itemImageCollection.backgroundColor = .clear
-        }
-        if let imageURL = info[UIImagePickerController.InfoKey.imageURL] as? String {
-            imageURLs.append(imageURL)
-            createItemView.itemImageCollection.backgroundColor = .clear
+            
+            //itemImages.append(image)
+            //createItemView.itemImageCollection.backgroundColor = .clear
+            
         }
         
         dismiss(animated: true)
