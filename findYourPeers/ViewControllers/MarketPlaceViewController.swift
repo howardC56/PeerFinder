@@ -69,7 +69,7 @@ class MarketPlaceViewController: UIViewController {
     }
     private func configureRefreshControl() {
         refreshControl = UIRefreshControl()
-        refreshControl.tintColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+        refreshControl.tintColor = customMainColor
         marketPlaceView.collectionView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(getItems), for: .valueChanged)
     }
