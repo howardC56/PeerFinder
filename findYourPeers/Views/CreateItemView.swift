@@ -18,6 +18,7 @@ class CreateItemView: UIView {
         }()
     public lazy var itemImage: UIImageView = {
         let imageView = UIImageView()
+        imageView.isHidden = true
         return imageView
     }()
     public lazy var addImageButton: UIButton = {
@@ -114,7 +115,7 @@ class CreateItemView: UIView {
     private func imageConstraints() {
         addSubview(itemImage)
         itemImage.translatesAutoresizingMaskIntoConstraints = false
-        
+
         NSLayoutConstraint.activate([
             itemImage.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
             itemImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
@@ -127,7 +128,7 @@ class CreateItemView: UIView {
         addImageButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            addImageButton.topAnchor.constraint(equalTo: itemImage.bottomAnchor, constant: 10),
+            addImageButton.topAnchor.constraint(equalTo: itemImageCollection.bottomAnchor, constant: 10),
             addImageButton.centerXAnchor.constraint(equalTo: centerXAnchor),
         ])
     }
