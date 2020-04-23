@@ -172,8 +172,8 @@ class ItemDetailViewController: UIViewController {
         
         guard let image = itemDetailView.imageView.image else { return }
         
-        if let imageData = image.jpegData(compressionQuality: 1.0){
-            messageComposer.addAttachmentData(imageData, typeIdentifier: "public.data", filename: "item_image")
+        if let imageData = image.pngData(){
+            messageComposer.addAttachmentData(imageData, typeIdentifier: "public.data", filename: "item_image.png")
         }else {
             DispatchQueue.main.async {
                 self.showAlert(title: "No image selected", message: "Did not attach an image to message")
