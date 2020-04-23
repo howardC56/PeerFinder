@@ -31,7 +31,7 @@ final class GroupDetailView: UIView {
     public lazy var categoryLabel: UILabel = {
            let label = UILabel()
            label.font = UIFont(name: "Kohinoor Telugu", size: 18)
-        label.textColor = .black
+           label.textColor = .black
            label.adjustsFontSizeToFitWidth = true
            label.text = "category Here"
            label.textAlignment = .left
@@ -90,7 +90,6 @@ final class GroupDetailView: UIView {
     
     private func commonInit() {
         photoimageSetup()
-        //titleLabelSetup()
         categoryLabelSetup()
         descriptionLabelSetup()
         tableViewSetup()
@@ -116,7 +115,6 @@ final class GroupDetailView: UIView {
     private func tableViewSetup() {
         addSubview(tableView)
         tableView.anchor(top: descriptionLabel.bottomAnchor, left: leftAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, right: rightAnchor, paddingTop: 35)
-
     }
     
     private func buttonSetup() {
