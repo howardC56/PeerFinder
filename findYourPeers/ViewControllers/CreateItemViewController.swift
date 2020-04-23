@@ -128,6 +128,7 @@ class CreateItemViewController: UIViewController {
         let id = UUID().uuidString
         let resizedImage = UIImage.resizeImage(originalImage: selectedImage, rect: createItemView.itemImage.bounds)
         var imageURL = String()
+        
         FireBaseStorage.shared.uploadPhoto(itemID: id, image: resizedImage) { [weak self] (result) in
             switch result {
             case .failure(let error):
@@ -138,6 +139,7 @@ class CreateItemViewController: UIViewController {
                 imageURL = url.absoluteString
                 let newItem = Item(datePosted: Date(), id: id, itemCondition: itemCondition, itemDescription: itemDescription, itemImages: self!.imageURLs, itemName: itemName, itemPrice: priceDouble, sellerEmail: "antonioflores@pursuit.org", sellerId: "6cy5BFsR14xyjGXWBvDq", sellerName: "Antonio Flores")
                 self?.createItem(item: newItem)
+                self?.dismiss(animated: true)
             }
         }
 
