@@ -40,6 +40,34 @@ class FireBaseStorage {
         }
     }
     
+    public func uploadPhoto(userId: String? = nil,
+                            postId: String? = nil,
+                            eventId: String? = nil,
+                            imageURL: URL,
+                            completion: @escaping (Result<URL, Error>) -> Void) {
+        var photoReference: StorageReference!
+        if let id = userId {
+            photoReference = storageRef.child("UserProfilesPhotos/\(id).jpeg")
+        } else if let id = postId {
+            photoReference = storageRef.child("PostsPhotos/\(id).jpeg")
+        } else if let id = eventId {
+            photoReference = storageRef.child("EventsPhotos/\(id).jpeg")
+        }
+        let _ = photoReference.putFile(from: imageURL, metadata: nil) { (metaData, error) in
+            if let error = error {
+                completion(.failure(error))
+            } else if let _ = metaData {
+                photoReference.downloadURL { (url, error) in
+                    if let error = error {
+                        completion(.failure(error))
+                    } else if let url = url {
+                        completion(.success(url))
+                    }
+                }
+            }
+        }
+    }
+    
      public func fetchGroupPhoto(groupID: String, completion: @escaping (Result<URL, Error>) -> ()) {
         storageRef.child("GroupPhotos/\(groupID).jpg").downloadURL { (url, error) in
           if let error = error {
