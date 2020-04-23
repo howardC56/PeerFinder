@@ -13,7 +13,7 @@ class ItemDetailView: UIView {
     public lazy var itemName: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Kohinoor Telugu", size: 24)
-        label.textColor = UIColor(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
+        label.textColor = .black
         label.adjustsFontSizeToFitWidth = true
         label.text = "Item Name"
         label.numberOfLines = 3
@@ -23,7 +23,7 @@ class ItemDetailView: UIView {
     public lazy var sellerName: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Kohinoor Telugu", size: 16)
-        label.textColor = UIColor(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
+        label.textColor = .darkGray
         label.adjustsFontSizeToFitWidth = true
         label.text = "Seller Name"
         label.textAlignment = .center
@@ -34,9 +34,11 @@ class ItemDetailView: UIView {
     public lazy var contactSellerButton: UIButton = {
         let button = UIButton()
         button.setTitle("Contact Seller", for: .normal)
-        button.backgroundColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
-        button.titleLabel?.textColor = #colorLiteral(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
+        button.backgroundColor = customHighlight
+        button.titleLabel?.textColor = .black
         button.layer.cornerRadius = 10
+        button.layer.borderWidth = 2
+        button.layer.borderColor = customBorderColor.cgColor
         button.layer.shadowOpacity = 0.3
         button.layer.shadowRadius = 10
         button.layer.shadowOffset = CGSize(width: 0, height: 4)
@@ -45,19 +47,21 @@ class ItemDetailView: UIView {
     
     public lazy var imageView: UIImageView = {
         let image = UIImageView()
-      image.image = UIImage(systemName: "photo.fill")
-      image.tintColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
-      image.backgroundColor = #colorLiteral(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
-    //add shadow
-      image.layer.cornerRadius = 10
-         return image
-     }()
+        image.image = UIImage(systemName: "photo.fill")
+        image.layer.borderWidth = 2
+        image.layer.borderColor = customBorderColor.cgColor
+        image.layer.cornerRadius = 10
+        image.clipsToBounds = true
+        return image
+    }()
     
     public lazy var itemsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let cv = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-        cv.backgroundColor = #colorLiteral(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
+        cv.backgroundColor = customHighlight
+        cv.layer.borderWidth = 2
+        cv.layer.borderColor = customBorderColor.cgColor
         cv.layer.cornerRadius = 10
         return cv
     }()
@@ -65,8 +69,7 @@ class ItemDetailView: UIView {
     public lazy var priceLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Kohinoor Telugu", size: 20)
-        label.textColor = #colorLiteral(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
-        label.adjustsFontSizeToFitWidth = true
+        label.textColor = .darkText
         label.text = "Price: "
         label.numberOfLines = 1
         return label
@@ -75,36 +78,23 @@ class ItemDetailView: UIView {
     public lazy var conditionLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Kohinoor Telugu", size: 18)
-        label.textColor = #colorLiteral(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
-        label.adjustsFontSizeToFitWidth = true
+        label.textColor = .darkText
         label.text = "Condition: "
         label.numberOfLines = 1
         return label
     }()
     
-//    public lazy var wishlistButton: UIButton = {
-//        let button = UIButton()
-//        button.setTitle("Add to wishlist", for: .normal)
-//        button.backgroundColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
-//        button.titleLabel?.textColor = #colorLiteral(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
-//        button.layer.cornerRadius = 10
-//        button.layer.shadowOpacity = 0.3
-//        button.layer.shadowRadius = 10
-//        button.layer.shadowOffset = CGSize(width: 0, height: 4)
-//        return button
-//    }()
-    
     public lazy var descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Kohinoor Telugu", size: 16)
-        label.textColor = #colorLiteral(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
+        label.textColor = .black
         label.adjustsFontSizeToFitWidth = true
         label.text = "Description:"
         label.textAlignment = .center
         label.numberOfLines = 0
         return label
     }()
-
+    
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
         commonInit()
@@ -116,39 +106,16 @@ class ItemDetailView: UIView {
     }
     
     private func commonInit() {
+        setUpContactConstraints()
         setUpItemNameConstraints()
         setUpSellerNameConstraints()
-        setUpContactConstraints()
         setUpItemImageConstraints()
         setUpImagesCollectionConstraints()
         setUpPriceConstraints()
         setUpConditionConstraints()
-//        setUpWishlistButtonConstraints()
         setUpDescripConstraints()
     }
     
-    private func setUpItemNameConstraints() {
-        addSubview(itemName)
-        
-        itemName.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            itemName.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 8),
-            itemName.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
-        ])
-    }
-    
-    private func setUpSellerNameConstraints() {
-        addSubview(sellerName)
-        
-        sellerName.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            sellerName.topAnchor.constraint(equalTo: itemName.bottomAnchor, constant: 8),
-            sellerName.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10)
-        ])
-    }
-
     private func setUpContactConstraints() {
         addSubview(contactSellerButton)
         
@@ -162,6 +129,29 @@ class ItemDetailView: UIView {
         ])
     }
     
+    private func setUpItemNameConstraints() {
+        addSubview(itemName)
+        
+        itemName.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            itemName.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 8),
+            itemName.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
+            itemName.trailingAnchor.constraint(equalTo: contactSellerButton.leadingAnchor, constant: 8)
+        ])
+    }
+    
+    private func setUpSellerNameConstraints() {
+        addSubview(sellerName)
+        
+        sellerName.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            sellerName.topAnchor.constraint(equalTo: itemName.bottomAnchor, constant: 8),
+            sellerName.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10)
+        ])
+    }
+    
     private func setUpItemImageConstraints() {
         addSubview(imageView)
         
@@ -169,7 +159,7 @@ class ItemDetailView: UIView {
         
         NSLayoutConstraint.activate([
             imageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            imageView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -100),
+            imageView.topAnchor.constraint(equalTo: sellerName.bottomAnchor, constant: 20),
             imageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.5),
             imageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.2)
         ])
@@ -195,7 +185,7 @@ class ItemDetailView: UIView {
         
         NSLayoutConstraint.activate([
             priceLabel.topAnchor.constraint(equalTo: itemsCollectionView.bottomAnchor, constant: 20),
-            priceLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8)
+            priceLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20)
         ])
     }
     
@@ -206,24 +196,10 @@ class ItemDetailView: UIView {
         
         NSLayoutConstraint.activate([
             conditionLabel.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 14),
-            conditionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10)
+            conditionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20)
         ])
         
     }
-    
-    
-//    private func setUpWishlistButtonConstraints() {
-//        addSubview(wishlistButton)
-//
-//        wishlistButton.translatesAutoresizingMaskIntoConstraints = false
-//
-//        NSLayoutConstraint.activate([
-//            wishlistButton.topAnchor.constraint(equalTo: itemsCollectionView.bottomAnchor, constant: 20),
-//            wishlistButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
-//            wishlistButton.widthAnchor.constraint(equalToConstant: 120),
-//            wishlistButton.heightAnchor.constraint(equalToConstant: 44)
-//        ])
-//    }
     
     private func setUpDescripConstraints(){
         addSubview(descriptionLabel)

@@ -13,8 +13,12 @@ class GroupDetailViewController: UIViewController {
 
     private var groupDetailView = GroupDetailView()
     private var groupPostView = GroupCommentPostView()
-    var group: Group!
+    var group: Group
     private var post: Bool = false
+    
+    override func loadView() {
+           view = groupDetailView
+       }
     
     private var posts = [Post]() {
         didSet {
@@ -35,9 +39,9 @@ class GroupDetailViewController: UIViewController {
         didSet {
             DispatchQueue.main.async {
                 if self.isFavorite == true {
-                    self.navigationItem.rightBarButtonItem?.image = UIImage(systemName: "star.fill")
+                    self.navigationItem.rightBarButtonItem?.image = UIImage(systemName: "person.badge.plus.fill")
             } else {
-                    self.navigationItem.rightBarButtonItem?.image = UIImage(systemName: "star")
+                    self.navigationItem.rightBarButtonItem?.image = UIImage(systemName: "person.badge.plus")
             }
             }
         }
@@ -45,7 +49,7 @@ class GroupDetailViewController: UIViewController {
     
     lazy private var favorite: UIBarButtonItem = {
                     [unowned self] in
-           return UIBarButtonItem(image: UIImage(systemName: "star"), style: .plain, target: self, action: #selector(configureFavorites(_:)))
+           return UIBarButtonItem(image: UIImage(systemName: "person.badge.plus"), style: .plain, target: self, action: #selector(configureFavorites(_:)))
                     }()
     
     @objc private func configureFavorites(_ sender: UIBarButtonItem) {
@@ -85,10 +89,6 @@ class GroupDetailViewController: UIViewController {
         }
     }
     
-    override func loadView() {
-        view = groupDetailView
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = group.groupName.capitalized
@@ -97,7 +97,8 @@ class GroupDetailViewController: UIViewController {
         groupDetailView.tableView.dataSource = self
         groupDetailView.tableView.register(GroupDetailViewCell.self, forCellReuseIdentifier: "GroupDetailViewCell")
         configureDetails()
-        //isGroupFavorited(group)
+        navigationController?.navigationBar.tintColor = customBorderColor
+        isGroupFavorited(group)
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
             groupPostView.addGestureRecognizer(tap)
         getPosts()
@@ -114,7 +115,7 @@ class GroupDetailViewController: UIViewController {
     
     private func configureDetails() {
         groupDetailView.photoImageView.kf.setImage(with: URL(string: group.groupPhotoURL))
-        groupDetailView.categoryLabel.text = "Category: \(group.category)"
+        groupDetailView.categoryLabel.text = "Category: \(group.category.capitalized)"
         groupDetailView.descriptionLabel.text = "created by: \(group.createdBy) \n\(group.description)"
         groupDetailView.titleLabel.text = group.groupName
         groupDetailView.commentButton.addTarget(self, action: #selector(startPostButtonPressed(_:)), for: .touchUpInside)
@@ -139,7 +140,7 @@ class GroupDetailViewController: UIViewController {
     @objc private func submitPostButtonPressed(_ sender: UIButton) {
         let text = groupPostView.descriptionLabel.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         guard let finishedText = text, !finishedText.isEmpty else {
-            self.showAlert(title: "HuH?", message: "add stuff")
+            sender.shake()
             return
         }
         let userName = "Antonio Flores"
@@ -186,6 +187,7 @@ extension GroupDetailViewController: UITableViewDelegate, UITableViewDataSource 
         }
         let post = posts[indexPath.row]
         cell.configureCell(post: post)
+        cell.isUserInteractionEnabled = false
         return cell
     }
     

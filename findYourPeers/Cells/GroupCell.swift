@@ -14,11 +14,16 @@ class GroupCell: UICollectionViewCell {
         super.layoutSubviews()
         self.clipsToBounds = true
         self.layer.cornerRadius = 13
+        self.backgroundColor = .clear
+        self.layer.borderWidth = 2
+        self.layer.borderColor = #colorLiteral(red: 0, green: 0.382160157, blue: 0.3518279195, alpha: 1)
     }
     
     public lazy var groupImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.cornerRadius = 13
+        imageView.clipsToBounds = true
         return imageView
     }()
     
@@ -35,15 +40,15 @@ class GroupCell: UICollectionViewCell {
         let label = UILabel()
         label.text = "Group Name"
         label.numberOfLines = 1
-        label.textColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
-        label.font = UIFont(name: "Kohinoor Telugu", size: 20)
+        label.textColor = .black
+        label.font = UIFont(name: "Futura", size: 20)
         return label
     }()
     public lazy var groupTopicLabel: UILabel = {
         let label = UILabel()
         label.text = "Group Topic (math, science, etc)"
         label.numberOfLines = 1
-        label.textColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+        label.textColor = .darkGray
         label.font = UIFont(name: "Kohinoor Telugu", size: 17)
         return label
     }()
@@ -51,7 +56,7 @@ class GroupCell: UICollectionViewCell {
         let label = UILabel()
         label.text = "created date"
         label.numberOfLines = 1
-        label.textColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+        label.textColor = .systemGray2
         label.font = UIFont(name: "Kohinoor Telugu", size: 17)
         return label
     }()
@@ -68,6 +73,7 @@ class GroupCell: UICollectionViewCell {
         groupImageConstraints()
         groupNameLabelConstraints()
         groupTopicLabelConstraints()
+        dateCreatedLabelConstraints()
     }
     private func groupImageConstraints() {
         addSubview(groupImageView)

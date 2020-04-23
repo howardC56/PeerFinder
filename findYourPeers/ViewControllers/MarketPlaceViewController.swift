@@ -17,7 +17,8 @@ class MarketPlaceViewController: UIViewController {
         view = marketPlaceView
         view.backgroundColor = .white
     }
-    
+    private var isFiltered = false
+    private var allItems = [Item]()
     private var items = [Item]() {
         didSet {
             DispatchQueue.main.async {
@@ -40,7 +41,10 @@ class MarketPlaceViewController: UIViewController {
         configureSearchBar()
         configureNavBar()
         configureRefreshControl()
+        configureButton()
         getItems()
+
+        
     }
     @objc private func getItems() {
         DatabaseService.manager.getItems(item: Item.self) { [weak self] (result) in
@@ -50,11 +54,17 @@ class MarketPlaceViewController: UIViewController {
                 DispatchQueue.main.async {
                     self?.refreshControl.endRefreshing()
                 }
-            case .success(let items):
-                self?.items = items
-                DispatchQueue.main.async {
-                    self?.refreshControl.endRefreshing()
+            case .success(let item):
+                if self?.isFiltered ?? false {
+                    self?.allItems = item
+                    self?.items = item
+                } else {
+                    self?.items = item
+                    DispatchQueue.main.async {
+                        self?.refreshControl.endRefreshing()
+                    }
                 }
+
             }
         }
     }
@@ -68,15 +78,23 @@ class MarketPlaceViewController: UIViewController {
     }
     private func configureRefreshControl() {
         refreshControl = UIRefreshControl()
-        refreshControl.tintColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+        refreshControl.tintColor = customMainColor
         marketPlaceView.collectionView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(getItems), for: .valueChanged)
     }
     private func configureNavBar() {
         navigationItem.title = "Student Market Place"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: nil)
-        navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
     }
+    private func configureButton() {
+        marketPlaceView.addItemButton.addTarget(self, action: #selector(addItemButtonPressed(_:)), for: .touchUpInside)
+    }
+
+    @objc private func addItemButtonPressed(_ sender: UIButton) {
+        let createItemVC = CreateItemViewController()
+        
+        present(UINavigationController(rootViewController: createItemVC), animated: true)
+    }
+    
     
     
 }
@@ -84,11 +102,8 @@ extension MarketPlaceViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let maxsize: CGSize = UIScreen.main.bounds.size
         let itemWidth: CGFloat = maxsize.width * 0.9
-        let itemHeight: CGFloat = maxsize.height * 0.20
+        let itemHeight: CGFloat = maxsize.height * 0.15
         return CGSize(width: itemWidth, height: itemHeight)
-    }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
     }
 }
 extension MarketPlaceViewController: UICollectionViewDataSource {
@@ -106,9 +121,10 @@ extension MarketPlaceViewController: UICollectionViewDataSource {
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = items[indexPath.row]
-
+        
         let itemDetailVC = ItemDetailViewController(item)
         navigationController?.pushViewController(itemDetailVC, animated: true)
+        navigationController?.navigationBar.tintColor = customBorderColor
     }
     
     
@@ -117,6 +133,16 @@ extension MarketPlaceViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let searchText = searchBar.text {
             searchQuery = searchText
+            isFiltered = true
         }
+        searchBar.resignFirstResponder()
     }
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = true
+    }
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        searchBar.showsCancelButton = false
+    }
+    
 }

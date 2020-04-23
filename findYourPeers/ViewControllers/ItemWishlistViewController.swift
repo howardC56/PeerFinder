@@ -11,10 +11,6 @@ import FirebaseFirestore
 
 class ItemWishlistViewController: UIViewController {
     
-    let customBlueColor = UIColor(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
-    
-    let customGoldColor = UIColor(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
-    
     private let itemWishlistView = ItemWishlistView()
     
     override func loadView() {
@@ -29,26 +25,40 @@ class ItemWishlistViewController: UIViewController {
             }
         }
     }
+    private var refreshControl: UIRefreshControl!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
         configureNavBar()
+        configureRefreshControl()
         getMyItems()
     }
     
     @objc private func getMyItems() {
         DatabaseService.manager.getitemFavoriteGroups(item: Item.self) {
-            (result) in
+            [weak self] (result) in
             switch result {
             case .failure(let error):
                 print("could not get myItems: \(error.localizedDescription)")
+                DispatchQueue.main.async {
+                    self?.refreshControl.endRefreshing()
+                }
             case .success(let myItems):
-                self.myItems = myItems
+                self?.myItems = myItems
+                DispatchQueue.main.async {
+                    self?.refreshControl.endRefreshing()
+                }
             }
         }
     }
-    
+    private func configureRefreshControl() {
+        refreshControl = UIRefreshControl()
+        refreshControl.tintColor = customMainColor
+        itemWishlistView.collectionView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(getMyItems), for: .valueChanged)
+    }
     private func configureCollectionView(){
         itemWishlistView.collectionView.delegate = self
         itemWishlistView.collectionView.dataSource = self
@@ -57,8 +67,6 @@ class ItemWishlistViewController: UIViewController {
     
     private func configureNavBar() {
         navigationItem.title = "My Wishlist"
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: customBlueColor,
-                                                                   NSAttributedString.Key.font: UIFont(name: "Kohinoor Telugu", size: 20.0) as Any]
     }
 }
 
@@ -91,6 +99,7 @@ extension ItemWishlistViewController: UICollectionViewDataSource {
         let myItem = myItems[indexPath.row]
         let itemDetailVC = ItemDetailViewController(myItem)
         navigationController?.pushViewController(itemDetailVC, animated: true)
+        navigationController?.navigationBar.tintColor = customBorderColor
     }
 }
 

@@ -24,7 +24,7 @@ class FollowedGroupsController: UIViewController {
         view = followedGroupsView
         followedGroupsView.backgroundColor = .white
     }
-    
+    private var allGroups = [Group]()
     private var followedGroups = [Group]() {
         didSet {
             DispatchQueue.main.async {
@@ -41,6 +41,7 @@ class FollowedGroupsController: UIViewController {
         }
     }
     private var refreshControl: UIRefreshControl!
+    private var isFiltered = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +53,7 @@ class FollowedGroupsController: UIViewController {
     
     private func configureRefreshControl() {
         refreshControl = UIRefreshControl()
-        refreshControl.tintColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+        refreshControl.tintColor = customMainColor
         followedGroupsView.collectionView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(fetchFollowedGroups), for: .valueChanged)
     }
@@ -65,10 +66,19 @@ class FollowedGroupsController: UIViewController {
                     self?.refreshControl.endRefreshing()
                 }
             case .success(let groups):
-                self?.followedGroups = groups
-                DispatchQueue.main.async {
-                    self?.refreshControl.endRefreshing()
+                if self?.isFiltered ?? false {
+                    self?.allGroups = groups.filter { $0.groupName == self?.selectedCategory.rawValue}
+                    DispatchQueue.main.async {
+                        self?.refreshControl.endRefreshing()
+                    }
+                } else {
+                    self?.allGroups = groups
+                    self?.followedGroups = groups
+                    DispatchQueue.main.async {
+                        self?.refreshControl.endRefreshing()
+                    }
                 }
+                
             }
             
         })
@@ -87,16 +97,20 @@ class FollowedGroupsController: UIViewController {
         switch sender.selectedSegmentIndex {
         case 0:
             selectedCategory = .all
-            fetchFollowedGroups()
+            isFiltered = false
+            followedGroups = allGroups
         case 1:
             selectedCategory = .study
-            followedGroups = followedGroups.filter {$0.category == selectedCategory.rawValue}
+            isFiltered = true
+            followedGroups = allGroups.filter {$0.category == selectedCategory.rawValue}
         case 2:
             selectedCategory = .club
-            followedGroups = followedGroups.filter {$0.category == selectedCategory.rawValue}
+            isFiltered = true
+            followedGroups = allGroups.filter {$0.category == selectedCategory.rawValue}
         case 3:
             selectedCategory = .event
-            followedGroups = followedGroups.filter {$0.category == selectedCategory.rawValue}
+            isFiltered = true
+            followedGroups = allGroups.filter {$0.category == selectedCategory.rawValue}
         default:
             print("default case hit")
         }
@@ -106,11 +120,8 @@ extension FollowedGroupsController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let maxsize: CGSize = UIScreen.main.bounds.size
         let itemWidth: CGFloat = maxsize.width * 0.9
-        let itemHeight: CGFloat = maxsize.height * 0.20
+        let itemHeight: CGFloat = maxsize.height * 0.15
         return CGSize(width: itemWidth, height: itemHeight)
-    }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
     }
 }
 extension FollowedGroupsController: UICollectionViewDataSource {
