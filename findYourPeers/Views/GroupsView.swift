@@ -8,7 +8,7 @@
 
 import UIKit
 
-let customHighlight = #colorLiteral(red: 0.3553702235, green: 0.7033417821, blue: 0.7145221829, alpha: 1)
+let customHighlight = #colorLiteral(red: 0.1917455792, green: 0.3806588054, blue: 0.3900330663, alpha: 1)
 
 let customMainColor = #colorLiteral(red: 0.1332651377, green: 0.7317578197, blue: 0.6140573621, alpha: 1)
 
@@ -25,7 +25,7 @@ class GroupsView: UIView {
         let sc = UISegmentedControl(items: categories)
         sc.selectedSegmentIndex = 0
         sc.tintColor = customHighlight
-        sc.backgroundColor = customHighlight
+        sc.backgroundColor = customMainColor
         sc.layer.borderColor = customBorderColor.cgColor
         let attributes = [NSAttributedString.Key.font: UIFont(name: "Futura", size: 18.0), NSAttributedString.Key.foregroundColor: white]
         sc.setTitleTextAttributes(attributes as [NSAttributedString.Key : Any], for: .normal)

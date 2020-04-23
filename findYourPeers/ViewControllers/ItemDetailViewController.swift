@@ -69,7 +69,8 @@ class ItemDetailViewController: UIViewController {
     private func updateUI() {
         itemDetailView.itemName.text = "\(item.itemName)"
         itemDetailView.sellerName.text = "Seller: \(item.sellerName)"
-        itemDetailView.priceLabel.text = "Price: \(item.itemPrice)"
+        let price = String(format: "$%.02f", item.itemPrice)
+        itemDetailView.priceLabel.text = price
         itemDetailView.conditionLabel.text = "Condition: \(item.itemCondition)"
         itemDetailView.descriptionLabel.text = "\(item.itemDescription)"
         itemDetailView.imageView.kf.setImage(with: URL(string: item.itemImages.first ?? ""))
@@ -119,8 +120,10 @@ class ItemDetailViewController: UIViewController {
                 //add message controller here
                 self.showMessageComposer()
             }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
             alertController.addAction(emailAction)
             alertController.addAction(messageAction)
+        alertController.addAction(cancelAction)
             present(alertController, animated: true)
 
     }
