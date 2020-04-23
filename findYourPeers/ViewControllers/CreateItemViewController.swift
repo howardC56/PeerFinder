@@ -34,12 +34,12 @@ class CreateItemViewController: UIViewController {
         }
     }
     
-//    private var itemImages = [UIImage]() {
-//        didSet {
-//            createItemView.itemImageCollection.reloadData()
-//        }
-//    }
-//    private var imageURLs = [String]()
+    private var itemImages = [UIImage]() {
+        didSet {
+            createItemView.itemImageCollection.reloadData()
+        }
+    }
+    private var imageURLs = [String]()
     private var condition: String?
     private var selectedCondition: ItemCondition = .new {
         didSet {
@@ -52,7 +52,7 @@ class CreateItemViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavBar()
-        //configureCollectionView()
+        configureCollectionView()
         configureButton()
         configureTextfield()
         registerKeyboardNotifications()
@@ -75,11 +75,11 @@ class CreateItemViewController: UIViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .plain, target: self, action: #selector(xbuttonPressed(_:)))
         navigationItem.leftBarButtonItem?.tintColor = customBorderColor
     }
-//    private func configureCollectionView() {
-//        createItemView.itemImageCollection.delegate = self
-//        createItemView.itemImageCollection.dataSource = self
-//        createItemView.itemImageCollection.register(ItemDetailCell.self, forCellWithReuseIdentifier: "itemImageCell")
-//    }
+    private func configureCollectionView() {
+        createItemView.itemImageCollection.delegate = self
+        createItemView.itemImageCollection.dataSource = self
+        createItemView.itemImageCollection.register(ItemDetailCell.self, forCellWithReuseIdentifier: "itemImageCell")
+    }
     private func configureButton() {
         createItemView.addImageButton.addTarget(self, action: #selector(addPhotoButtonPressed(_:)), for: .touchUpInside)
         createItemView.itemConditionSC.addTarget(self, action: #selector(selectedItemCondition(_:)), for: .valueChanged)
@@ -136,8 +136,7 @@ class CreateItemViewController: UIViewController {
                 }
             case .success(let url):
                 imageURL = url.absoluteString
-                
-                let newItem = Item(datePosted: Date(), id: id, itemCondition: itemCondition, itemDescription: itemDescription, itemImages: [imageURL], itemName: itemName, itemPrice: priceDouble, sellerEmail: "antonioflores@pursuit.org", sellerId: "6cy5BFsR14xyjGXWBvDq", sellerName: "Antonio Flores")
+                let newItem = Item(datePosted: Date(), id: id, itemCondition: itemCondition, itemDescription: itemDescription, itemImages: self!.imageURLs, itemName: itemName, itemPrice: priceDouble, sellerEmail: "antonioflores@pursuit.org", sellerId: "6cy5BFsR14xyjGXWBvDq", sellerName: "Antonio Flores")
                 self?.createItem(item: newItem)
             }
         }
@@ -178,31 +177,32 @@ extension CreateItemViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: itemWidth, height: 80)
     }
 }
-//extension CreateItemViewController: UICollectionViewDataSource {
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return itemImages.count
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        guard let cell = createItemView.itemImageCollection.dequeueReusableCell(withReuseIdentifier: "itemImageCell", for: indexPath) as? ItemDetailCell else {
-//            fatalError("could not cast to ItemDetailCell")
-//        }
-//        let image = itemImages[indexPath.row]
-//        cell.imageView.image = image
-//        return cell
-//    }
-//
-//
-//}
+extension CreateItemViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return itemImages.count
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = createItemView.itemImageCollection.dequeueReusableCell(withReuseIdentifier: "itemImageCell", for: indexPath) as? ItemDetailCell else {
+            fatalError("could not cast to ItemDetailCell")
+        }
+        let image = itemImages[indexPath.row]
+        cell.imageView.image = image
+        return cell
+    }
+
+
+}
 extension CreateItemViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+        guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage,
+            let imageURL = info[UIImagePickerController.InfoKey.imageURL] as? URL else {
+                       return
+                   }
             selectedImage = image
-            
-            //itemImages.append(image)
-            //createItemView.itemImageCollection.backgroundColor = .clear
-            
-        }
+        itemImages.append(selectedImage!)
+        imageURLs.append(imageURL.absoluteString)
+            createItemView.itemImageCollection.backgroundColor = .clear
         
         dismiss(animated: true)
     }
