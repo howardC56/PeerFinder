@@ -19,6 +19,7 @@ class CreateViewGroup: UIView {
         image.contentMode = .scaleAspectFill
         image.backgroundColor = .white
         image.layer.cornerRadius = 10
+        image.clipsToBounds = true
         return image
     }()
     
@@ -134,7 +135,7 @@ class CreateViewGroup: UIView {
             changeImageButton.heightAnchor.constraint(equalToConstant: 54),
             changeImageButton.widthAnchor.constraint(equalToConstant: 54),
             changeImageButton.centerYAnchor.constraint(equalTo: imageView.centerYAnchor),
-            changeImageButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -40)
+            changeImageButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -25)
         ])
     }
     
