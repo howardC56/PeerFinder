@@ -9,12 +9,16 @@
 import UIKit
 class CreateItemView: UIView {
     
-    public lazy var itemImageCollection: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        let cv = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-        cv.backgroundColor = .lightGray
-        return cv
+    //    public lazy var itemImageCollection: UICollectionView = {
+    //        let layout = UICollectionViewFlowLayout()
+    //        layout.scrollDirection = .horizontal
+    //        let cv = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
+    //        cv.backgroundColor = .lightGray
+    //        return cv
+    //    }()
+    public lazy var itemImage: UIImageView = {
+        let imageView = UIImageView()
+        return imageView
     }()
     public lazy var addImageButton: UIButton = {
         let button = UIButton()
@@ -88,22 +92,34 @@ class CreateItemView: UIView {
         commonInit()
     }
     private func commonInit() {
-        collectionViewConstraints()
+        //collectionViewConstraints()
+        imageConstraints()
         addButtonConstraints()
         itemNameConstraints()
         itemPriceConstraints()
         itemConditionConstraints()
         itemDescriptionConstraints()
     }
-    private func collectionViewConstraints() {
-        addSubview(itemImageCollection)
-        itemImageCollection.translatesAutoresizingMaskIntoConstraints = false
+    //    private func collectionViewConstraints() {
+    //        addSubview(itemImageCollection)
+    //        itemImageCollection.translatesAutoresizingMaskIntoConstraints = false
+    //
+    //        NSLayoutConstraint.activate([
+    //            itemImageCollection.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
+    //            itemImageCollection.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+    //            itemImageCollection.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+    //            itemImageCollection.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.2)
+    //        ])
+    //    }
+    private func imageConstraints() {
+        addSubview(itemImage)
+        itemImage.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            itemImageCollection.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
-            itemImageCollection.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            itemImageCollection.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            itemImageCollection.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.2)
+            itemImage.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
+            itemImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            itemImage.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            itemImage.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.3)
         ])
     }
     private func addButtonConstraints() {
@@ -111,7 +127,7 @@ class CreateItemView: UIView {
         addImageButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            addImageButton.topAnchor.constraint(equalTo: itemImageCollection.bottomAnchor, constant: 10),
+            addImageButton.topAnchor.constraint(equalTo: itemImage.bottomAnchor, constant: 10),
             addImageButton.centerXAnchor.constraint(equalTo: centerXAnchor),
         ])
     }
