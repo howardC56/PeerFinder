@@ -32,7 +32,9 @@ class MarketPlaceView: UIView {
         button.layer.shadowOpacity = 0.25
         button.layer.shadowRadius = 5
         button.layer.shadowOffset = CGSize(width: 0, height: 4)
-        button.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
+        button.backgroundColor = customButtonColor
+        button.layer.borderWidth = 2
+        button.layer.borderColor = customBorderColor.cgColor
         button.tintColor = .white
         return button
     }()

@@ -172,9 +172,7 @@ extension GroupsViewController: UICollectionViewDelegateFlowLayout, UICollection
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "groupCell", for: indexPath) as? GroupCell else {
             fatalError("could not downcast to groupCell")
         }
-        cell.backgroundColor = .clear
-        cell.layer.borderWidth = 2
-        cell.layer.borderColor = #colorLiteral(red: 0, green: 0.382160157, blue: 0.3518279195, alpha: 1)
+        
         
         if isFirst == false {
             let group = newGroups[indexPath.row]
