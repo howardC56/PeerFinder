@@ -21,7 +21,9 @@ class ItemCell: UICollectionViewCell {
     
     public lazy var itemImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.cornerRadius = 13
+        imageView.clipsToBounds = true
         return imageView
     }()
     public lazy var itemNameLabel: UILabel = {
@@ -68,9 +70,9 @@ class ItemCell: UICollectionViewCell {
         addSubview(itemImageView)
         itemImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            itemImageView.topAnchor.constraint(equalTo: topAnchor),
+            itemImageView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             itemImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            itemImageView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            itemImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
             itemImageView.widthAnchor.constraint(equalToConstant: 120)
         ])
     }

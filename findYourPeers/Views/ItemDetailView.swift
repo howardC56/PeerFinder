@@ -48,8 +48,10 @@ class ItemDetailView: UIView {
     public lazy var imageView: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(systemName: "photo.fill")
-        image.layer.shadowOpacity = 0.4
-        image.layer.shadowRadius = 10
+        image.layer.borderWidth = 2
+        image.layer.borderColor = customBorderColor.cgColor
+        image.layer.cornerRadius = 10
+        image.clipsToBounds = true
         return image
     }()
     
@@ -104,36 +106,14 @@ class ItemDetailView: UIView {
     }
     
     private func commonInit() {
+        setUpContactConstraints()
         setUpItemNameConstraints()
         setUpSellerNameConstraints()
-        setUpContactConstraints()
         setUpItemImageConstraints()
         setUpImagesCollectionConstraints()
         setUpPriceConstraints()
         setUpConditionConstraints()
         setUpDescripConstraints()
-    }
-    
-    private func setUpItemNameConstraints() {
-        addSubview(itemName)
-        
-        itemName.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            itemName.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 8),
-            itemName.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
-        ])
-    }
-    
-    private func setUpSellerNameConstraints() {
-        addSubview(sellerName)
-        
-        sellerName.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            sellerName.topAnchor.constraint(equalTo: itemName.bottomAnchor, constant: 8),
-            sellerName.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10)
-        ])
     }
     
     private func setUpContactConstraints() {
@@ -146,6 +126,29 @@ class ItemDetailView: UIView {
             contactSellerButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
             contactSellerButton.widthAnchor.constraint(equalToConstant: 120),
             contactSellerButton.heightAnchor.constraint(equalToConstant: 48)
+        ])
+    }
+    
+    private func setUpItemNameConstraints() {
+        addSubview(itemName)
+        
+        itemName.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            itemName.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 8),
+            itemName.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
+            itemName.trailingAnchor.constraint(equalTo: contactSellerButton.leadingAnchor, constant: 8)
+        ])
+    }
+    
+    private func setUpSellerNameConstraints() {
+        addSubview(sellerName)
+        
+        sellerName.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            sellerName.topAnchor.constraint(equalTo: itemName.bottomAnchor, constant: 8),
+            sellerName.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10)
         ])
     }
     
