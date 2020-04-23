@@ -100,12 +100,11 @@ class CreateItemViewController: UIViewController {
     
     @objc private func addPhotoButtonPressed(_ sender: UIButton) {
         let alertController = UIAlertController(title: "Choose Photo Option", message: nil, preferredStyle: .actionSheet)
-        let cameraAction = UIAlertAction(title: "Camera", style: .default)
-        {[weak self] alertAction in self?.imagePickerController.sourceType = .camera
-            self?.present(self!.imagePickerController, animated: true)
+        let cameraAction = UIAlertAction(title: "Camera", style: .default) { alertAction in self.imagePickerController.sourceType = .camera
+            self.present(self.imagePickerController, animated: true)
         }
-        let photoLibraryAction = UIAlertAction(title: "Photo Library", style: .default) {[weak self] alertAction in self?.imagePickerController.sourceType = .photoLibrary
-            self?.present(self!.imagePickerController, animated: true)
+        let photoLibraryAction = UIAlertAction(title: "Photo Library", style: .default) { alertAction in self.imagePickerController.sourceType = .photoLibrary
+            self.present(self.imagePickerController, animated: true)
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
