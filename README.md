@@ -2,15 +2,22 @@
 Peer Finder: The app for college students to connect with students from their college for study groups, clubs, events and marketplace for school essentials.
 
 Users can follow groups from their school and see them on their main feed.
-
-Users can filter groups by Study groups, Clubs and Events.
-
+They can filter groups by Study groups, Clubs, or Events.
 Users can comment to the groups and see them on the groups page.
+![view1]Assets/PeerFinderGif2.gif
 
-Users can create their own groups.
+Users can search for new groups to follow
+![view3]Assets/PeerFinderGif1.gif
 
-The other part of the app is a Student Marketplace where users can buy or sell items.
+or create their own group.
+![view3]Assets/PeerFindergif5.gif
 
-Users can contact the seller by email or text message.
+There is also a Student Marketplace where users can buy or sell items.
+Users can view items up for sale and contact the seller by email or text message.
+![view4]PeerFindergif3.gif
 
-Users can add items to their wishlist.
+Users can add items to their wishlist or remove them.
+![view5]PeerFindergif4.gif
+
+Users also have the ability to add items to the market place.
+![view6]PeerFindergif6.gif
