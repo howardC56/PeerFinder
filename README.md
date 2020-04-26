@@ -7,7 +7,7 @@ Users can comment to the groups and see them on the groups page.
 ![view1](Assets/PeerFinderGif2.gif)
 
 Users can search for new groups to follow
-![view3](Assets/PeerFinderGif1.gif)
+![view2](Assets/PeerFinderGif1.gif)
 
 or create their own group.
 ![view3](Assets/PeerFindergif5.gif)
