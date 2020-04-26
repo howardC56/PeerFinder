@@ -4,7 +4,6 @@ Peer Finder: The app for college students to connect with students from their co
 Users can follow groups from their school and see them on their main feed.
 They can filter groups by Study groups, Clubs, or Events.
 Users can comment to the groups and see them on the groups page.
-
 ![view1](PeerFinderAssets/PeerFinderGif2.gif)
 
 Users can search for new groups to follow.
