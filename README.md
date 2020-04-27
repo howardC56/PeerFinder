@@ -34,8 +34,11 @@ Users also have the ability to add items to the market place.
 ## Contributors
 
 [Howard Chang](https://github.com/howardC56)
+
 [Maitree Bain](https://github.com/maitreebain)
+
 [Casandra Grullon](https://github.com/CasandraGrullon)
+
 [Yuliia Engman](https://github.com/YuliiaEngman)
 
 ## The api was created on Firebase and relies on crowdsourcing to add more data.
