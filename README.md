@@ -1,10 +1,11 @@
 # PeerFinder
+Hackaton Project
 Peer Finder: The app for college students to connect with students from their college for study groups, clubs, events and marketplace for school essentials.
 
 Users can follow groups from their school and see them on their main feed.
 They can filter groups by Study groups, Clubs, or Events.
 Users can comment to the groups and see them on the groups page.
-![view1](PeerFinderAssets/PeerFinderGif2.gif)
+![gif](PeerFinderAssets/PeerFinderGif2.gif)
 
 Users can search for new groups to follow.
 ![view2](PeerFinderAssets/PeerFinderGif1.gif)
@@ -21,6 +22,14 @@ Users can add items to their wishlist or remove them.
 
 Users also have the ability to add items to the market place.
 ![view6](PeerFinderAssets/peerfindergif6.gif)
+
+
+## Contributors
+
+[Howard Chang](https://github.com/howardC56)
+[Maitree Bain](https://github.com/maitreebain)
+[Casandra Grullon](https://github.com/CasandraGrullon)
+[Yuliia Engman](https://github.com/YuliiaEngman)
 
 ## The api was created on Firebase and relies on crowdsourcing to add more data.
 ```swift
