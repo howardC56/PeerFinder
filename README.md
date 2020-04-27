@@ -1,12 +1,13 @@
 # PeerFinder
-Hackaton Project
-Peer Finder: The app for college students to connect with students from their college for study groups, clubs, events and marketplace for school essentials.
+
+Winning Hackaton Project: The app for college students to connect with students from their college for study groups, clubs, events and marketplace for school essentials. Building a better, brighter school community by creating and sharing commonality among students. Students now have more excuses to meet.
 
 # Description
-
-Users can follow groups from their school and see them on their main feed.
+The idea requires students to create an account with their edu email address and choose their school, which will then lock them in that school for the app.
+Users can follow and create groups.
 They can filter groups by Study groups, Clubs, or Events.
-Users can comment to the groups and see them on the groups page.
+Users can comment on the groups and see them on the groups page.
+Users can also buy and sell items on the marketplace which is also only for students in that school.
 
 <br />
 ![gif](PeerFinderAssets/PeerFinderGif2.gif)
