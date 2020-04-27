@@ -10,6 +10,7 @@ Users can comment on the groups and see them on the groups page.
 Users can also buy and sell items on the marketplace which is also only for students in that school.
 
 <br />
+
 ![gif](PeerFinderAssets/PeerFinderGif2.gif)
 
 Users can search for new groups to follow.
