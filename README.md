@@ -44,7 +44,7 @@ Users also have the ability to add items to the market place.
 
 [Casandra Grullon](https://github.com/CasandraGrullon)
 
-[Yulia Engman](https://github.com/YuliiaEngman)
+[Yuliia Engman](https://github.com/YuliiaEngman)
 
 ## The api was created on Firebase and relies on crowdsourcing to add more data.
 ```swift
