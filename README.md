@@ -2,9 +2,12 @@
 Hackaton Project
 Peer Finder: The app for college students to connect with students from their college for study groups, clubs, events and marketplace for school essentials.
 
+# Description
+
 Users can follow groups from their school and see them on their main feed.
 They can filter groups by Study groups, Clubs, or Events.
 Users can comment to the groups and see them on the groups page.
+
 <br />
 ![gif](PeerFinderAssets/PeerFinderGif2.gif)
 
@@ -39,7 +42,7 @@ Users also have the ability to add items to the market place.
 
 [Casandra Grullon](https://github.com/CasandraGrullon)
 
-[Yuliia Engman](https://github.com/YuliiaEngman)
+[Yulia Engman](https://github.com/YuliiaEngman)
 
 ## The api was created on Firebase and relies on crowdsourcing to add more data.
 ```swift
@@ -104,7 +107,7 @@ private func showMailComposer() {
         
         let messageComposer = MFMessageComposeViewController()
         messageComposer.body = "Hi! I'm interested in this item that you're selling."
-        messageComposer.recipients = ["3474699643"]
+        messageComposer.recipients = ["items creator phone number"]
         messageComposer.messageComposeDelegate = self
         
         guard let image = itemDetailView.imageView.image else { return }
