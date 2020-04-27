@@ -9,6 +9,7 @@ Users can comment to the groups and see them on the groups page.
 ![gif](PeerFinderAssets/PeerFinderGif2.gif)
 
 Users can search for new groups to follow.
+
 ![gif](PeerFinderAssets/PeerFinderGif1.gif)
 
 Users can also create their own groups.
