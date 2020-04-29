@@ -1,6 +1,6 @@
 # PeerFinder
 
-Winning Hackaton Project: The app for college students to connect with students from their college for study groups, clubs, events and marketplace for school essentials. Building a better, brighter school community by creating and sharing commonality among students. Students now have more excuses to meet.
+Winning Pursuit Hackathon Project: The app for college students to connect with students from their college for study groups, clubs, events and marketplace for school essentials. Building a better, brighter school community by creating and sharing commonality among students. Students now have more excuses to meet.
 
 # Description
 The idea requires students to create an account with their edu email address and choose their school, which will then lock them in that school for the app.
